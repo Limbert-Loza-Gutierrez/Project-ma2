@@ -1,0 +1,84 @@
+.sidebar {
+    width: 100vw;
+    background-color: #54582f;;
+    /* background: rgb(43, 208, 157);
+    background: linear-gradient(0deg, rgba(43, 208, 157, 1) 0%, rgba(24, 160, 154, 1) 35%, rgba(7, 117, 150, 1)100%); */
+    height: 10rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebar .perfil-usuario {
+    width: 15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2rem;
+    /* border-bottom: 0.5rem solid #3e434a; */
+    border-bottom: 0.5rem solid #198754;
+    max-height: 10rem;
+}
+
+.sidebar .perfil-usuario img {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.sidebar .perfil-usuario .text-perfil {
+    font-size: 1rem;
+    letter-spacing: 0.2rem;
+    font-weight: 500;
+    color: #EBEAEB;
+    
+}
+
+.sidebar .opciones-sidebar {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    width: calc(100vw - 15rem);
+    align-items: center;
+    margin-right: 30px;
+    
+    
+}
+
+.sidebar .opciones-sidebar .opcion-sidebar {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 1rem;
+    flex-direction: center;
+    color: #EBEAEB;
+    width: 20%;
+    
+}
+
+.sidebar .opciones-sidebar .opcion-sidebar:hover {
+    /* background-color: #3085d6; */
+    /* background-color: #0EB0C5; */
+    background-color: #198754;
+    border-radius: 0.5rem;
+}
+
+.sidebar a {
+    text-decoration: none;
+}
+
+.opcion-sidebar .text-opcion {
+    margin-left: 1.5rem;
+    letter-spacing: 0.2rem;
+    font-size: 1.8rem;
+}
+
+.opcion-sidebar .icon {
+    font-size: 3rem;
+}

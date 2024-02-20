@@ -1,0 +1,27 @@
+.modalContainer {
+    width: 500px;
+    height: 500px;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modalContainer .inputs-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0px;
+    margin-top: 4rem;
+}
+
+.modalContainer .buttons-box {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+}

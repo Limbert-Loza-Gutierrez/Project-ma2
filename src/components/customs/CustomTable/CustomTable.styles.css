@@ -1,0 +1,41 @@
+.table-head {
+    background-color: #295408;
+    color: #ddd;
+    height: 5rem;
+    text-align: center;
+    /* border-collapse: collapse; */
+    border: 0px;
+    
+
+}
+
+.table-head td {
+    padding: 0 1rem;
+    font-weight: 500;
+    font-size: 2rem;
+    border: 0px;
+    
+}
+
+.table-body {
+    background-color: #ddd;
+    height: 100%;
+    
+    
+    
+
+}
+
+.table-body tr {
+    height: 5rem;
+    
+}
+
+.table-body tr td {
+    padding: 0 1rem; 
+
+}
+
+table, tr, td{
+    border-collapse: collapse;
+   }

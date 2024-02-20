@@ -1,0 +1,32 @@
+.centerTRN {
+    /* display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr; */
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(5rem, auto);
+    width: 65%;
+    
+}
+
+.buscar {
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+.boton-buscar {
+    grid-column-start: 4;
+    grid-column-end: 5;
+}
+
+.tabla {
+    grid-column-start: 1;
+    grid-column-end: 5;
+}
+
+.nuevo-registro {
+    grid-column-start: 4;
+    grid-column-end: 5;
+}
