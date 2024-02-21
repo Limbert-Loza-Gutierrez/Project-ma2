@@ -63,7 +63,7 @@ const NuevoCaso = () => {
             <h2>
                 Inserte la informacion del paciente
             </h2>
-            <form action="" id="form-nuevo-caso" onSubmit={handleSubmit}>
+            <form className="for" action="" id="form-nuevo-caso" onSubmit={handleSubmit}>
                 <CustomInput
                     name="nombre"
                     label="Nombre del paciente"
@@ -73,7 +73,7 @@ const NuevoCaso = () => {
                     onChange={handleChange}
 
                 />
-                <div className="ci-expedicion">
+                <div className="ci-expedicion"> 
                     <CustomInput
                         name="documento"
                         label="Numero de documento"
@@ -83,7 +83,7 @@ const NuevoCaso = () => {
                         onChange={handleChange}
 
                     />
-                
+                   
                     <CustomSelect
                         name="extension"
                         arrayOptionsSelect={["LP", "CBBA", "SC", "BN", "PT", "OR", "CH", "TJ", "PA", "BE", "PD"]}
@@ -130,6 +130,7 @@ const NuevoCaso = () => {
                     type="submit"
                 />
             </form>
+            
         </main>
     )
 }

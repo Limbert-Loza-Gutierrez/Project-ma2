@@ -41,10 +41,14 @@
 
 .sidebar .opciones-sidebar {
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(3, 1fr) auto;
     width: calc(100vw - 15rem);
     align-items: center;
-    margin-right: 30px;
+    /* margin-right: 1px; */
+    margin-left: 10rem;
+    
+    
+    
     
     
 }
@@ -66,7 +70,8 @@
     /* background-color: #3085d6; */
     /* background-color: #0EB0C5; */
     background-color: #198754;
-    border-radius: 0.5rem;
+    border-radius: 1rem;
+    width: 15rem;
 }
 
 .sidebar a {

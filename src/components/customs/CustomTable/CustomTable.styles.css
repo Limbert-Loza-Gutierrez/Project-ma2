@@ -5,12 +5,14 @@
     text-align: center;
     /* border-collapse: collapse; */
     border: 0px;
-    
+    left: 400px;
+    border-radius: 5px;
+      
 
 }
 
 .table-head td {
-    padding: 0 1rem;
+    padding: 0.1rem;
     font-weight: 500;
     font-size: 2rem;
     border: 0px;
@@ -23,6 +25,7 @@
     
     
     
+    
 
 }
 
@@ -32,10 +35,13 @@
 }
 
 .table-body tr td {
-    padding: 0 1rem; 
+
+    padding: 0.5rem; 
+    
 
 }
 
 table, tr, td{
     border-collapse: collapse;
+    border-radius: 5px;
    }
