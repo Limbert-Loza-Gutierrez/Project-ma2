@@ -41,18 +41,23 @@ const Login = () => {
     if (user) {
       Login();
       updateUserInfo(user);
-      updateListPacientes(listUsers.pacientes);
-      updateListPersonal(listUsers.personal);
+      // si no hay items en el localstorage con el nombre listPacientes
+      // se carga la lista de pacientes desde el archivo listUsers.ts
+      if (!window.localStorage.getItem("listPacientes")) {
+        updateListPacientes(listUsers.pacientes);
+        updateListPersonal(listUsers.personal);
+      }
     } else {
       alert("Usuario incorrecto");
     }
   };
+  
 
   return (
     <main className='container-without_sidebar'>
     
-    <img className='logo' src="https://www.policia.bo/wp-content/uploads/2023/06/logo-2023-2.png"/>
-    
+    {/* <img className='logo' src="https://www.policia.bo/wp-content/uploads/2023/06/logo-2023-2.png"/> */}
+    <img className="logo" src="./public/image/logo.jpg" />
       <form action='' onSubmit={handleSubmit} className='login-container'>
       
         <h1 className='login-title'>Iniciar Sesion</h1>

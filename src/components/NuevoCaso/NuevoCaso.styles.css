@@ -13,9 +13,9 @@
     padding: 5rem;
     width: 100%;
     height: 90rem;
-    background-color: rgb(43, 208, 157);
-    background: linear-gradient(0deg, rgba(43, 208, 157, 1) 0%, rgb(90, 198, 134) 35%, rgb(44, 133, 22)100%);
-    border: gray 0.3rem solid;
+    background-color: rgb(43, 84, 208);
+    background: linear-gradient(0deg, rgb(184, 185, 204) 0%, rgb(177, 187, 222) 35%, rgb(77, 100, 202)100%);
+    border: rgb(244, 206, 206) 0.3rem solid;
     border-radius: 0.5rem;
     box-shadow: 0 0 0.5rem #212428;
     display: flex;

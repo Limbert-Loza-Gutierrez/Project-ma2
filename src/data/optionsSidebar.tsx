@@ -4,12 +4,12 @@ const opcionesAdmin = [
   {
     to: "/administrar-pacientes",
     icon: <GrUserAdd />,
-    text: "Administrar Paciente",
+    text: "Pacientes",
   },
   {
     to: "/administrar-personal",
     icon: <GrUserSettings />,
-    text: "Administrar Personal",
+    text: "Personal",
   },
   {
     to: "/logout",

@@ -8,6 +8,7 @@ import AdministrarPersonal from "./components/AdministrarPersonal/AdministrarPer
 import AdministrarPacientes from "./components/AdministrarPacientes/AdministrarPacientes";
 import NuevoCaso from "./components/NuevoCaso/NuevoCaso";
 import Casos from "./components/Casos/Casos";
+import NuevoCasoAnalisis from "./components/NuevoCasoAnalisis/NuevoCasoAnalisis"
 const router = createBrowserRouter([
   {
     path: "/",
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
+      {
+        path: "/rara",
+        element:<NuevoCasoAnalisis/>
+      }
     ],
   },
 ]);

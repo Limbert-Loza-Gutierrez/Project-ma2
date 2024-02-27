@@ -1,77 +1,70 @@
 .sidebar {
     width: 100vw;
-    background-color: #54582f;;
+    /* background-color: #54582f;; */
     /* background: rgb(43, 208, 157);
     background: linear-gradient(0deg, rgba(43, 208, 157, 1) 0%, rgba(24, 160, 154, 1) 35%, rgba(7, 117, 150, 1)100%); */
+    background: url(https://img.freepik.com/vector-gratis/fondo-verano-transparente-vector-abstracto-repetible-vertical-horizontalmente_8130-2260.jpg);
     height: 10rem;
     position: fixed;
     top: 0;
     left: 0;
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    border-bottom: 5px solid rgb(123, 157, 228); 
+
 }
 
 .sidebar .perfil-usuario {
-    width: 15rem;
+    height: 10rem;
     display: flex;
+    margin-left: 7rem ;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 2rem;
-    /* border-bottom: 0.5rem solid #3e434a; */
-    border-bottom: 0.5rem solid #198754;
-    max-height: 10rem;
+    
+    
 }
 
 .sidebar .perfil-usuario img {
-    width: 5rem;
-    height: 5rem;
-    border-radius: 50%;
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
+    width: 7rem;
+    height: 7rem;
+    margin: 1rem;
 }
-
 .sidebar .perfil-usuario .text-perfil {
-    font-size: 1rem;
-    letter-spacing: 0.2rem;
-    font-weight: 500;
-    color: #EBEAEB;
-    
+    color: rgb(37, 10, 10);
+    font-weight: 700;
+    font-size: 2rem;
 }
-
 .sidebar .opciones-sidebar {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr) auto;
-    width: calc(100vw - 15rem);
+    /* background: red; */
     align-items: center;
-    /* margin-right: 1px; */
-    margin-left: 10rem;
-    
-    
-    
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-right: 7rem;
     
     
 }
 
 .sidebar .opciones-sidebar .opcion-sidebar {
     display: flex;
+    justify-content: center;
     align-items: center;
-    padding: 1rem 2rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin: 1rem;
-    flex-direction: center;
-    color: #EBEAEB;
-    width: 20%;
+    
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    color: #4d264d;
+    width: 20rem;
+
     
 }
 
 .sidebar .opciones-sidebar .opcion-sidebar:hover {
     /* background-color: #3085d6; */
     /* background-color: #0EB0C5; */
-    background-color: #198754;
+    background-color: #8b8be5;
     border-radius: 1rem;
-    width: 15rem;
+    width: 20rem;
 }
 
 .sidebar a {
@@ -79,11 +72,8 @@
 }
 
 .opcion-sidebar .text-opcion {
-    margin-left: 1.5rem;
+    
     letter-spacing: 0.2rem;
-    font-size: 1.8rem;
-}
-
-.opcion-sidebar .icon {
-    font-size: 3rem;
+    font-size: 2rem;
+    font-weight: 700;
 }

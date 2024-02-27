@@ -11,9 +11,7 @@ const CustomSidebarOptions = ({ data_user, opciones }) => {
             {data_user.nombre}
           </div>
         )}
-        <div className='text-perfil rol-usuario'>
-          {data_user.informacionLaboral.nivelJerarquico}
-        </div>
+        
       </div>
       <div className='opciones-sidebar'>
         {opciones.map((opcion, index) => {
@@ -27,6 +25,8 @@ const CustomSidebarOptions = ({ data_user, opciones }) => {
           );
         })}
       </div>
+
+
     </aside>
   );
 };

@@ -1,14 +1,35 @@
+.container-without_sidebar {
+    background: url(https://static.guiainfantil.com/uploads/educacion/respetodiversidad-p.jpg)center/cover no-repeat;
+    
+}
 
 .login-container {
-    background-color: #54582f;
+    /* background-color: rgb(107, 107, 255); */
+    background: url(https://img.freepik.com/vector-gratis/fondo-verano-transparente-vector-abstracto-repetible-vertical-horizontalmente_8130-2260.jpg);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 40%;
     width: 30%;
-    border-radius: 8px;
+    border-radius: 0 0 8px 8px;
+
+    
 }
+
+/* .login-container ::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 380px;
+    height: 420px;
+    background: linear-gradient(0deg,transparent,transparent#45f3ff,#45f3ff,#45f3ff);
+    z-index: 1;
+    transform-origin: bottom right;
+    animation: animate 6s linear infinite;
+    animation-delay: -3s;
+} */
 
 .login-title {
     font-size: 2.5rem;
@@ -20,6 +41,6 @@
     padding-top: 0;
     width: 30%;
     height: 20%;
-    border-radius: 8px;
+    border-radius: 8px 8px 0 0 ;
 }
 

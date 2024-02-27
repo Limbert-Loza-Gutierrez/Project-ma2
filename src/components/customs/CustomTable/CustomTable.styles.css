@@ -1,14 +1,11 @@
 .table-head {
-    background-color: #295408;
-    color: #ddd;
+    background-color: #86ff05;
+    color: #272222;
     height: 5rem;
     text-align: center;
     /* border-collapse: collapse; */
     border: 0px;
     left: 400px;
-    border-radius: 5px;
-      
-
 }
 
 .table-head td {
@@ -20,28 +17,18 @@
 }
 
 .table-body {
-    background-color: #ddd;
+    background-color: #f3e2e2;
     height: 100%;
-    
-    
-    
-    
-
 }
 
 .table-body tr {
     height: 5rem;
-    
 }
 
 .table-body tr td {
-
     padding: 0.5rem; 
-    
-
 }
 
 table, tr, td{
     border-collapse: collapse;
-    border-radius: 5px;
    }

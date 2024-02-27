@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     /* background: rgb(43, 208, 157); */
-    background-color: #198754;
+    background-color: #3345ea;
     color: #fff;
     font-size: 2rem;
     border: none;
@@ -19,7 +19,7 @@
 
 .custom-button:hover {
     /* background-color: #5390f5; */
-    background-color: #32bb7b;
+    background-color: #6596d2;
     transform: scale(1.1);
 }
 

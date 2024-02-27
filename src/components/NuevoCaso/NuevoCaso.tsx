@@ -4,6 +4,12 @@ import CustomSelect from "../customs/CustomSelect/CustomSelect"
 import { useState, useContext } from "react"
 import UsersContext from "../../context/UsersContext"
 import "./NuevoCaso.styles.css"
+import { useEffect } from "react"
+import axios from "axios"
+import { loadImageBase64 } from "../../services/ia_detection"
+import { generateRandomResponse } from "../../services/ia_detection"
+
+
 
 const NuevoCaso = () => {
     const { updateListPacientes } = useContext(UsersContext)
@@ -11,7 +17,10 @@ const NuevoCaso = () => {
     console.log(pacientesLocalStorage);
     const [imageUrl, setImageUrl] = useState("");
     const [selectTagValue, setSelectTagValue] = useState("LP")
-
+    const [fileData, setFileData] = useState(null);
+    const [detectionResults, setDetectionResults] = useState(null);
+    const [error, setError] = useState(null);
+    const [response, setResponse] = useState(null);
     const handleSelectTagChange = (e) => {
         setSelectTagValue(e.target.value)
     }
@@ -19,30 +28,74 @@ const NuevoCaso = () => {
     const [infPaciente, setInfPaciente] = useState({
         nombre: "",
         documento: "",
-        extension: "",
+        expedicion: "",
         sexo: "",
         edad: "",
         fechaDiagnostico: "",
-        imgDiagnostData: ""
+        imgDiagnostData: "",
+        diagnostico: ""
 
     })
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const newPacientes = [...pacientesLocalStorage, infPaciente]
-        updateListPacientes(newPacientes);
-    }
-    const handleChange = (e) => {
-        setInfPaciente({
-            ...infPaciente,
-            [e.target.name]: e.target.value,
-            extension: selectTagValue,
-            imgDiagnostData: imageUrl
-        })
+   
+    const MALTRATO_INDICATORS = {
+        "Persona perfil hacia el frente": {
+          "agachada": true,
+          "expresion_triste": true,
+        },
+        "Paraguas hacia la derecha": {
+          "inclinado": true,
+          "posicion_incorrecta": true,
+        },
+        "Lluvia torrencial": {
+          "intensidad": "fuerte",
+          "duracion": "prolongada",
+        },
+      };
+    const handleImageUpload = (file) => {
+    
+        setFileData(file); // Guardamos el archivo en el estado
+      
+        loadImageBase64(file) // Pasamos el archivo a loadImageBase64
+          .then((imageData) => {
+            sendImageToAPI(imageData);
+          })
+          .catch((error) => {
+            setError(error.message);
+          });
+      };
 
-    }
+
+    
+
+    const sendImageToAPI = (imageData) => {
+        axios({
+          method: "POST",
+          url: "https://detect.roboflow.com/persona-bajo-la-lluvia/1",
+          params: {
+            api_key: "LP1YvLOtK4PbOiJ54HHL",
+          },
+          data: imageData,
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        })
+          .then((response) => {
+            setDetectionResults(response.data);
+            setError(null); // Limpiamos cualquier error anterior
+            const detectionFeatures =
+              detectionResults?.predictions?.map((prediction) => prediction.class) ||
+              [];
+            setResponse(generateRandomResponse(detectionFeatures,MALTRATO_INDICATORS));
+            
+          })
+          .catch((error) => {
+            setError(error.message);
+          });
+      };
 
     const handleChangeFile = (event) => {
+
         const file = event.target.files[0];
 
 
@@ -57,7 +110,37 @@ const NuevoCaso = () => {
         reader.onerror = (error) => {
             console.error('Error:', error);
         };
+
+        handleImageUpload(file)
+
     };
+    useEffect(() => {
+        // Inicializamos el estado
+        setError(null);
+        setDetectionResults(null);
+        setResponse(null);
+      }, [fileData]);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        response?.maltratoDetected ? infPaciente.diagnostico="Sí" :  infPaciente.diagnostico="No"
+        // infPaciente.imgDiagnostData=imageUrl
+        const newPacientes = [...pacientesLocalStorage, infPaciente]
+        updateListPacientes(newPacientes);
+
+    }
+    console.log(infPaciente)
+    const handleChange = (e) => {
+        setInfPaciente({
+            ...infPaciente,
+            [e.target.name]: e.target.value,
+            expedicion: selectTagValue,
+            
+
+        })
+       
+
+    }
+      
     return (
         <main className="window-content-nc">
             <h2>

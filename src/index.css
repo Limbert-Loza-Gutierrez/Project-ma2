@@ -10,11 +10,17 @@ html {
 }
 
 body {
+  display: block;
   font-size: 1.6rem;
   width: 100%;
   height: 100%;
-  background-color: #212529;;
+  background-color: #212529;
+  background: rgb(214, 214, 230);
+  /* background: url(https://static.guiainfantil.com/uploads/educacion/respetodiversidad-p.jpg) center/cover no-repeat; */
+  
 }
+
+
 
 #root {
   display: flex;
@@ -26,13 +32,13 @@ body {
 .window-content {
   /* width: calc(100vw - 40rem); */
   width: 100vw;
-  border: gray 0.3rem solid;
+  border: rgb(232, 212, 212) 0.3rem solid;
   margin: 1.5rem;
   border-radius: 0.5rem;
   padding: 1.5rem;
   box-shadow: 0 0 0.5rem #212428;
   /* background-color: #fffbff; */
-  background-color: #32bb7b;
+  background-color: #5a75f0;
   /* position: relative; */
   top: 10rem;
   left: 0;
