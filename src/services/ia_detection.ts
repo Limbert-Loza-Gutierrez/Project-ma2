@@ -8,7 +8,7 @@ export const loadImageBase64 = (file) => {
 };
 
 // Función para generar una respuesta aleatoria
-export function generateRandomResponse(detectedFeatures, MALTRATO_INDICATORS) {
+export function generateResponse(detectedFeatures, MALTRATO_INDICATORS) {
   const maltratoIndicators = {};
   detectedFeatures.forEach((feature) => {
     if (MALTRATO_INDICATORS.hasOwnProperty(feature)) {
