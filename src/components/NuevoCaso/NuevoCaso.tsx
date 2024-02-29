@@ -8,7 +8,7 @@ import { useEffect } from "react"
 import axios from "axios"
 import { loadImageBase64 } from "../../services/ia_detection"
 import { generateResponse } from "../../services/ia_detection"
-
+import Modal from "./Modal"
 
 
 const NuevoCaso = () => {
@@ -21,6 +21,7 @@ const NuevoCaso = () => {
     const [detectionResults, setDetectionResults] = useState(null);
     const [error, setError] = useState(null);
     const [response, setResponse] = useState(null);
+    const [openModal, setOpenModal] = useState(false);
     const handleSelectTagChange = (e) => {
         setSelectTagValue(e.target.value)
     }
@@ -32,7 +33,7 @@ const NuevoCaso = () => {
         sexo: "",
         edad: "",
         fechaDiagnostico: "",
-        imgDiagnostData: "",
+        // imgDiagnostData: "",
         diagnostico: ""
 
     })
@@ -120,14 +121,80 @@ const NuevoCaso = () => {
         setDetectionResults(null);
         setResponse(null);
       }, [fileData]);
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        response?.maltratoDetected ? infPaciente.diagnostico="Sí" :  infPaciente.diagnostico="No"
-        // infPaciente.imgDiagnostData=imageUrl
-        const newPacientes = [...pacientesLocalStorage, infPaciente]
-        updateListPacientes(newPacientes);
 
+//     const handleSubmit = (e) => {
+//       alert("Handle Submit")
+// // validar que los datos de los input ninguno este vacio
+
+
+//         e.preventDefault();
+//         response?.maltratoDetected ? infPaciente.diagnostico="Sí" :  infPaciente.diagnostico="No"
+//         // infPaciente.imgDiagnostData=imageUrl
+//         const newPacientes = [...pacientesLocalStorage, infPaciente]
+//         updateListPacientes(newPacientes);
+
+//     }
+// const handleSubmit = (e) => {
+//   // Recorrer todos los inputs que se quieren validar
+//   for (const input of document.querySelectorAll('.input-a-validar')) {
+//     // Obtener el valor del input
+//     const valor = input.value.trim();
+
+//     // Si el valor está vacío, mostrar una alerta y salir de la función
+//     if (!valor) {
+//       alert('El campo ' + input.name + ' no puede estar vacío.');
+//       return;
+//     }
+//   }
+
+//   // Si todos los inputs están llenos, se continúa con el resto del código de `handleSubmit`
+
+//   alert("Handle Submit")
+
+//   e.preventDefault();
+//   response?.maltratoDetected ? infPaciente.diagnostico="Sí" :  infPaciente.diagnostico="No"
+//   // infPaciente.imgDiagnostData=imageUrl
+//   const newPacientes = [...pacientesLocalStorage, infPaciente]
+//   updateListPacientes(newPacientes);
+
+// }
+const handleSubmit = (e) => {
+  e.preventDefault();
+  response?.maltratoDetected ? infPaciente.diagnostico="Sí" :  infPaciente.diagnostico="No"
+  // Variable para indicar si hay un campo vacío
+  let hayCampoVacio = false;
+
+  // Recorrer las propiedades de infPaciente
+  for (const propiedad in infPaciente) {
+    // Obtener el valor de la propiedad
+    const valor = infPaciente[propiedad];
+
+    // Si el valor está vacío, se marca la variable y se sale del bucle
+    if (!valor) {
+      hayCampoVacio = true;
+      break;
     }
+  }
+
+  // Si hay un campo vacío, se muestra una alerta y no se actualiza la lista de pacientes
+  if (hayCampoVacio) {
+    alert('Debe completar todos los campos.');
+    return;
+  }
+
+  setOpenModal(true);
+
+
+  // Si todos los campos están llenos, se continúa con el resto del código de `handleSubmit`
+
+
+  
+  // infPaciente.imgDiagnostData=imageUrl
+  // const newPacientes = [...pacientesLocalStorage, infPaciente]
+  // updateListPacientes(newPacientes);
+
+}
+
     console.log(infPaciente)
     const handleChange = (e) => {
         setInfPaciente({
@@ -207,12 +274,25 @@ const NuevoCaso = () => {
                     onChange={handleChangeFile}
                     required
                 />
-                {/* {imageUrl && <img src={imageUrl} alt="Imagen subida" />} */}
-                <CustomButton
-                    content="Realizar Diagnosticos"
-                    type="submit"
-                />
+                
             </form>
+            <CustomButton
+                    content="Realizar Diagnosticos"
+                    onClick={handleSubmit}
+                />
+            <Modal 
+            open={openModal} onClose={() => 
+              {
+                setOpenModal(false);
+                response?.maltratoDetected ? infPaciente.diagnostico="Sí" :  infPaciente.diagnostico="No"
+                // infPaciente.imgDiagnostData=imageUrl
+                const newPacientes = [...pacientesLocalStorage, infPaciente]
+                updateListPacientes(newPacientes);
+              }
+              
+            }
+            informacionPaciente={infPaciente}
+            />
             
         </main>
     )

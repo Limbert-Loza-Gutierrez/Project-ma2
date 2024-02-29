@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { loadImageBase64 } from '../../services/ia_detection';
-import { generateRandomResponse } from '../../services/ia_detection';
+import { generateResponse } from '../../services/ia_detection';
 
 function ImageUploader() {
   const [fileData, setFileData] = useState(null);
