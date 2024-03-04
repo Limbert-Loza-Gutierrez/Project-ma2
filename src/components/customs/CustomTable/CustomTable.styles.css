@@ -1,34 +1,118 @@
-.table-head {
+/* .table-head {
     background-color: #86ff05;
     color: #272222;
     height: 5rem;
-    text-align: center;
-    /* border-collapse: collapse; */
+    text-align: center; 
+    border-collapse: collapse; 
     border: 0px;
     left: 400px;
 }
-
 .table-head td {
     padding: 0.1rem;
     font-weight: 500;
     font-size: 2rem;
-    border: 0px;
+    border: 0px;  
+}
+.table-body {
+    background-color: #d7abab;
+    height: 100%;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #d0b1b1;   
+}
+.table-body tr {
+    height: 5rem;
+    text-align: left;
+}
+.table-body tr td {
+    padding: 1rem; 
+}
+table, tr, td{
+    border-collapse: collapse;
+   } */
+
+   table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
     
 }
 
-.table-body {
-    background-color: #f3e2e2;
-    height: 100%;
-}
-
-.table-body tr {
-    height: 5rem;
-}
-
-.table-body tr td {
-    padding: 0.5rem; 
-}
-
-table, tr, td{
+table-head {
+    width: min(900px, 100% - 3rem);
+    margin-inline: auto;
+    width: 100%;
     border-collapse: collapse;
-   }
+    background-color: #323232;
+}
+
+table-body {
+    width: min(900px, 100% - 3rem);
+    margin-inline: auto;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #323232;
+}
+
+tr{
+    text-align: left;
+    background: hsla(253, 83%, 45%, 0.5);
+}
+
+tr:nth-of-type(2n) {
+    background: hsla(143, 90%, 52%, 0.904); 
+}
+
+tr, td {
+    border: 1px solid #391414;
+    text-align: left;
+    padding: 7px; 
+}
+
+
+@media (max-width: 850px) {
+    /* tr{
+       display: none; 
+    }
+    td{
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: 15ch auto;
+        padding: 0.75rem 1rem;
+        
+    }
+    td:first-child {
+        padding-top: 2rem;
+    }
+    td:last-child {
+        padding-top: 2rem;
+    }
+    td::before {
+        font-weight: 700;
+        text-transform: capitalize;
+    } */
+    th{
+        
+        display: none;
+    }
+    td{
+        display: block;
+        padding: 0.5rem 1rem;
+    }
+
+    td:first-child {
+        padding-top: 2rem;
+    }
+    td:last-child {
+        padding-top: 2rem;
+    }
+
+    td::before {
+        content: attr(data-cell) ": ";
+        font-weight: 700;
+        text-transform: capitalize;
+    }
+
+
+
+}

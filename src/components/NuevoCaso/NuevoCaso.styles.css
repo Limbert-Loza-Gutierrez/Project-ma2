@@ -50,13 +50,28 @@
     width: 500px;
     height: 500px;
     position: fixed;
-    top: 40%;
-    left: 50%;
+    top: 55%;
+    left: 49%;
     transform: translate(-50%, -50%);
     display: flex;
     background-color: #ffffff;
     box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
-    border-radius: 8px;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
+}
+
+
+
+.diagnosticoSelect {
+    margin: 8px;
+    width: 100px;
+    text-align: center;
+
+}
+
+.imprimird {
+    margin: 40px;
+    display: flex;
+    align-items: center;
 }

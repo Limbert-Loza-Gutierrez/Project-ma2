@@ -55,39 +55,40 @@ const Login = () => {
 
   return (
     <main className='container-without_sidebar'>
-    
-    {/* <img className='logo' src="https://www.policia.bo/wp-content/uploads/2023/06/logo-2023-2.png"/> */}
-    <img className="logo" src="./public/image/logo.jpg" />
-      <form action='' onSubmit={handleSubmit} className='login-container'>
-      
-        <h1 className='login-title'>Iniciar Sesion</h1>
+          <img className="logo" src="/public/image/logo2.jpg" alt="" />
+        
+        <form action='' onSubmit={handleSubmit} className='login-container' >
+          <h1 className='login-title'>INICIO DE SESIÓN</h1>
 
-        {
+          {
           //   <label htmlFor=''>Soy paciente</label>
           // <input
           //   type='checkbox'
           //   value={isPaciente}
           //   onChange={() => setIsPaciente(!isPaciente)}
           // />
-        }
+          }
+          
+          <CustomInput
+            label='Nombre de Usuario'
+            type='text'
+            placeholder='Usuario'
+            value={loginDate.username}
+            onChange={handleInputChange}
+            name='username'
+          />
+          <CustomInput
+            label='Contraseña'
+            type='password'
+            placeholder='Contraseña'
+            value={loginDate.password}
+            onChange={handleInputChange}
+            name='password'
+          />
+          <CustomButton type='submit' content='Iniciar Sesión' />
+        </form>
+       
 
-        <CustomInput
-          // label='Username'
-          type='text'
-          placeholder='Usuario'
-          value={loginDate.username}
-          onChange={handleInputChange}
-          name='username'
-        />
-        <CustomInput
-          type='password'
-          placeholder='Contraseña'
-          value={loginDate.password}
-          onChange={handleInputChange}
-          name='password'
-        />
-        <CustomButton type='submit' content='Iniciar Sesion' />
-      </form>
     </main>
   );
 };

@@ -91,7 +91,9 @@ const pdfname = informacionPaciente.nombre + informacionPaciente.documento + '.p
       {/* <CustomButton content="Guardar" onClick={
         
       } /> */}
+      <div className='imprimird'>
       <CustomButton content="Generar PDF" onClick={generatePDF} />
+      </div>
     </div>
   );
 };
