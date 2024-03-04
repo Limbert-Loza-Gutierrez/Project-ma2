@@ -16,7 +16,7 @@ import Modal from "./Modal"
 const NuevoCaso = () => {
     const { updateListPacientes } = useContext(UsersContext)
     const pacientesLocalStorage = JSON.parse(window.localStorage.getItem("listPacientes") as string);
-    console.log(pacientesLocalStorage);
+    
     const [imageUrl, setImageUrl] = useState("");
     const [selectTagValue, setSelectTagValue] = useState("LP");
     const [selectGenero, setSelectGenero] = useState("seleccionDeGenero");
@@ -42,20 +42,33 @@ const NuevoCaso = () => {
     })
 
    
-    const MALTRATO_INDICATORS = {
-        "Persona perfil hacia el frente": {
-          "agachada": true,
-          "expresion_triste": true,
-        },
-        "Paraguas hacia la derecha": {
-          "inclinado": true,
-          "posicion_incorrecta": true,
-        },
-        "Lluvia torrencial": {
-          "intensidad": "fuerte",
-          "duracion": "prolongada",
-        },
-      };
+    const MALTRATO_INDICATORS = 
+    [
+      "Persona desnuda",
+      "Persona inconclusa",
+      // Omitimos "Figura masculina" y "Figura femenina" ya que depende del contexto
+      "CabezaCaraCorbata (corbata apretada o persona asfixiada)",
+      "Dedos tipo garra",
+      "Lluvia como lágrimas",
+      "Lluvia torrencial",
+      "Nubes oscuras",
+      "Rayo",
+      "Margen abajo",
+      "Boca abierta",
+      "Ojos cerrados",
+      "Ojos sin pupila",
+      "Paraguas cerrado",
+      "Paraguas muy chico",
+      "Paraguas tipo lanza",
+      // Símbolos adicionales opcionales
+      "Sombreado excesivo",
+      "Borrones o manchas",
+      "Ausencia de detalles",
+      "Dibujo pequeño",
+      "Margen izquierdo",
+      "Postura rígida",
+      // Omitimos expresiones faciales ya que dependen del contexto
+    ];
     const handleImageUpload = (file) => {
     
         setFileData(file); // Guardamos el archivo en el estado
@@ -73,6 +86,7 @@ const NuevoCaso = () => {
     
 
     const sendImageToAPI = (imageData) => {
+      
         axios({
           method: "POST",
           url: "https://detect.roboflow.com/persona-bajo-la-lluvia/1",
@@ -90,7 +104,10 @@ const NuevoCaso = () => {
             const detectionFeatures =
               detectionResults?.predictions?.map((prediction) => prediction.class) ||
               [];
-            setResponse(generateRandomResponse(detectionFeatures,MALTRATO_INDICATORS));
+              const feactures=new Set(detectionFeatures)
+              console.log("caracteristicas",feactures)
+              console.log(generateResponse(feactures,MALTRATO_INDICATORS))
+            setResponse(generateResponse(feactures,MALTRATO_INDICATORS));
             
           })
           .catch((error) => {
@@ -152,17 +169,9 @@ const handleSubmit = (e) => {
   setOpenModal(true);
 
 
-  // Si todos los campos están llenos, se continúa con el resto del código de `handleSubmit`
-
-
-  
-  // infPaciente.imgDiagnostData=imageUrl
-  // const newPacientes = [...pacientesLocalStorage, infPaciente]
-  // updateListPacientes(newPacientes);
-
 }
 
-    console.log(infPaciente)
+    
     const handleChange = (e) => {
         setInfPaciente({
             ...infPaciente,

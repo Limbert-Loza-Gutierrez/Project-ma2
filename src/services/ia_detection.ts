@@ -9,21 +9,10 @@ export const loadImageBase64 = (file) => {
 
 // Función para generar una respuesta aleatoria
 export function generateResponse(detectedFeatures, MALTRATO_INDICATORS) {
-  const maltratoIndicators = {};
-  detectedFeatures.forEach((feature) => {
-    if (MALTRATO_INDICATORS.hasOwnProperty(feature)) {
-      const indicatorKeys = Object.keys(MALTRATO_INDICATORS[feature]);
-      const randomIndicator =
-        indicatorKeys[Math.floor(Math.random() * indicatorKeys.length)];
-      maltratoIndicators[feature] = randomIndicator;
-    }
-  });
+  
+  const maltratoDetected= detectedFeatures.filter((elemento) => MALTRATO_INDICATORS.includes(elemento));
+console.log(maltratoDetected)
+  return maltratoDetected;
 
-  const maltratoDetected = Object.keys(maltratoIndicators).length > 0;
-
-  return {
-    maltratoDetected,
-    maltratoIndicators,
-  };
 }
 
