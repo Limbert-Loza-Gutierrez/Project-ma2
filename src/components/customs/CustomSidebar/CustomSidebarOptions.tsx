@@ -8,7 +8,13 @@ const CustomSidebarOptions = ({ data_user, opciones }) => {
         {data_user.informacionLaboral.nivelJerarquico ===
           "Super Administrador" ? null : (
           <div className='text-perfil nome-usuario'>
-            {data_user.nombre}
+            {data_user.nombre
+            
+            }
+            <br />
+            {
+              data_user.informacionLaboral.especialidad
+            }
           </div>
         )}
         
