@@ -19,6 +19,9 @@ const AdministrarPersonal = () => {
 
   return (
     <main className=' window-content '>
+      <div>
+      <h1>Personal</h1>
+    </div>
       {
         personalList.length > 0 ? (
           <CustomTNR headerTablesAdminUs={headerTablesAdminUs} data={personalList} />

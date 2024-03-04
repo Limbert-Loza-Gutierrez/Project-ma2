@@ -20,6 +20,9 @@ const Casos = () => {
   ])
   return (
     <main className="window-content">
+      <div>
+      <h1>Pacientes</h1>
+    </div>
       {/* <CustomTNR headerTablesAdminUs={headerCasos} data={pacientes} /> */}
       {pacientes.length > 0 ? (
         <CustomTNR headerTablesAdminUs={headerCasos} data={pacientes} />

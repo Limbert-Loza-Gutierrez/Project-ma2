@@ -11,8 +11,8 @@
     /* background:  url(https://img.freepik.com/foto-gratis/fondo-blanco-negro-ondulado_23-2150531026.jpg)no-repeat center; */
     background-size: cover;
     z-index: -1;
-    filter: blur(50px);
-    
+    /* filter: blur(50px); */
+    opacity: 0.3;
 }
 
 .login-container {

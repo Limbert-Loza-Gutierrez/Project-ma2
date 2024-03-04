@@ -1,8 +1,8 @@
-.modalContainer {
+.modalContainer1 {
     /* margin-top: 12rem; */
     padding: 2rem;
-    width: 750px;
-    height: 600px;
+    width: 650px;
+    height: 500px;
     position: fixed;
     top: 55%;
     left: 50%;
@@ -21,14 +21,14 @@
     text-align: center;
 }
 
-.modalContainer .inputs-box {
+.modalContainer1 .inputs-box {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0px;
     margin-top: 1rem;
 }
 
-.modalContainer .buttons-box {
+.modalContainer1 .buttons-box {
     display: flex;
     justify-content: space-around;
     margin-top: 2rem;
@@ -36,7 +36,8 @@
 .ci-expedicion {
     display: flex;
     flex-direction: row;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    /* margin-top: 20px; */
+    /* margin-bottom: 20px; */
     align-items: flex-end;
 }
+

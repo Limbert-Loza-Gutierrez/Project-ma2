@@ -8,7 +8,10 @@ function NuevoRegistroPersonal() {
   
 
   return (
+    
+    
     <>
+    
       <CustomButton
         content='Nuevo Registro'
         onClick={() => setOpenModal(true)}

@@ -58,7 +58,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
 
   return (
     <div className="overlay ">
-      <div className="modalContainer">
+      <div className="modalContainer1">
         <h2>Informacion Personal</h2>
         <form className="inputs-box" onSubmit={handleSubmitPersonal}>
           <CustomInput

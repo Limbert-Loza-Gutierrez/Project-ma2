@@ -18,7 +18,11 @@ const Casos = () => {
         localStorage
     ])
     return (
+        
         <main className="window-content">
+            <div className="title-casos">
+                <h1>Casos</h1>
+            </div>
             {/* <CustomTNR headerTablesAdminUs={headerCasos} data={pacientes} /> */}
             {pacientes.length > 0 ? (
                 <CustomTNR headerTablesAdminUs={headerCasos} data={pacientes} />

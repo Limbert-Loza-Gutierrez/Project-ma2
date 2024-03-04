@@ -91,6 +91,11 @@ tr, td {
         font-weight: 700;
         text-transform: capitalize;
     } */
+
+    table {
+        padding-top: 100px;
+        margin-top: 400px ;
+    }
     th{
         
         display: none;

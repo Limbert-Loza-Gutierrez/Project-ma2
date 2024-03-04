@@ -35,7 +35,7 @@ const usuarios = {
         tipoLaboral: "Medico",
         correoInstitucional: "admin@admin.com",
         estado: "Activo",
-        especialidad: "Psicologia",
+        especialidad: "Psicologo",
         nivelJerarquico: "Medico",
         
       },

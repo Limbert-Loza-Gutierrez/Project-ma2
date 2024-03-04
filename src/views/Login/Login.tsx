@@ -55,7 +55,7 @@ const Login = () => {
 
   return (
     <main className='container-without_sidebar'>
-          <img className="logo" src="/public/image/logo2.jpg" alt="" />
+          <img className="logo" src="/public/image/logo.jpg" alt="" />
         
         <form action='' onSubmit={handleSubmit} className='login-container' >
           <h1 className='login-title'>INICIO DE SESIÓN</h1>
