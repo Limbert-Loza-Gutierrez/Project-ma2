@@ -1,8 +1,9 @@
 import './CustomSelect.styles.css'
-const CustomSelect = ({ onChange, arrayOptionsSelect, value, name }) => {
+const CustomSelect = ({ onChange, arrayOptionsSelect, value, name, style }) => {
     return (
         <>
             <select
+            style={style}
 
                 onChange={onChange}
                 value={value}

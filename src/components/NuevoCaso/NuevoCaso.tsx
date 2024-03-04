@@ -11,12 +11,15 @@ import { generateResponse } from "../../services/ia_detection"
 import Modal from "./Modal"
 
 
+
+
 const NuevoCaso = () => {
     const { updateListPacientes } = useContext(UsersContext)
     const pacientesLocalStorage = JSON.parse(window.localStorage.getItem("listPacientes") as string);
     console.log(pacientesLocalStorage);
     const [imageUrl, setImageUrl] = useState("");
-    const [selectTagValue, setSelectTagValue] = useState("LP")
+    const [selectTagValue, setSelectTagValue] = useState("LP");
+    const [selectGenero, setSelectGenero] = useState("seleccionDeGenero");
     const [fileData, setFileData] = useState(null);
     const [detectionResults, setDetectionResults] = useState(null);
     const [error, setError] = useState(null);
@@ -122,42 +125,6 @@ const NuevoCaso = () => {
         setResponse(null);
       }, [fileData]);
 
-//     const handleSubmit = (e) => {
-//       alert("Handle Submit")
-// // validar que los datos de los input ninguno este vacio
-
-
-//         e.preventDefault();
-//         response?.maltratoDetected ? infPaciente.diagnostico="Sí" :  infPaciente.diagnostico="No"
-//         // infPaciente.imgDiagnostData=imageUrl
-//         const newPacientes = [...pacientesLocalStorage, infPaciente]
-//         updateListPacientes(newPacientes);
-
-//     }
-// const handleSubmit = (e) => {
-//   // Recorrer todos los inputs que se quieren validar
-//   for (const input of document.querySelectorAll('.input-a-validar')) {
-//     // Obtener el valor del input
-//     const valor = input.value.trim();
-
-//     // Si el valor está vacío, mostrar una alerta y salir de la función
-//     if (!valor) {
-//       alert('El campo ' + input.name + ' no puede estar vacío.');
-//       return;
-//     }
-//   }
-
-//   // Si todos los inputs están llenos, se continúa con el resto del código de `handleSubmit`
-
-//   alert("Handle Submit")
-
-//   e.preventDefault();
-//   response?.maltratoDetected ? infPaciente.diagnostico="Sí" :  infPaciente.diagnostico="No"
-//   // infPaciente.imgDiagnostData=imageUrl
-//   const newPacientes = [...pacientesLocalStorage, infPaciente]
-//   updateListPacientes(newPacientes);
-
-// }
 const handleSubmit = (e) => {
   e.preventDefault();
   response?.maltratoDetected ? infPaciente.diagnostico="Sí" :  infPaciente.diagnostico="No"
@@ -201,6 +168,7 @@ const handleSubmit = (e) => {
             ...infPaciente,
             [e.target.name]: e.target.value,
             expedicion: selectTagValue,
+            sexo: selectGenero,
             
 
         })
@@ -241,24 +209,35 @@ const handleSubmit = (e) => {
                         value={selectTagValue}
                     />                    
                 </div>
-                <CustomInput
-                    name="sexo"
-                    label="Sexo"
-                    type="text"
-                    placeholder="Sexo"
-                    required
-                    onChange={handleChange}
+                
+                <CustomSelect
+                  style={{
+                    width: "200px",
+                }}
+                  name="genero"
+                  arrayOptionsSelect={["Masculino","Femenino"]}
+                  onChange= {
+                    (e)=>{
+                      setSelectGenero(e.target.value)
+                      
+                    }
+                  }
+                  value={selectGenero}
+
 
                 />
+                
                 <CustomInput
                     name="edad"
                     label="Edad"
                     type="number"
                     placeholder="Edad"
+                    
                     required
                     onChange={handleChange}
 
                 />
+               
                 <CustomInput
                     name="fechaDiagnostico"
                     label="Fecha de diagnostico"
