@@ -4,7 +4,7 @@ import CustomButton from "../customs/CustomButton/CustomButton";
 import CustomSelect from "../customs/CustomSelect/CustomSelect";
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-
+import logo from "../../../public/image/logo.jpg"
 const Modal = ({ open, onClose, informacionPaciente }) => {
   if (!open) return null;
   const [diagnosticoPsicologo, setDiagnosticoPsicologo] = useState('');
@@ -19,15 +19,33 @@ const Modal = ({ open, onClose, informacionPaciente }) => {
       const canvas = await html2canvas(modalElement);
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF();
-
+      pdf.setFontSize(40);
+      pdf.setFont("helvetica","bold")
+      pdf.addImage(logo,"PNG",5,0,50,50)
+      pdf.setFontSize(20);
+  const docWidth = pdf.internal.pageSize.getWidth();
+  const docHeight = pdf.internal.pageSize.getHeight();
+  pdf.line(0, 60, docWidth, 60);
+  pdf.setFont("helvetica", "italic");
+  const splitDescription = pdf.splitTextToSize(
+    "REPORTE",
+    docWidth - 20
+  );
+  pdf.text(splitDescription, docWidth -20, 45, {align:"right"});
+  pdf.setFontSize(20);
+  pdf.setFont("helvetica", "bold");
       // Agregar datos al PDF
-      pdf.text(`Nombre: ${informacionPaciente.nombre}`, 10, 20);
-      pdf.text(`Edad: ${informacionPaciente.edad}`, 10, 30);
-      pdf.text(`Fecha: ${informacionPaciente.fechaDiagnostico}`, 10, 40);
-
+      pdf.text(`Nombre: ${informacionPaciente.nombre}`, 10, 80);
+      pdf.text(`Edad: ${informacionPaciente.edad}`,  10, 95 );
+      pdf.text(`Fecha: ${informacionPaciente.fechaDiagnostico}`,  10, 110);
+      pdf.line(0, docHeight - 60, docWidth, docHeight - 60);
       // Agregar "Diagnostico del Psicologo" al PDF
-      pdf.text(`Diagnóstico del Psicólogo:`, 10, 80, { fontSize: 14 });
-      pdf.text(diagnosticoPsicologo, 10, 90, { fontSize: 12 });
+      pdf.text(`Diagnóstico del Psicólogo:`, 10,docHeight -40);
+      const ds=pdf.splitTextToSize(
+        diagnosticoPsicologo, docWidth -20
+      )
+      pdf.text(ds, 10,docHeight -30);
+
 
       // extraer de diagnosticoSeleccionado el valor 
       let da = '';
@@ -39,7 +57,7 @@ const Modal = ({ open, onClose, informacionPaciente }) => {
         da = 'No especificado';
       }
       console.log("=====>",da)
-      pdf.text(`¿Está de acuerdo con el diagnóstico?: ${da}`, 10, 100, { fontSize: 12 });
+      pdf.text(`¿Está de acuerdo con el diagnóstico?: ${da}`, 10, 150);
 
       // pdf.addImage(imgData, 'PNG', 10, 110, pdf.internal.pageSize.getWidth() - 20, pdf.internal.pageSize.getHeight() - 20);
 // pdf save debe tener el document y nombre d ifnormacioPaciente para descargarlo:
