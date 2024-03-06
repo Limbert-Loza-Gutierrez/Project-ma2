@@ -169,7 +169,6 @@ const NuevoCaso = () => {
       sexo: "",
       edad: "",
       fechaDiagnostico: "",
-      // imgDiagnostData: "",
       diagnostico: "",
       nombreMedico: "",
     });
@@ -284,7 +283,6 @@ const NuevoCaso = () => {
             : (infPaciente.diagnostico = "No");
 
           // infPaciente.imgDiagnostData=imageUrl
-          console.log("reporte" ,reportBase64);
           infPaciente.reporte = reportBase64;
           const newPacientes = [...pacientesLocalStorage, infPaciente];
           updateListPacientes(newPacientes);
