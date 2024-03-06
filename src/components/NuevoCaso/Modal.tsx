@@ -97,13 +97,14 @@ const Modal = ({
       }
     }
   }, [open]);
+ 
 
   return (
     <div className="modalContainer" id="modalContainer">
       <h1>
-        {informacionPaciente.diagnostico === "No"
-          ? "No se detectaron indicios de maltrato infantil"
-          : "Se detectaron indicios de maltrato infantil"}
+        {
+          informacionPaciente.diagnostico === "Sí" ? "Se detecto indicios de Maltrato Psicologico" : "No se detecto indicios de Maltrato Psicologico"
+        }
       </h1>
       <label htmlFor="diagnosticoSelect">
         ¿Está de acuerdo con el diagnóstico?
@@ -124,6 +125,27 @@ const Modal = ({
         cols="30"
         rows="10"
         value={diagnosticoPsicologo}
+        style={
+          {
+            "outline": "none",
+            "border": "none",
+            // display: block;
+            // width: 100%;
+            // background: #e6e6e6;
+            // font-family: Montserrat-Bold;
+            // font-size: 15px;
+            // line-height: 1.5;
+            "color": "#666",
+            "display": "",
+            "width": "95%",
+            "background": "#e6e6e6",
+            "fontFamily": "Montserrat-Bold",
+            "borderRadius": "25px",
+            "minHeight": "150px",
+            "padding": "10px",
+
+          }
+        }
         onChange={(e) => setDiagnosticoPsicologo(e.target.value)}
       ></textarea>
 

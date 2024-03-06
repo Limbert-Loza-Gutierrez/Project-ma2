@@ -31,7 +31,7 @@ const NuevoCaso = () => {
   const infMedico = JSON.parse(
     window.localStorage.getItem("inforUser") as string
   );
-  
+
   const [infPaciente, setInfPaciente] = useState({
     nombre: "",
     documento: "",
@@ -42,9 +42,8 @@ const NuevoCaso = () => {
     // diagnostico: "",
     nombreMedico: "",
   });
-  console.log(detectionResults)
-  console.log(infPaciente)
-
+  console.log(detectionResults);
+  console.log(infPaciente);
 
   const indicadores = [
     "Lluvia como lágrimas",
@@ -93,8 +92,6 @@ const NuevoCaso = () => {
         // console.log("indicadores", indicadores);
         let repuesta = generateResponse(detectionFeatures, indicadores);
         setDetectionResults(repuesta);
-
-        
       })
       .catch(function (error) {
         console.log(error.message);
@@ -273,9 +270,9 @@ const NuevoCaso = () => {
         }}
         guardar={() => {
           setOpenModal(false);
-          detectionResults?.isMaltrato
-            ? (infPaciente.diagnostico = "Sí")
-            : (infPaciente.diagnostico = "No");
+          // detectionResults?.isMaltrato
+          //   ? (infPaciente.diagnostico = "Sí")
+          //   : (infPaciente.diagnostico = "No");
 
           infPaciente.reporte = reportBase64;
           const newPacientes = [...pacientesLocalStorage, infPaciente];
