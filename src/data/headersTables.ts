@@ -22,7 +22,7 @@ const headerCasos = {
   edad: "Edad",
   fechaDiagnostico: "Fecha de Diagnostico",
   diagnostico: "Diagnostico",
-  imgDiagnostData: "Imagen Diagnostico",
+  reporte: "Reporte",
 }
 
 const headerCasosAdmin = {
@@ -33,6 +33,6 @@ const headerCasosAdmin = {
   edad: "Edad",
   fechaDiagnostico: "Fecha de Diagnostico",
   diagnostico: "Diagnostico",
-  medico: "Medico Tratante",
+  nombreMedico: "Medico Tratante",
 }
 export { headerTablesAdminUs, headerTablePaciente, headerCasos, headerCasosAdmin };

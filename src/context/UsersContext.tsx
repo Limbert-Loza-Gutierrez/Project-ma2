@@ -27,7 +27,6 @@ const UsersContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
         pacientes,
         updateListPacientes
     };
-    console.log("Personal", personal);
 
     return <UsersContext.Provider value={value}
 

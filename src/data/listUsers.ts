@@ -46,7 +46,7 @@ const usuarios = {
       fechaDiagnostico: "1996-06-12T00:00:00.000Z",
       diagnostico: "Sin diagnostico",
       imgDiagnostData: "/",
-      medico: "12421511",
+      
       nombreMedico: "Juan David Perez Ramirez",
     },
     {
@@ -59,7 +59,7 @@ const usuarios = {
       fechaDiagnostico: "1996-05-12T00:00:00.000Z",
       diagnostico: "Sin diagnostico",
       imgDiagnostData: "/",
-      medico: "12421511",
+
       nombreMedico: "Juan David Perez Ramirez",
 
     }
