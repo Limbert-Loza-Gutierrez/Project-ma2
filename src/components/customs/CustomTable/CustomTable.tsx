@@ -12,7 +12,8 @@ const CustomTable = ({ headerData, bodyData }) => {
     return newObj;
   });
   return (
-    <>
+    <div className="outer-wrapper">
+      <div className="table-wrapper">
       <table>
         <thead className='table-head'>
           {header.map((prop) => (
@@ -23,7 +24,8 @@ const CustomTable = ({ headerData, bodyData }) => {
           <CustomTableRow data={newBodyData} />
         </tbody>
       </table>
-    </>
+      </div>
+    </div>
   );
 };
 

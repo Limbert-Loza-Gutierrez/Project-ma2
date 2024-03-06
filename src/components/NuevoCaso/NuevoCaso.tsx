@@ -125,6 +125,7 @@ const NuevoCaso = () => {
     detectionResults?.isMaltrato
       ? (infPaciente.diagnostico = "Sí")
       : (infPaciente.diagnostico = "No");
+      infPaciente.imagen = imageUrl;
     let hayCampoVacio = false;
 
     for (const propiedad in infPaciente) {
