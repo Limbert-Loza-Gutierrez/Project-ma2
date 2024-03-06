@@ -79,3 +79,7 @@
     display: flex;
     align-items: center;
 }
+
+.genero {
+    width: 100px;
+}

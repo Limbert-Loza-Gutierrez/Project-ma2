@@ -218,10 +218,14 @@ const handleSubmit = (e) => {
                         value={selectTagValue}
                     />                    
                 </div>
-                
+
+
+                <div className="genero">  
+                <p>Genero</p>
                 <CustomSelect
+                
                   style={{
-                    width: "200px",
+                    width: "400px",
                 }}
                   name="genero"
                   arrayOptionsSelect={["Masculino","Femenino"]}
@@ -235,9 +239,9 @@ const handleSubmit = (e) => {
 
 
                 />
-                
+                 </div> 
                 <CustomInput
-                    name="edad"
+                    name="edad"p
                     label="Edad"
                     type="number"
                     placeholder="Edad"
@@ -250,10 +254,12 @@ const handleSubmit = (e) => {
                 <CustomInput
                     name="fechaDiagnostico"
                     label="Fecha de diagnostico"
-                    type="date"
+                    type="text"
                     placeholder="Fecha de diagnostico"
                     required
                     onChange={handleChange}
+                    value={new Date().toLocaleDateString().split("/").join("-")
+                    }
                 />
                 <CustomInput
                     label="Imagen para Diagnostico"

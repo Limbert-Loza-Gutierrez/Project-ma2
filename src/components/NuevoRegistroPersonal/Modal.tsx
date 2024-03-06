@@ -118,7 +118,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
           />
           <CustomInput
             type="text"
-            placeholder="Especilidad"
+            placeholder="Especialidad"
             name="especialidad"
             required
             value={inforLaboral.especialidad}
