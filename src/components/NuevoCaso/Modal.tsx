@@ -11,11 +11,14 @@ const Modal = ({
   onClose,
   informacionPaciente,
   guardar,
-  setReportBase64,
+  updateReportBase64 ,
 }) => {
   // const [base64PDF, setBase64PDF] = useState("");
   if (!open) return null;
   const [diagnosticoPsicologo, setDiagnosticoPsicologo] = useState("");
+  
+  
+
 
   const generatePDF = async () => {
     const diagnosticoPsicologo = document.getElementById(
@@ -65,8 +68,15 @@ const Modal = ({
       //   informacionPaciente.nombre + informacionPaciente.documento + ".pdf";
       // pdf.save(pdfname);
       const base64Data = pdf.output("datauristring");
+      const informesPrevios = JSON.parse(localStorage.getItem("informes")) || [];
+      const nuevoInforme = {
+        pdf: base64Data,
+        documento: informacionPaciente.documento,
+      };
+      informesPrevios.push(nuevoInforme);
+      localStorage.setItem("informes", JSON.stringify(informesPrevios));
       console.log("Base64:", base64Data);
-      setReportBase64(base64Data);
+      updateReportBase64(base64Data);
       onClose();
     } catch (error) {
       console.error("Error generating PDF:", error);

@@ -174,7 +174,13 @@ const NuevoCaso = () => {
       nombreMedico: "",
     });
   };
+  const updateReportBase64 = (newValue) => {
+    setReportBase64((prevState) => {
+      return newValue;
+    });
+  };
 
+  
   return (
     <main className="window-content-nc">
       <h2>Inserte la informacion del paciente</h2>
@@ -283,8 +289,7 @@ const NuevoCaso = () => {
           clearForm();
         }}
         informacionPaciente={infPaciente}
-        setReportBase64={setReportBase64}
-      />
+        updateReportBase64={updateReportBase64}      />
     </main>
   );
 };
