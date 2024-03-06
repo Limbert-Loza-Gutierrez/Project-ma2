@@ -92,7 +92,7 @@ tr, td {
 }
 
 
-@media (max-width: 850px) {
+/* @media (max-width: 850px) { */
     /* tr{
        display: none; 
     }
@@ -114,10 +114,10 @@ tr, td {
         text-transform: capitalize;
     } */
 
-    table {
+    /* table {
         padding-top: 100px;
-        margin-top: 400px ;
-    }
+        margin-top: 400px ; */
+    /* }
     th{
         
         display: none;
@@ -135,11 +135,11 @@ tr, td {
     }
 
     td::before {
-        content: attr(data-cell) ": ";
-        font-weight: 700;
-        text-transform: capitalize;
-    }
+        /* content: attr(data-cell) ": "; */
+        /* font-weight: 700; */
+        /* text-transform: capitalize; */
+    /* } */ */
 
 
 
-}
+/* } */
