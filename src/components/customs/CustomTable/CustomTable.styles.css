@@ -32,6 +32,7 @@ table, tr, td{
    } */
 
    .outer-wrapper {
+
     margin: 10px;
     margin-left: 20px;
     margin-right: 20px;
@@ -46,7 +47,8 @@ table, tr, td{
     overflow-y: scroll;
     overflow-x: scroll;
     height: fit-content;
-    max-height: 70vh;
+    max-height: 40vh;
+    
     margin-top: 22px;
     margin: 15px;
     padding-bottom: 20px;
