@@ -59,10 +59,7 @@ const Modal = ({ open, onClose, informacionPaciente }) => {
       console.log("=====>",da)
       pdf.text(`¿Está de acuerdo con el diagnóstico?: ${da}`, 10, 150);
 
-      // pdf.addImage(imgData, 'PNG', 10, 110, pdf.internal.pageSize.getWidth() - 20, pdf.internal.pageSize.getHeight() - 20);
-// pdf save debe tener el document y nombre d ifnormacioPaciente para descargarlo:
 const pdfname = informacionPaciente.nombre + informacionPaciente.documento + '.pdf';
-      // pdf.save('diagnosis-report.pdf');
       pdf.save(pdfname);
       onClose();
     } catch (error) {
@@ -80,6 +77,9 @@ const pdfname = informacionPaciente.nombre + informacionPaciente.documento + '.p
       }
     }
   }, [open]);
+
+
+  
 
   return (
     <div className='modalContainer' id='modalContainer'>
@@ -106,11 +106,11 @@ const pdfname = informacionPaciente.nombre + informacionPaciente.documento + '.p
         value={diagnosticoPsicologo}
         onChange={(e) => setDiagnosticoPsicologo(e.target.value)}
       ></textarea>
-      {/* <CustomButton content="Guardar" onClick={
-        
-      } /> */}
+      
       <div className='imprimird'>
-      <CustomButton content="Generar PDF" onClick={generatePDF} />
+      <CustomButton content="Cancelar" onClick={generatePDF} />
+      <CustomButton content="Guardar" onClick={onClose} />
+
       </div>
     </div>
   );

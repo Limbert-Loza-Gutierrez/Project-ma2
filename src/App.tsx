@@ -1,14 +1,14 @@
-import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Login from "./views/Login/Login";
-import PrivateRoute from "./components/router/PrivateRoute";
-import PublicRoute from "./components/router/PublicRoute";
-import Logout from "./views/Logout/Logout";
-import AdministrarPersonal from "./components/AdministrarPersonal/AdministrarPersonal";
-import AdministrarPacientes from "./components/AdministrarPacientes/AdministrarPacientes";
-import NuevoCaso from "./components/NuevoCaso/NuevoCaso";
-import Casos from "./components/Casos/Casos";
-import NuevoCasoAnalisis from "./components/NuevoCasoAnalisis/NuevoCasoAnalisis"
+import { Login, Logout } from "./views/exports"
+import {
+  AdministrarPersonal,
+  AdministrarPacientes,
+  NuevoCaso,
+  Casos,
+  PrivateRoute,
+  PublicRoute,
+} from "./components/exports"
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -53,10 +53,7 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
-      {
-        path: "/rara",
-        element:<NuevoCasoAnalisis/>
-      }
+
     ],
   },
 ]);

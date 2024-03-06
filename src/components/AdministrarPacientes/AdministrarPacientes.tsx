@@ -1,14 +1,10 @@
 
-import { headerCasos } from "../../data/headersTables";
-import listUsers from "../../data/listUsers";
+import { headerCasosAdmin } from "../../data/headersTables";
 import CustomTNR from "../customs/CustomTablanNuevoRegistro/CustomTNR";
-import UsersContext from "../../context/UsersContext";
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 const Casos = () => {
   const [pacientes, setPacientes] = useState([]);
-  // const { pacientes } = useContext(UsersContext);
-  // const pacientes = JSON.parse(window.localStorage.getItem("listPacientes") as string);
-  // const data = listUsers.pacientes;
+  
   useEffect(() => {
     const data = JSON.parse(window.localStorage.getItem("listPacientes") as string);
     console.log(data);
@@ -23,9 +19,8 @@ const Casos = () => {
       <div>
       <h1>Pacientes</h1>
     </div>
-      {/* <CustomTNR headerTablesAdminUs={headerCasos} data={pacientes} /> */}
       {pacientes.length > 0 ? (
-        <CustomTNR headerTablesAdminUs={headerCasos} data={pacientes} />
+        <CustomTNR headerTablesAdminUs={headerCasosAdmin} data={pacientes} />
       ) : (
         <p>Loading pacientes...</p>
       )}

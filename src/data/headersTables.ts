@@ -1,13 +1,13 @@
 const headerTablesAdminUs = {
-  numeroDocumento: "Número de Documento",
+  numeroDocumento: "Cedula de Identidad",
   expedicion: "Expedición Documento",
   nombre: "Nombres",
   nombreUsuario: "Nombre de Usuario",
-  
+
 };
 
 const headerTablePaciente = {
-  numeroDocumento: "Número de Documento",
+  numeroDocumento: "Cedula de Identidad",
   expedicionDocumento: "Expedición Documento",
   nombres: "Nombres",
   primerApellido: "Primer Apellido",
@@ -15,13 +15,24 @@ const headerTablePaciente = {
   nombreUsuario: "Nombre de Usuario",
 };
 const headerCasos = {
-      nombre: "Nombre",
-      documento: "CI",
-      expedicion: "Expedicion",
-      sexo: "Sexo",
-      edad: "Edad",
-      fechaDiagnostico: "Fecha de Diagnostico",
-      diagnostico: "Diagnostico",
-      imgDiagnostData: "Imagen Diagnostico",
+  nombre: "Nombre",
+  documento: "CI",
+  expedicion: "Expedicion",
+  sexo: "Sexo",
+  edad: "Edad",
+  fechaDiagnostico: "Fecha de Diagnostico",
+  diagnostico: "Diagnostico",
+  imgDiagnostData: "Imagen Diagnostico",
 }
-export { headerTablesAdminUs, headerTablePaciente,headerCasos };
+
+const headerCasosAdmin = {
+  nombre: "Nombre",
+  documento: "CI",
+  expedicion: "Expedicion",
+  sexo: "Sexo",
+  edad: "Edad",
+  fechaDiagnostico: "Fecha de Diagnostico",
+  diagnostico: "Diagnostico",
+  medico: "Medico Tratante",
+}
+export { headerTablesAdminUs, headerTablePaciente, headerCasos, headerCasosAdmin };
