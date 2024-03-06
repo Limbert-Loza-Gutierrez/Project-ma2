@@ -6,9 +6,9 @@ import UsersContext from "../../context/UsersContext";
 import "./NuevoCaso.styles.css";
 import { useEffect } from "react";
 import axios from "axios";
-import { loadImageBase64 } from "../../services/ia_detection";
-import { generateResponse } from "../../services/ia_detection";
+import { loadImageBase64, generateResponse } from "../../services/ia_detection";
 import Modal from "./Modal";
+// import axios from 'axios';
 
 const NuevoCaso = () => {
   const { updateListPacientes } = useContext(UsersContext);
@@ -31,7 +31,7 @@ const NuevoCaso = () => {
   const infMedico = JSON.parse(
     window.localStorage.getItem("inforUser") as string
   );
-
+  
   const [infPaciente, setInfPaciente] = useState({
     nombre: "",
     documento: "",
@@ -39,30 +39,30 @@ const NuevoCaso = () => {
     sexo: "",
     edad: "",
     fechaDiagnostico: "",
-    // imgDiagnostData: "",
-    diagnostico: "",
+    // diagnostico: "",
     nombreMedico: "",
   });
+  console.log(detectionResults)
+  console.log(infPaciente)
 
 
-  const MALTRATO_INDICATORS = {
-    "Persona perfil hacia el frente": {
-      agachada: true,
-      expresion_triste: true,
-    },
-    "Paraguas hacia la derecha": {
-      inclinado: true,
-      posicion_incorrecta: true,
-    },
-    "Lluvia torrencial": {
-      intensidad: "fuerte",
-      duracion: "prolongada",
-    },
-  };
+  const indicadores = [
+    "Lluvia como lágrimas",
+    "Lluvia torrencial",
+    "Nubes",
+    "Rayo",
+    "Margen abajo",
+    "Boca abierta",
+    "Paraguas cerrado",
+    "Paraguas muy chico",
+    "Paraguas tipo lanza",
+    "Dibujo pequeño",
+    "Margen izquierdo",
+  ];
   const handleImageUpload = (file) => {
-    setFileData(file); // Guardamos el archivo en el estado
+    setFileData(file);
 
-    loadImageBase64(file) // Pasamos el archivo a loadImageBase64
+    loadImageBase64(file)
       .then((imageData) => {
         sendImageToAPI(imageData);
       })
@@ -72,30 +72,32 @@ const NuevoCaso = () => {
   };
 
   const sendImageToAPI = (imageData) => {
+    // console.log("Enviando imagen a la API", imageData);
+
     axios({
       method: "POST",
       url: "https://detect.roboflow.com/persona-bajo-la-lluvia/1",
       params: {
-        api_key: "LP1YvLOtK4PbOiJ54HHL",
+        api_key: "EAW01eDHAuDdqLm8W0W9",
       },
       data: imageData,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
     })
-      .then((response) => {
-        setDetectionResults(response.data);
-        setError(null); // Limpiamos cualquier error anterior
-        const detectionFeatures =
-          detectionResults?.predictions?.map(
-            (prediction) => prediction.class
-          ) || [];
-        setResponse(
-          generateRandomResponse(detectionFeatures, MALTRATO_INDICATORS)
-        );
+      .then(function (response) {
+        let detectionFeatures =
+          response.data?.predictions?.map((prediction) => prediction.class) ||
+          [];
+        // console.log("caracteristicas detectadas", detectionFeatures);
+        // console.log("indicadores", indicadores);
+        let repuesta = generateResponse(detectionFeatures, indicadores);
+        setDetectionResults(repuesta);
+
+        
       })
-      .catch((error) => {
-        setError(error.message);
+      .catch(function (error) {
+        console.log(error.message);
       });
   };
 
@@ -116,7 +118,6 @@ const NuevoCaso = () => {
     handleImageUpload(file);
   };
   useEffect(() => {
-    // Inicializamos el estado
     setError(null);
     setDetectionResults(null);
     setResponse(null);
@@ -124,18 +125,14 @@ const NuevoCaso = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    response?.maltratoDetected
+    detectionResults?.isMaltrato
       ? (infPaciente.diagnostico = "Sí")
       : (infPaciente.diagnostico = "No");
-    // Variable para indicar si hay un campo vacío
     let hayCampoVacio = false;
 
-    // Recorrer las propiedades de infPaciente
-    for (const propiedad in infPaciente ) {
-      // Obtener el valor de la propiedad
+    for (const propiedad in infPaciente) {
       const valor = infPaciente[propiedad];
 
-      // Si el valor está vacío, se marca la variable y se sale del bucle
       if (!valor) {
         hayCampoVacio = true;
         break;
@@ -148,7 +145,6 @@ const NuevoCaso = () => {
     }
 
     setOpenModal(true);
-
   };
 
   const handleChange = (e) => {
@@ -179,7 +175,6 @@ const NuevoCaso = () => {
     });
   };
 
-  
   return (
     <main className="window-content-nc">
       <h2>Inserte la informacion del paciente</h2>
@@ -228,20 +223,20 @@ const NuevoCaso = () => {
             value={selectTagValue}
           />
         </div>
-        <div className="genero">  
-                <p>Genero</p>
-                
-        <CustomSelect
-          style={{
-            width: "400px",
-          }}
-          name="genero"
-          arrayOptionsSelect={["Masculino", "Femenino"]}
-          onChange={(e) => {
-            setSelectGenero(e.target.value);
-          }}
-          value={selectGenero}
-        />
+        <div className="genero">
+          <p>Genero</p>
+
+          <CustomSelect
+            style={{
+              width: "400px",
+            }}
+            name="genero"
+            arrayOptionsSelect={["Masculino", "Femenino"]}
+            onChange={(e) => {
+              setSelectGenero(e.target.value);
+            }}
+            value={selectGenero}
+          />
         </div>
         <CustomInput
           name="edad"
@@ -278,18 +273,18 @@ const NuevoCaso = () => {
         }}
         guardar={() => {
           setOpenModal(false);
-          response?.maltratoDetected
+          detectionResults?.isMaltrato
             ? (infPaciente.diagnostico = "Sí")
             : (infPaciente.diagnostico = "No");
 
-          // infPaciente.imgDiagnostData=imageUrl
           infPaciente.reporte = reportBase64;
           const newPacientes = [...pacientesLocalStorage, infPaciente];
           updateListPacientes(newPacientes);
           clearForm();
         }}
         informacionPaciente={infPaciente}
-        updateReportBase64={updateReportBase64}      />
+        updateReportBase64={updateReportBase64}
+      />
     </main>
   );
 };
