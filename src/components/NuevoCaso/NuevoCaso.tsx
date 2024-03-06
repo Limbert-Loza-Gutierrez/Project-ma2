@@ -151,6 +151,7 @@ const NuevoCaso = () => {
       expedicion: selectTagValue,
       sexo: selectGenero,
       nombreMedico: infMedico.nombre,
+      fechaDiagnostico: new Date().toISOString().split("T")[0].split("-").reverse().join("-"),
     });
   };
 
@@ -248,11 +249,11 @@ const NuevoCaso = () => {
         <CustomInput
           name="fechaDiagnostico"
           label="Fecha de diagnostico"
-          type="date"
+          type="text"
           placeholder="Fecha de diagnostico"
           required
-          onChange={handleChange}
-          value={new Date().toISOString().split("T")[0]}
+          // onChange={handleChange}
+          value={new Date().toISOString().split("T")[0].split("-").reverse().join("-")}
         />
         <CustomInput
           label="Imagen para Diagnostico"
