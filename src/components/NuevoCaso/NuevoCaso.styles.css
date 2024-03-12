@@ -46,7 +46,7 @@
   /* } */
 
 
-  .modalContainer {
+  .modalContainernc {
     width: 500px;
     height: 500px;
     position: fixed;
@@ -65,7 +65,15 @@
 
 }
 
+.diagnosticoPsicologo {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+    align-items: center;
+    justify-content: center;
+    margin: 13px;
 
+}
 
 .diagnosticoSelect {
     margin: 8px;
@@ -80,6 +88,16 @@
     align-items: center;
 }
 
+.ci-expedicion {
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+
+}
+
 .genero {
     width: 100px;
+    text-align: center; 
+    margin: 8px;
+
 }

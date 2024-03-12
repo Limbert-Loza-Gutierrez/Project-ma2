@@ -37,38 +37,42 @@ const Modal = ({
     // *Encabezado*
 
     pdf.setFontSize(16);
-    pdf.text("Informe Psicológico", docWidth / 2, 20, { align: "center" });
-    pdf.line(0, 25, docWidth, 25);
+    pdf.text("SISTEMA DE APOYO PARA PSICOLOGOS", docWidth / 2, 20, { align: "center" });
+    pdf.text("DIRECCION DE IGUALDAD DE OPRTUNIDADES", docWidth / 2, 30, { align: "center" });
+    pdf.text("INFORME PSICOLOGICO", docWidth / 2, 40, { align: "center" });
+    // pdf.text("SISTEMA DE APOYO PARA PSICOLOGOS", docWidth / 2, 50, { align: "center" });
+    pdf.line(0, 60, docWidth, 60);
 
     // *Logotipo e imagen del paciente*
 
-    pdf.addImage(logo, "PNG", 5, 0, 50, 50);
-    pdf.addImage(informacionPaciente.imagen, "PNG", 100, 60,70, 70);
+    pdf.addImage(logo, "PNG", 5, 15, 30, 30);
+    pdf.addImage(informacionPaciente.imagen, "PNG", 15, 200,70, 70);
 
     // *Información del paciente*
 
     pdf.setFontSize(20);
-    pdf.text("Nombre:", 10, 80);
+    pdf.text("Paciente:", 10, 80);
     pdf.text(informacionPaciente.nombre, 50, 80);
-    pdf.text("Edad:", 10, 95);
-    pdf.text(informacionPaciente.edad, 50, 95);
+    pdf.text("Edad:", 10, 90);
+    pdf.text(informacionPaciente.edad, 50, 90);
    
-    pdf.text("Fecha:", 10, 110);
-    pdf.text(informacionPaciente.fechaDiagnostico, 50, 110);
+    pdf.text("Fecha:", 10, 100);
+    pdf.text(informacionPaciente.fechaDiagnostico, 50, 100);
     
 
     // *Línea divisoria*
+    pdf.line(0, 160, docWidth, 160);
 
-    pdf.line(0, docHeight - 60, docWidth, docHeight - 60);
+    // pdf.line(0, docHeight - 60, docWidth, docHeight - 60);
 
     // *Diagnóstico del Psicólogo*
 
     pdf.setFontSize(16);
-    pdf.text("Diagnóstico del Sistema:", 10, docHeight - 40);
-    pdf.text(informacionPaciente.diagnostico, 80, docHeight - 40);
-    pdf.text("Diagnóstico del Psicólogo:", 10, docHeight - 50);
+    pdf.text("Diagnóstico del Sistema:", 10, 180);
+    pdf.text(informacionPaciente.diagnostico, 80, 180);
+    pdf.text("Diagnóstico del Psicólogo:", 10, 140);
     const ds = pdf.splitTextToSize(diagnosticoPsicologo, docWidth - 50);
-    pdf.text(ds, 80, docHeight - 50);
+    pdf.text(ds, 80, 140);
 
     // *¿Está de acuerdo con el diagnóstico?*
 
@@ -80,7 +84,7 @@ const Modal = ({
     } else {
       da = "No especificado";
     }
-    pdf.text(`¿Está de acuerdo con el diagnóstico?: ${da}`, 10, 150);
+    pdf.text(`¿Está de acuerdo con el diagnóstico?: ${da}`, 10, 120);
 
     // *Pie de página*
 
@@ -164,7 +168,7 @@ const Modal = ({
  
 
   return (
-    <div className="modalContainer" id="modalContainer">
+    <div className="modalContainernc" id="modalContainer">
       <h1>
         {
           informacionPaciente.diagnostico === "Sí" ? "Se detecto indicios de Maltrato Psicologico" : "No se detecto indicios de Maltrato Psicologico"
@@ -204,10 +208,10 @@ const Modal = ({
             "width": "95%",
             "background": "#e6e6e6",
             "fontFamily": "Montserrat-Bold",
-            "borderRadius": "25px",
+            "borderRadius": "20px",
             "minHeight": "150px",
             "padding": "10px",
-
+            
           }
         }
         onChange={(e) => setDiagnosticoPsicologo(e.target.value)}

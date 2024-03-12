@@ -204,6 +204,13 @@ const NuevoCaso = () => {
           />
 
           <CustomSelect
+          style={{
+            width: "70px",
+            top: "10px",
+            margin: "10px",
+            height: "48px",
+            
+          }}
             name="extension"
             arrayOptionsSelect={[
               "LP",
@@ -223,11 +230,11 @@ const NuevoCaso = () => {
           />
         </div>
         <div className="genero">
-          <p>Genero</p>
+          <h3>Genero</h3>
 
           <CustomSelect
             style={{
-              width: "400px",
+              width: "380px",
             }}
             name="genero"
             arrayOptionsSelect={["Masculino", "Femenino"]}
