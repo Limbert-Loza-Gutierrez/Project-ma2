@@ -3,6 +3,7 @@ const headerTablesAdminUs = {
   expedicion: "Expedición Documento",
   nombre: "Nombres",
   nombreUsuario: "Nombre de Usuario",
+  "informacionLaboral.estado": "Estado",
 
 };
 

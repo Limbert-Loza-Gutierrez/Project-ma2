@@ -10,7 +10,7 @@ const CustomTNR = (props) => {
     <div className='centerTRN'>
       <div className='buscar'>
         <CustomInput
-          placeholder='Inserte Numero de Identificacion'
+          placeholder='Inserte Carnet de Identidad'
           type='number'
         />
       </div>

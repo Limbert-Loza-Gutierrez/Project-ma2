@@ -24,7 +24,9 @@ const Login = () => {
   const user = user_list.find(
     (user) =>
       user.nombreUsuario === loginDate.username &&
-      user.password === loginDate.password
+      user.password === loginDate.password 
+      &&
+      user.informacionLaboral.estado === "Activo"
   );
 
   const handleSubmit = (e) => {
