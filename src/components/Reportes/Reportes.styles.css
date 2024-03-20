@@ -1,0 +1,24 @@
+.reportes {
+    display: grid;
+    width: 100%;
+    height: calc(100% - 20rem);
+    grid-template-columns: 33% 33% 33%;
+    grid-gap: 20px;
+}
+
+
+.reportes div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    opacity: 0.9;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.reportes .genero-reporte {
+    
+}

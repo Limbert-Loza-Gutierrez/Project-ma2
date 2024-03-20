@@ -5,6 +5,7 @@ import NuevoCaso from "./NuevoCaso/NuevoCaso";
 import NuevoRegistroPersonal from "./NuevoRegistroPersonal/NuevoRegistroPersonal";
 import NuevoRegistroPacientes from "./NuevoRegistroPacientes/NuevoRegistroPacientes";
 import { PrivateRoute, PublicRoute } from "./router/exports";
+import Reportes from "./Reportes/Reportes";
 
 
 
@@ -16,5 +17,6 @@ export {
     NuevoRegistroPersonal,
     NuevoRegistroPacientes,
     PrivateRoute,
-    PublicRoute
+    PublicRoute,
+    Reportes
 }

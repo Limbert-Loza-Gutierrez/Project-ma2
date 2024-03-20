@@ -4,22 +4,18 @@ import CustomButton from "../customs/CustomButton/CustomButton";
 import CustomSelect from "../customs/CustomSelect/CustomSelect";
 import { jsPDF } from "jspdf";
 
-
 import logo from "../../../public/image/logo.jpg";
 const Modal = ({
   open,
   onClose,
   informacionPaciente,
   guardar,
-  updateReportBase64 ,
+  updateReportBase64,
 }) => {
   // const [base64PDF, setBase64PDF] = useState("");
   if (!open) return null;
   const infoMedico = JSON.parse(localStorage.getItem("inforUser")) || {};
   const [diagnosticoPsicologo, setDiagnosticoPsicologo] = useState("");
-  
-  
-  
 
   const generatePDF = async () => {
     const diagnosticoPsicologo = document.getElementById(
@@ -31,112 +27,79 @@ const Modal = ({
 
     try {
       const pdf = new jsPDF();
-    const docWidth = pdf.internal.pageSize.getWidth();
-    const docHeight = pdf.internal.pageSize.getHeight();
+      const docWidth = pdf.internal.pageSize.getWidth();
+      const docHeight = pdf.internal.pageSize.getHeight();
 
-    // *Encabezado*
+      // *Encabezado*
 
-    pdf.setFontSize(16);
-    pdf.text("SISTEMA DE APOYO PARA PSICOLOGOS", docWidth / 2, 20, { align: "center" });
-    pdf.text("DIRECCION DE IGUALDAD DE OPRTUNIDADES", docWidth / 2, 30, { align: "center" });
-    pdf.text("INFORME PSICOLOGICO", docWidth / 2, 40, { align: "center" });
-    // pdf.text("SISTEMA DE APOYO PARA PSICOLOGOS", docWidth / 2, 50, { align: "center" });
-    pdf.line(0, 60, docWidth, 60);
+      pdf.setFontSize(16);
+      pdf.text("SISTEMA DE APOYO PARA PSICOLOGOS", docWidth / 2, 20, {
+        align: "center",
+      });
+      pdf.text("DIRECCION DE IGUALDAD DE OPRTUNIDADES", docWidth / 2, 30, {
+        align: "center",
+      });
+      pdf.text("INFORME PSICOLOGICO", docWidth / 2, 40, { align: "center" });
+      // pdf.text("SISTEMA DE APOYO PARA PSICOLOGOS", docWidth / 2, 50, { align: "center" });
+      pdf.line(0, 60, docWidth, 60);
 
-    // *Logotipo e imagen del paciente*
+      // *Logotipo e imagen del paciente*
 
-    pdf.addImage(logo, "PNG", 5, 15, 30, 30);
-    pdf.addImage(informacionPaciente.imagen, "PNG", 15, 200,70, 70);
+      pdf.addImage(logo, "PNG", 5, 15, 30, 30);
+      pdf.addImage(informacionPaciente.imagen, "PNG", 15, 200, 70, 70);
 
-    // *Información del paciente*
+      // *Información del paciente*
 
-    pdf.setFontSize(20);
-    pdf.text("Paciente:", 10, 80);
-    pdf.text(informacionPaciente.nombre, 50, 80);
-    pdf.text("Edad:", 10, 90);
-    pdf.text(informacionPaciente.edad, 50, 90);
-   
-    pdf.text("Fecha:", 10, 100);
-    pdf.text(informacionPaciente.fechaDiagnostico, 50, 100);
-    
+      pdf.setFontSize(20);
+      pdf.text("Paciente:", 10, 80);
+      pdf.text(informacionPaciente.nombre, 50, 80);
+      pdf.text("Edad:", 10, 90);
+      pdf.text(informacionPaciente.edad, 50, 90);
 
-    // *Línea divisoria*
-    pdf.line(0, 160, docWidth, 160);
+      pdf.text("Fecha:", 10, 100);
+      pdf.text(informacionPaciente.fechaDiagnostico, 50, 100);
 
-    // pdf.line(0, docHeight - 60, docWidth, docHeight - 60);
+      // *Línea divisoria*
+      pdf.line(0, 160, docWidth, 160);
 
-    // *Diagnóstico del Psicólogo*
-
-    pdf.setFontSize(16);
-    pdf.text("Diagnóstico del Sistema:", 10, 180);
-    pdf.text(informacionPaciente.diagnostico, 80, 180);
-    pdf.text("Diagnóstico del Psicólogo:", 10, 140);
-    const ds = pdf.splitTextToSize(diagnosticoPsicologo, docWidth - 50);
-    pdf.text(ds, 80, 140);
-
-    // *¿Está de acuerdo con el diagnóstico?*
-
-    let da = "";
-    if (diagnosticoSeleccionado === "si") {
-      da = "Si";
-    } else if (diagnosticoSeleccionado === "no") {
-      da = "No";
-    } else {
-      da = "No especificado";
-    }
-    pdf.text(`¿Está de acuerdo con el diagnóstico?: ${da}`, 10, 120);
-
-    // *Pie de página*
-
-    pdf.line(0, docHeight - 20, docWidth, docHeight - 20);
-    pdf.setFontSize(10);
-    pdf.text(`Elaborado por: ${infoMedico.nombre}`, 10, docHeight - 10);
-    pdf.text(`Página ${pdf.internal.getNumberOfPages()}`, docWidth - 20, docHeight - 10, { align: "right" });
-    
-      // const pdf = new jsPDF();
-      // pdf.setFontSize(40);
-      // pdf.setFont("helvetica", "bold");
-      // pdf.addImage(logo, "PNG", 5, 0, 50, 50);
-      // pdf.addImage(informacionPaciente.imagen, "PNG", 5, 60, 200, 200);
-      // pdf.setFontSize(20);
-      // const docWidth = pdf.internal.pageSize.getWidth();
-      // const docHeight = pdf.internal.pageSize.getHeight();
-      // pdf.line(0, 60, docWidth, 60);
-      // pdf.setFont("helvetica", "italic");
-      // const splitDescription = pdf.splitTextToSize("REPORTE", docWidth - 20);
-      // pdf.text(splitDescription, docWidth - 20, 45, { align: "right" });
-      // pdf.setFontSize(20);
-      // pdf.setFont("helvetica", "bold");
-      // // Agregar datos al PDF
-      // pdf.text(`Nombre: ${informacionPaciente.nombre}`, 10, 80);
-      // pdf.text(`Edad: ${informacionPaciente.edad}`, 10, 95);
-      // pdf.text(`Diagnostico del Sistema: ${informacionPaciente.diagnostico}`, 10, 105);
-      // pdf.text(`Fecha: ${informacionPaciente.fechaDiagnostico}`, 10, 110);
       // pdf.line(0, docHeight - 60, docWidth, docHeight - 60);
 
-      
-      // // Agregar "Diagnostico del Psicologo" al PDF
-      // pdf.text(`Diagnóstico del Psicólogo:`, 10, docHeight - 40);
-      // const ds = pdf.splitTextToSize(diagnosticoPsicologo, docWidth - 20);
-      // pdf.text(ds, 10, docHeight - 30);
+      // *Diagnóstico del Psicólogo*
 
-      // // extraer de diagnosticoSeleccionado el valor
-      // let da = "";
-      // if (diagnosticoSeleccionado === "si") {
-      //   da = "Si";
-      // } else if (diagnosticoSeleccionado === "no") {
-      //   da = "No";
-      // } else {
-      //   da = "No especificado";
-      // }
-      // console.log("=====>", da);
-      // pdf.text(`¿Está de acuerdo con el diagnóstico?: ${da}`, 10, 150);
+      pdf.setFontSize(16);
+      pdf.text("Diagnóstico del Sistema:", 10, 180);
+      pdf.text(informacionPaciente.diagnostico, 80, 180);
+      pdf.text("Diagnóstico del Psicólogo:", 10, 140);
+      const ds = pdf.splitTextToSize(diagnosticoPsicologo, docWidth - 50);
+      pdf.text(ds, 80, 140);
 
-      // const pdfname =
-      //   informacionPaciente.nombre + informacionPaciente.documento + ".pdf";
-      // pdf.save(pdfname);
+      // *¿Está de acuerdo con el diagnóstico?*
+
+      let da = "";
+      if (diagnosticoSeleccionado === "si") {
+        da = "Si";
+      } else if (diagnosticoSeleccionado === "no") {
+        da = "No";
+      } else {
+        da = "No especificado";
+      }
+      pdf.text(`¿Está de acuerdo con el diagnóstico?: ${da}`, 10, 120);
+
+      // *Pie de página*
+
+      pdf.line(0, docHeight - 20, docWidth, docHeight - 20);
+      pdf.setFontSize(10);
+      pdf.text(`Elaborado por: ${infoMedico.nombre}`, 10, docHeight - 10);
+      pdf.text(
+        `Página ${pdf.internal.getNumberOfPages()}`,
+        docWidth - 20,
+        docHeight - 10,
+        { align: "right" }
+      );
+
       const base64Data = pdf.output("datauristring");
-      const informesPrevios = JSON.parse(localStorage.getItem("informes")) || [];
+      const informesPrevios =
+        JSON.parse(localStorage.getItem("informes")) || [];
       const nuevoInforme = {
         pdf: base64Data,
         documento: informacionPaciente.documento,
@@ -165,14 +128,13 @@ const Modal = ({
       }
     }
   }, [open]);
- 
 
   return (
     <div className="modalContainernc" id="modalContainer">
       <h1>
-        {
-          informacionPaciente.diagnostico === "Sí" ? "Se detecto indicios de Maltrato Psicologico" : "No se detecto indicios de Maltrato Psicologico"
-        }
+        {informacionPaciente.diagnostico === "Sí"
+          ? "Se detecto indicios de Maltrato Psicologico"
+          : "No se detecto indicios de Maltrato Psicologico"}
       </h1>
       <label htmlFor="diagnosticoSelect">
         ¿Está de acuerdo con el diagnóstico?
@@ -193,36 +155,36 @@ const Modal = ({
         cols="30"
         rows="10"
         value={diagnosticoPsicologo}
-        style={
-          {
-            "outline": "none",
-            "border": "none",
-            // display: block;
-            // width: 100%;
-            // background: #e6e6e6;
-            // font-family: Montserrat-Bold;
-            // font-size: 15px;
-            // line-height: 1.5;
-            "color": "#666",
-            "display": "",
-            "width": "95%",
-            "background": "#e6e6e6",
-            "fontFamily": "Montserrat-Bold",
-            "borderRadius": "20px",
-            "minHeight": "150px",
-            "padding": "10px",
-            
-          }
-        }
+        style={{
+          outline: "none",
+          border: "none",
+          // display: block;
+          // width: 100%;
+          // background: #e6e6e6;
+          // font-family: Montserrat-Bold;
+          // font-size: 15px;
+          // line-height: 1.5;
+          color: "#666",
+          display: "",
+          width: "95%",
+          background: "#e6e6e6",
+          fontFamily: "Montserrat-Bold",
+          borderRadius: "20px",
+          minHeight: "150px",
+          padding: "10px",
+        }}
         onChange={(e) => setDiagnosticoPsicologo(e.target.value)}
       ></textarea>
 
       <div className="imprimird">
         <CustomButton content="Cancelar" onClick={onClose} />
-        <CustomButton content="Guardar" onClick={()=>{
-          guardar();
-          generatePDF();
-        }} />
+        <CustomButton
+          content="Guardar"
+          onClick={() => {
+            guardar();
+            generatePDF();
+          }}
+        />
         {/* <CustomButton content="Generar PDF" onClick={generatePDF} /> */}
       </div>
     </div>

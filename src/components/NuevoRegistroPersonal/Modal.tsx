@@ -9,7 +9,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
   const [selectTagValue, setSelectTagValue] = useState("LP")
   const [inforPersonal, setInforPersonal] = useState({
     imgPerfil: "https://cdn-icons-png.flaticon.com/512/6915/6915987.png", nombre: "",
-    numeroDocumento: "",
+    documento: "",
     expedicion: "",
     password: "",
     nombreUsuario: "",
@@ -73,9 +73,9 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
             <CustomInput
               type="number"
               placeholder="CI"
-              name="numeroDocumento"
+              name="documento"
               required
-              value={inforPersonal.numeroDocumento}
+              value={inforPersonal.documento}
               onChange={handleChangePersonal}
 
             />

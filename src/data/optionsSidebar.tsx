@@ -12,6 +12,11 @@ const opcionesAdmin = [
     text: "Personal",
   },
   {
+    to: "/reportes",
+    icon: <GrUserSettings />,
+    text: "Reportes",
+  },
+  {
     to: "/logout",
     icon: <GrLogout />,
     text: "Cerrar sesión",
