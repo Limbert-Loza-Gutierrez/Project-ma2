@@ -125,7 +125,7 @@ const NuevoCaso = () => {
     detectionResults?.isMaltrato
       ? (infPaciente.diagnostico = "Sí")
       : (infPaciente.diagnostico = "No");
-      infPaciente.imagen = imageUrl;
+    infPaciente.imagen = imageUrl;
     let hayCampoVacio = false;
 
     for (const propiedad in infPaciente) {
@@ -204,13 +204,13 @@ const NuevoCaso = () => {
           />
 
           <CustomSelect
-          style={{
-            width: "70px",
-            top: "10px",
-            margin: "10px",
-            height: "48px",
-            
-          }}
+            style={{
+              width: "70px",
+              top: "10px",
+              margin: "10px",
+              height: "48px",
+
+            }}
             name="extension"
             arrayOptionsSelect={[
               "LP",
@@ -279,10 +279,6 @@ const NuevoCaso = () => {
         }}
         guardar={() => {
           setOpenModal(false);
-          // detectionResults?.isMaltrato
-          //   ? (infPaciente.diagnostico = "Sí")
-          //   : (infPaciente.diagnostico = "No");
-
           infPaciente.reporte = reportBase64;
           const newPacientes = [...pacientesLocalStorage, infPaciente];
           updateListPacientes(newPacientes);

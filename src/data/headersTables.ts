@@ -1,16 +1,17 @@
 const headerTablesAdminUs = {
-  documento: "Cedula de Identidad",
-  expedicion: "Expedición Documento",
   nombre: "Nombres",
   nombreUsuario: "Nombre de Usuario",
+  documento: "Cedula de Identidad",
+  expedicion: "Expedición Documento",
   "informacionLaboral.estado": "Estado",
 
 };
 
 const headerTablePaciente = {
+  nombres: "Nombres",
+
   documento: "Cedula de Identidad",
   expedicionDocumento: "Expedición Documento",
-  nombres: "Nombres",
   primerApellido: "Primer Apellido",
   segundoApellido: "Segundo Apellido",
   nombreUsuario: "Nombre de Usuario",
@@ -35,5 +36,6 @@ const headerCasosAdmin = {
   fechaDiagnostico: "Fecha de Diagnostico",
   diagnostico: "Diagnostico",
   nombreMedico: "Medico Tratante",
+  reporte: "Reporte",
 }
 export { headerTablesAdminUs, headerTablePaciente, headerCasos, headerCasosAdmin };

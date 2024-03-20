@@ -18,9 +18,7 @@ const CustomTableRow = ({ data }) => {
         return (
           <tr key={object.id}>
             {keysData.map((key) =>
-              key !== "reporte" ? (
-                <td key={key}>{object[key]}</td>
-              ) : (
+              key === "reporte" ? (
                 <td key={key}>
                   {href ? (
                     <a
@@ -38,6 +36,14 @@ const CustomTableRow = ({ data }) => {
                     "Sin reporte"
                   )}
                 </td>
+              ) : (
+                // <td key={key}>{object[key]}</td>
+                <>
+                  <td key={key}>{object[key]}</td>
+                  {console.log(object[key])}
+                  </>
+
+
               )
             )}
           </tr>

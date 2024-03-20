@@ -1,13 +1,13 @@
 import { useEffect, useState, useContext } from "react";
 import { headerTablesAdminUs } from "../../data/headersTables";
-import listUsers from "../../data/listUsers.ts";
 import CustomTNR from "../customs/CustomTablanNuevoRegistro/CustomTNR";
 import NuevoRegistroPersonal from "../NuevoRegistroPersonal/NuevoRegistroPersonal.tsx";
+import ModificarPersonal from "../ModificarPersonal/ModificarPersonal.tsx";
 import UsersContext from "../../context/UsersContext";
 const AdministrarPersonal = () => {
   const { personal } = useContext(UsersContext);
-
   const [personalList, setPersonalList] = useState([]);
+  
   useEffect(() => {
     const data = JSON.parse(window.localStorage.getItem("listPersonal") as string);
     if (data) {
@@ -31,6 +31,7 @@ const AdministrarPersonal = () => {
       }
       <div className='nuevo-registro'>
         <NuevoRegistroPersonal />
+        <ModificarPersonal/>
       </div>
     </main>
   );
