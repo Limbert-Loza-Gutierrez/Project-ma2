@@ -9,14 +9,17 @@ const CustomTNR = (props) => {
   const [carnet, setCarnet] = useState('');
   const [buscarActivo, setBuscarActivo] = useState(false);
   const [userFilter, setUserFilter] = useState([]);
-  console.log(userFilter);
+  
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setBuscarActivo(true);
     props.data.map((paciente) => {
-      paciente.documento === carnet ? setUserFilter([paciente]) : setUserFilter([{}]);
+      paciente.documento === carnet ? setUserFilter([paciente]) : null;
+      carnet === '' ? setBuscarActivo(false) : null;
+      // console.log(paciente.documento);
+      // paciente.documento === carnet ? setUserFilter([paciente]) : null
     }
     );
 

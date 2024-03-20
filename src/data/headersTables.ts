@@ -1,5 +1,5 @@
 const headerTablesAdminUs = {
-  numeroDocumento: "Cedula de Identidad",
+  documento: "Cedula de Identidad",
   expedicion: "Expedición Documento",
   nombre: "Nombres",
   nombreUsuario: "Nombre de Usuario",
@@ -8,7 +8,7 @@ const headerTablesAdminUs = {
 };
 
 const headerTablePaciente = {
-  numeroDocumento: "Cedula de Identidad",
+  documento: "Cedula de Identidad",
   expedicionDocumento: "Expedición Documento",
   nombres: "Nombres",
   primerApellido: "Primer Apellido",
