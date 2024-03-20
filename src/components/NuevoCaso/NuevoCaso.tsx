@@ -17,8 +17,9 @@ const NuevoCaso = () => {
   );
 
   const [imageUrl, setImageUrl] = useState("");
-  const [selectTagValue, setSelectTagValue] = useState("LP");
-  const [selectGenero, setSelectGenero] = useState("seleccionDeGenero");
+  const [selectTagValue, setSelectTagValue] = useState("");
+  const [selectGenero, setSelectGenero] = useState("");
+  const [selectEdad, setSelectEdad] = useState("");
   const [fileData, setFileData] = useState(null);
   const [reportBase64, setReportBase64] = useState(null);
   const [detectionResults, setDetectionResults] = useState(null);
@@ -44,7 +45,10 @@ const NuevoCaso = () => {
   });
   console.log(detectionResults);
   console.log(infPaciente);
-
+  const handleCustomSelect = (e, functionSelect) => {
+    handleChange(e);
+    functionSelect(e.target.value);
+};
   const indicadores = [
     "Lluvia como lágrimas",
     "Lluvia torrencial",
@@ -99,6 +103,7 @@ const NuevoCaso = () => {
   };
 
   const handleChangeFile = (event) => {
+    handleChange(event);
     const file = event.target.files[0];
 
     const reader = new FileReader();
@@ -151,6 +156,7 @@ const NuevoCaso = () => {
       [e.target.name]: e.target.value,
       expedicion: selectTagValue,
       sexo: selectGenero,
+      edad: selectEdad,
       nombreMedico: infMedico.nombre,
       fechaDiagnostico: new Date().toISOString().split("T")[0].split("-").reverse().join("-"),
     });
@@ -211,21 +217,22 @@ const NuevoCaso = () => {
               height: "48px",
 
             }}
-            name="extension"
+            name="expedicion"
             arrayOptionsSelect={[
-              "LP",
-              "CBBA",
-              "SC",
-              "BN",
-              "PT",
-              "OR",
-              "CH",
-              "TJ",
-              "PA",
-              "BE",
-              "PD",
+              "Seleccione Expedicion",
+              "La Paz",
+              "Cochabamba",
+              "Santa Cruz",
+              "Beni",
+              "Pando",
+              "Oruro",
+              "Potosi",
+              "Tarija",
+              "Chuquisaca",
             ]}
-            onChange={handleSelectTagChange}
+            onChange={(e) => {
+              handleCustomSelect(e, setSelectTagValue);
+          }}
             value={selectTagValue}
           />
         </div>
@@ -236,23 +243,26 @@ const NuevoCaso = () => {
             style={{
               width: "380px",
             }}
-            name="genero"
-            arrayOptionsSelect={["Masculino", "Femenino"]}
+            name="sexo"
+            arrayOptionsSelect={["Seleccione Genero","Masculino", "Femenino"]}
             onChange={(e) => {
-              setSelectGenero(e.target.value);
-            }}
+              handleCustomSelect(e, setSelectGenero);
+          }}
             value={selectGenero}
           />
         </div>
-        <CustomInput
-          name="edad"
-          label="Edad"
-          type="number"
-          placeholder="Edad"
-          value={infPaciente.edad}
-          required
-          onChange={handleChange}
-        />
+      
+        <CustomSelect
+            style={{
+              width: "380px",
+            }}
+            name="edad"
+            arrayOptionsSelect={["Seleccione Edad","5", "6", "7", "8", "9", "10", "11", "12",]}
+            onChange={(e) => {
+              handleCustomSelect(e, setSelectEdad);
+          }}
+            value={selectEdad}
+          />
 
         <CustomInput
           name="fechaDiagnostico"

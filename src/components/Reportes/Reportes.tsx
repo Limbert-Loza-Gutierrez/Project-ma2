@@ -53,13 +53,17 @@ function Reportes() {
         const fecha = new Date(paciente.fechaDiagnostico);
         const mes = fecha.getMonth();
         if (paciente.diagnostico === "Sí") {
+            
             mesesPositivos[mes]++;
         } else {
             mesesNegativos[mes]++;
         }
 
     }
+    
     );
+    console.log(mesesPositivos);
+    console.log(mesesNegativos);
     const dataDeteccion = {
         labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
         datasets: [

@@ -47,6 +47,7 @@ const Modal = ({
 
       pdf.addImage(logo, "PNG", 5, 15, 30, 30);
       pdf.addImage(informacionPaciente.imagen, "PNG", 15, 200, 70, 70);
+      pdf.addImage(informacionPaciente.imagen, "PNG", 100, 200, 70, 70);
 
       // *Información del paciente*
 

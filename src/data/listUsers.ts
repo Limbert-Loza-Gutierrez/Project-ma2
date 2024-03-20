@@ -93,7 +93,7 @@ const usuarios = {
       sexo: "Masculino",
       edad: 5,
       fechaDiagnostico: "20-01-2024",
-      diagnostico: "Si",
+      diagnostico: "Sí",
       imgDiagnostData: "/",
       nombreMedico: "Juan David Perez Ramirez",
     },
