@@ -35,6 +35,7 @@ const CustomTNR = (props) => {
   return (
 
     <div className='centerTRN'>
+      
       <form action="" onSubmit={handleSubmit}>
         <div className='buscar'>
           <CustomInput
@@ -49,7 +50,9 @@ const CustomTNR = (props) => {
             type="submit" />
 
         </div>
+        
       </form>
+      
       <div className='tabla'>
         {
           buscarActivo ? <CustomTable

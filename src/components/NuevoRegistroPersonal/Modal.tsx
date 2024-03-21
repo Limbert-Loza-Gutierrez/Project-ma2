@@ -80,8 +80,18 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
 
             />
             <CustomSelect
+             style={{
+                width: "100%",
+                height: "40px",
+                marginBottom: "30px",
+                marginTop: "19px",
+                textAlign: "center",
+                borderRadius: "5px",
+                
+                         
+             }}
               name="expedicion"
-              arrayOptionsSelect={["LP", "CBBA", "SC", "BN", "PT", "OR", "CH", "TJ", "PA", "BE", "PD"]}
+              arrayOptionsSelect={["LP", "CBBA", "SC", "BN", "PT", "OR", "CH", "TJ", "PA"]}
               onChange={handleSelectTagChange}
               value={selectTagValue}
             />

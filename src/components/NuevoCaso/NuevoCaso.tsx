@@ -198,8 +198,9 @@ const NuevoCaso = () => {
           onChange={handleChange}
           value={infPaciente.nombre}
         />
-        <div className="ci-expedicion">
+        <div className="ci-expedicion1">
           <CustomInput
+          
             name="documento"
             label="Numero de documento"
             type="number"
@@ -211,12 +212,15 @@ const NuevoCaso = () => {
 
           <CustomSelect
             style={{
-              width: "70px",
-              top: "10px",
-              margin: "10px",
-              height: "48px",
-
-            }}
+              width: "50%",
+              height: "40px",
+              marginBottom: "20px",
+              marginTop: "48px",
+              textAlign: "center",
+              borderRadius: "5px",
+              
+                       
+           }}
             name="expedicion"
             arrayOptionsSelect={[
               "Seleccione Expedicion",
@@ -241,7 +245,7 @@ const NuevoCaso = () => {
 
           <CustomSelect
             style={{
-              width: "380px",
+              width: "445px",
             }}
             name="sexo"
             arrayOptionsSelect={["Seleccione Genero","Masculino", "Femenino"]}
@@ -251,10 +255,11 @@ const NuevoCaso = () => {
             value={selectGenero}
           />
         </div>
-      
+        <div className="edad">
+        <h3>Edad</h3>
         <CustomSelect
             style={{
-              width: "380px",
+              width: "445px",
             }}
             name="edad"
             arrayOptionsSelect={["Seleccione Edad","5", "6", "7", "8", "9", "10", "11", "12",]}
@@ -263,6 +268,7 @@ const NuevoCaso = () => {
           }}
             value={selectEdad}
           />
+          </div>
 
         <CustomInput
           name="fechaDiagnostico"

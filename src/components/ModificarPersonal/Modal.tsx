@@ -51,29 +51,44 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
     return (
         <div className="overlay">
             <div className="modalContainer1">
-                <p>Seleccione el Usuario</p>
+                <h1>Seleccione el Usuario</h1>
                 <CustomSelect
+                 style={{
+                    width: "40%",
+                    height: "40px",
+                    marginBottom: "30px",
+                    marginTop: "20px",
+                    textAlign: "center",
+                    borderRadius: "5px",
+                    border: "1px solid #000",
+                    marginLeft: "30%",  
+                    backgroundColor: "lightblue",          
+                  }}
                     name="Personal"
                     arrayOptionsSelect={nombresPersonal}
                     onChange={(e) => {
                         handleCustomSelect(e, setPersonalSelect);
                     }}
                     value={personalSelect}
-                />
-                <p>
+                />         
+                <h2>
                     Estado del Usuario :{" "}
                     {personalSelect !== ""
                         ? dataPersonal[0]?.informacionLaboral?.estado
                         : "Sin Usuario Seleccionado"}
-                </p>
+                </h2>
+                
                 {personalSelect !== "" ? (
                     dataPersonal[0].informacionLaboral?.estado === "Activo" ? (
-                        <CustomButton content="Desactivar" onClick={inactivarUsuario} />
+                        
+                        <CustomButton  content="Desactivar" onClick={inactivarUsuario} />
+                        
                     ) : (
                         <CustomButton content="Activar" onClick={activarUsuario} />
                     )
                 ) : null}
                 <CustomButton content="Cerrar" onClick={onClose} />
+                
             </div>
         </div>
     );
