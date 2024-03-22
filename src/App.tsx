@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Login, Logout } from "./views/exports"
+import { Login, Logout,Home} from "./views/exports"
 import {
   AdministrarPersonal,
   AdministrarPacientes,
@@ -18,9 +18,7 @@ const router = createBrowserRouter([
 
       {
         index: true,
-        element: <h1>
-          hola hola
-        </h1>,
+        element: <Home/>
       },
       {
         path: "/logout",

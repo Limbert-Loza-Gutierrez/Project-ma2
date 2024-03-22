@@ -1,0 +1,19 @@
+
+
+.overlay_modal__modificar-personal .modalContainer1 select {
+    width: 40%;
+    height: 40px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #000;
+    margin-left: 30%;
+    background-color: lightblue;
+}
+
+.overlay_modal__modificar-personal .modalContainer1  {
+    width: fit-content;
+    height: fit-content;
+}
+

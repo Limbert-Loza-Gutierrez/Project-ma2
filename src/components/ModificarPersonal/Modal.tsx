@@ -49,21 +49,10 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
         onClose();
     };
     return (
-        <div className="overlay">
+        <div className="overlay_modal__modificar-personal">
             <div className="modalContainer1">
                 <h1>Seleccione el Usuario</h1>
                 <CustomSelect
-                 style={{
-                    width: "40%",
-                    height: "40px",
-                    marginBottom: "30px",
-                    marginTop: "20px",
-                    textAlign: "center",
-                    borderRadius: "5px",
-                    border: "1px solid #000",
-                    marginLeft: "30%",  
-                    backgroundColor: "lightblue",          
-                  }}
                     name="Personal"
                     arrayOptionsSelect={nombresPersonal}
                     onChange={(e) => {

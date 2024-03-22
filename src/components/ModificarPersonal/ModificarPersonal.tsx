@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Modal from "./Modal";
 import CustomButton from "../customs/CustomButton/CustomButton";
+import "./ModificarPersonal.styles.css"
 
 function ModificarPersonal() {
   const [openModal, setOpenModal] = useState(false);
