@@ -12,17 +12,20 @@ const CustomTNR = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setBuscarActivo(true);
-    props.data.map((paciente) => {
-      paciente.documento === carnet ? setUserFilter([paciente]) : null;
-      carnet === "" ? setBuscarActivo(false) : null;
-    });
+    const filteredUsers = props.data.filter(paciente => paciente.documento === carnet);
+    setUserFilter(filteredUsers);
+    setCarnet(""); // Limpiar el valor de carnet después de la búsqueda
   };
-  const handleChange = (e) => {
-    if (e.target.value === "") {
-      setBuscarActivo(false);
-    }
-    setCarnet(e.target.value);
-  };
+
+
+ const handleChange = (e) => {
+  const inputValue = e.target.value;
+  if (inputValue === "") {
+    setBuscarActivo(false);
+    setUserFilter([]); // Limpiar la lista de usuarios filtrados cuando el campo esté vacío
+  }
+  setCarnet(inputValue);
+};
   return (
     <div className="centerTRN">
       <form action="" className="form_customtnr" onSubmit={handleSubmit}>
