@@ -5,6 +5,7 @@ import CustomSelect from "../customs/CustomSelect/CustomSelect";
 import { jsPDF } from "jspdf";
 
 import logo from "../../../public/image/logo.jpg";
+
 const Modal = ({
   open,
   onClose,
@@ -14,7 +15,7 @@ const Modal = ({
 }) => {
   // const [base64PDF, setBase64PDF] = useState("");
   if (!open) return null;
-  const infoMedico = JSON.parse(localStorage.getItem("inforUser")) || {};
+  const infoMedico = JSON.parse(localStorage.getItem("infoUser")) || {};
   const [diagnosticoPsicologo, setDiagnosticoPsicologo] = useState("");
 
   const generatePDF = async () => {
@@ -33,14 +34,14 @@ const Modal = ({
       // *Encabezado*
 
       pdf.setFontSize(16);
-      pdf.text("SISTEMA DE APOYO PARA PSICOLOGOS", docWidth / 2, 20, {
+      pdf.text("SISTEMA DE APOYO PARA PSICÓLOGOS", docWidth / 2, 20, {
         align: "center",
       });
-      pdf.text("DIRECCION DE IGUALDAD DE OPRTUNIDADES", docWidth / 2, 30, {
+      pdf.text("DIRECCIÓN DE IGUALDAD DE OPORTUNIDADES", docWidth / 2, 30, {
         align: "center",
       });
-      pdf.text("INFORME PSICOLOGICO", docWidth / 2, 40, { align: "center" });
-      // pdf.text("SISTEMA DE APOYO PARA PSICOLOGOS", docWidth / 2, 50, { align: "center" });
+      pdf.text("INFORME PSICOLÓGICO", docWidth / 2, 40, { align: "center" });
+      // pdf.text("SISTEMA DE APOYO PARA PSICÓLOGOS", docWidth / 2, 50, { align: "center" });
       pdf.line(0, 60, docWidth, 60);
 
       // *Logotipo e imagen del paciente*
@@ -60,12 +61,7 @@ const Modal = ({
       pdf.text("Fecha:", 10, 100);
       pdf.text(informacionPaciente.fechaDiagnostico, 50, 100);
 
-      // *Línea divisoria*
       pdf.line(0, 160, docWidth, 160);
-
-      // pdf.line(0, docHeight - 60, docWidth, docHeight - 60);
-
-      // *Diagnóstico del Psicólogo*
 
       pdf.setFontSize(16);
       pdf.text("Diagnóstico del Sistema:", 10, 180);
@@ -78,7 +74,7 @@ const Modal = ({
 
       let da = "";
       if (diagnosticoSeleccionado === "si") {
-        da = "Si";
+        da = "Sí";
       } else if (diagnosticoSeleccionado === "no") {
         da = "No";
       } else {
@@ -111,7 +107,7 @@ const Modal = ({
       updateReportBase64(base64Data);
       onClose();
     } catch (error) {
-      console.error("Error generating PDF:", error);
+      console.error("Error generando PDF:", error);
     }
   };
 
@@ -159,12 +155,6 @@ const Modal = ({
         style={{
           outline: "none",
           border: "none",
-          // display: block;
-          // width: 100%;
-          // background: #e6e6e6;
-          // font-family: Montserrat-Bold;
-          // font-size: 15px;
-          // line-height: 1.5;
           color: "#666",
           display: "",
           width: "95%",

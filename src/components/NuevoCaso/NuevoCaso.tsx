@@ -161,7 +161,6 @@ const NuevoCaso = () => {
       fechaDiagnostico: new Date().toISOString().split("T")[0].split("-").reverse().join("-"),
     });
   };
-
   const clearForm = () => {
     setInfPaciente({
       nombre: "",
@@ -174,6 +173,7 @@ const NuevoCaso = () => {
       nombreMedico: "",
     });
   };
+
   const updateReportBase64 = (newValue) => {
     setReportBase64((prevState) => {
       return newValue;
@@ -182,7 +182,7 @@ const NuevoCaso = () => {
 
   return (
     <main className="window-content-nc">
-      <h2>Inserte la informacion del paciente</h2>
+      <h2>Inserte la información del paciente</h2>
       <form
         className="for"
         action=""
@@ -200,11 +200,10 @@ const NuevoCaso = () => {
         />
         <div className="ci-expedicion1">
           <CustomInput
-          
             name="documento"
-            label="Numero de documento"
+            label="Número de documento"
             type="number"
-            placeholder="Numero de documento"
+            placeholder="Número de documento"
             required
             onChange={handleChange}
             value={infPaciente.documento}
@@ -218,76 +217,79 @@ const NuevoCaso = () => {
               marginTop: "48px",
               textAlign: "center",
               borderRadius: "5px",
-              
-                       
-           }}
+            }}
             name="expedicion"
             arrayOptionsSelect={[
-              "Seleccione Expedicion",
+              "Seleccione Expedición",
               "La Paz",
               "Cochabamba",
               "Santa Cruz",
               "Beni",
               "Pando",
               "Oruro",
-              "Potosi",
+              "Potosí",
               "Tarija",
               "Chuquisaca",
             ]}
             onChange={(e) => {
               handleCustomSelect(e, setSelectTagValue);
-          }}
+            }}
             value={selectTagValue}
           />
         </div>
         <div className="genero">
-          <h3>Genero</h3>
+          <h3>Género</h3>
 
           <CustomSelect
             style={{
               width: "445px",
             }}
             name="sexo"
-            arrayOptionsSelect={["Seleccione Genero","Masculino", "Femenino"]}
+            arrayOptionsSelect={["Seleccione Género", "Masculino", "Femenino"]}
             onChange={(e) => {
               handleCustomSelect(e, setSelectGenero);
-          }}
+            }}
             value={selectGenero}
           />
         </div>
         <div className="edad">
-        <h3>Edad</h3>
-        <CustomSelect
+          <h3>Edad</h3>
+          <CustomSelect
             style={{
               width: "445px",
             }}
             name="edad"
-            arrayOptionsSelect={["Seleccione Edad","5", "6", "7", "8", "9", "10", "11", "12",]}
+            arrayOptionsSelect={["Seleccione Edad", "5", "6", "7", "8", "9", "10", "11", "12"]}
             onChange={(e) => {
               handleCustomSelect(e, setSelectEdad);
-          }}
+            }}
             value={selectEdad}
           />
-          </div>
+        </div>
 
         <CustomInput
           name="fechaDiagnostico"
-          label="Fecha de diagnostico"
+          label="Fecha de diagnóstico"
           type="text"
-          placeholder="Fecha de diagnostico"
+          placeholder="Fecha de diagnóstico"
           required
-          // onChange={handleChange}
-          value={new Date().toISOString().split("T")[0].split("-").reverse().join("-")}
+          value={new Date()
+            .toISOString()
+            .split("T")[0]
+            .split("-")
+            .reverse()
+            .join("-")}
+          readOnly
         />
         <CustomInput
-          label="Imagen para Diagnostico"
+          label="Imagen para Diagnóstico"
           type="file"
-          placeholder="Imagen para Diagnostico"
+          placeholder="Imagen para Diagnóstico"
           onChange={handleChangeFile}
           required
         />
       </form>
-      <CustomButton content="Realizar Diagnosticos" onClick={handleSubmit} />
+      <CustomButton content="Realizar Diagnósticos" onClick={handleSubmit} />
       <Modal
         open={openModal}
         onClose={() => {
