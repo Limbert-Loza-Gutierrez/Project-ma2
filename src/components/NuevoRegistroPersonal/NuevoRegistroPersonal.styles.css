@@ -34,3 +34,22 @@
     
 } */
 
+
+.password__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.password__container p {
+    display: flex;
+    flex-direction: row;
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    height: 4rem;
+    align-items: center;
+    background-color: white;
+}
+

@@ -13,8 +13,13 @@ const CustomTNR = (props) => {
     e.preventDefault();
     setBuscarActivo(true);
     const filteredUsers = props.data.filter(paciente => paciente.documento === carnet);
-    setUserFilter(filteredUsers);
-    setCarnet(""); // Limpiar el valor de carnet después de la búsqueda
+    if (filteredUsers.length > 0) {
+      setUserFilter(filteredUsers);
+    }else{
+     setUserFilter(props.data);
+    
+    }
+   // setCarnet(""); 
   };
 
 
@@ -22,7 +27,7 @@ const CustomTNR = (props) => {
   const inputValue = e.target.value;
   if (inputValue === "") {
     setBuscarActivo(false);
-    setUserFilter([]); // Limpiar la lista de usuarios filtrados cuando el campo esté vacío
+    setUserFilter([]); 
   }
   setCarnet(inputValue);
 };
@@ -38,7 +43,10 @@ const CustomTNR = (props) => {
           />
         </div>
         <div className="boton-buscar">
-          <CustomButton content="Buscar" type="submit" />
+          <CustomButton content="Buscar" type={
+            carnet !== "" ? "submit" : "button"
+          
+          } />
         </div>
       </form>
 

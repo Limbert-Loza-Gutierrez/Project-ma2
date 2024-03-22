@@ -66,17 +66,17 @@ const Modal = ({
       pdf.setFontSize(16);
       pdf.text("Diagnóstico del Sistema:", 10, 180);
       pdf.text(informacionPaciente.diagnostico, 80, 180);
-      pdf.text("Diagnóstico del Psicólogo:", 10, 140);
-      const ds = pdf.splitTextToSize(diagnosticoPsicologo, docWidth - 50);
-      pdf.text(ds, 80, 140);
+      // pdf.text("Diagnóstico del Psicólogo:", 10, 140);
+      // const ds = pdf.splitTextToSize(diagnosticoPsicologo, docWidth - 50);
+      // pdf.text(ds, 80, 140);
 
       // *¿Está de acuerdo con el diagnóstico?*
 
       let da = "";
       if (diagnosticoSeleccionado === "si") {
-        da = "Sí";
+        da = "Sí se detectaron indicios de maltrato psicologico";
       } else if (diagnosticoSeleccionado === "no") {
-        da = "No";
+        da = "No se detectaron indicios de maltrato psicologico";
       } else {
         da = "No especificado";
       }
