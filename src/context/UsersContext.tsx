@@ -1,7 +1,22 @@
-import { useState, createContext, FC, ReactNode, useEffect } from "react";
-import listUser from "../data/listUsers";
+import { useState, createContext, FC, ReactNode } from "react";
 
-const UsersContext = createContext(null);
+interface UsersContextData {
+    personal: any;
+    updateListPersonal: (list: any) => void;
+    pacientes: any;
+    updateListPacientes: (list: any) => void;
+}
+
+
+// const UsersContext = createContext(null);
+const UsersContext = createContext<UsersContextData>({
+    personal: null,
+    updateListPersonal: () => { },
+    pacientes: null,
+    updateListPacientes: () => { }
+});
+
+
 
 const UsersContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [pacientes, setPacientes] = useState(
