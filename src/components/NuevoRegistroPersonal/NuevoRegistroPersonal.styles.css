@@ -16,45 +16,59 @@
     text-align: center;
 }
 
+.modalContainer1 form *{
+    padding: 0;
+    margin: 0;
+}
+
+
 .modalContainer1 .inputs-box {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0px;
     margin-top: 1rem;
+    margin-bottom: 1rem;
 }
+
+
 
 .modalContainer1 .buttons-box {
     display: flex;
     justify-content: space-around;
     margin-top: 2rem;
-
-}
-/* .ci-expedicion {
-    
-    
-} */
-
-
-.password__container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* margin-top: 1rem; */
 }
 
-.password__container p {
+
+
+.modalContainer1 .password__container p {
     display: flex;
     flex-direction: row;
     font-size: 2rem;
     font-weight: 500;
     margin-bottom: 0.5rem;
     height: 4rem;
-    width: 4rem;
+    width: 100%;
     align-items: center;
+    justify-content: center;
     background-color: white;
-    border-radius: 10px;
-    margin-top: 4px;
-    margin-right: 10px;
-    padding: 10px;
+    border-radius: 5px;
 }
+.modalContainer1 .ci-expedicion select {
+    margin-top: 0 !important;
+}
+
+.modalContainer1 .password__container {
+    display: grid;
+    grid-template-columns: 70% 30%;   
+}
+.modalContainer1 .ci-expedicion {
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+
+
+
+
+
 

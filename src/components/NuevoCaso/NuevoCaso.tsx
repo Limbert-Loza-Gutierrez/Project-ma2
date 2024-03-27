@@ -48,7 +48,7 @@ const NuevoCaso = () => {
   const handleCustomSelect = (e, functionSelect) => {
     handleChange(e);
     functionSelect(e.target.value);
-};
+  };
   const indicadores = [
     "Lluvia como lágrimas",
     "Lluvia torrencial",
@@ -158,7 +158,12 @@ const NuevoCaso = () => {
       sexo: selectGenero,
       edad: selectEdad,
       nombreMedico: infMedico.nombre,
-      fechaDiagnostico: new Date().toISOString().split("T")[0].split("-").reverse().join("-"),
+      fechaDiagnostico: new Date()
+        .toISOString()
+        .split("T")[0]
+        .split("-")
+        .reverse()
+        .join("-"),
     });
   };
   const clearForm = () => {
@@ -189,6 +194,7 @@ const NuevoCaso = () => {
         id="form-nuevo-caso"
         onSubmit={handleSubmit}
       >
+        <div className="contain-input option-form__nuevocaso">
         <CustomInput
           name="nombre"
           label="Nombre del paciente"
@@ -198,12 +204,13 @@ const NuevoCaso = () => {
           onChange={handleChange}
           value={infPaciente.nombre}
         />
-        <div className="ci-expedicion1">
+        </div>
+        <div className="ci-expedicion1 contain-input option-form__nuevocaso">
           <CustomInput
             name="documento"
-            label="Número de documento"
+            label="Carnet de Identidad"
             type="number"
-            placeholder="Número de documento"
+            placeholder="Carnet de Identidad"
             required
             onChange={handleChange}
             value={infPaciente.documento}
@@ -237,9 +244,8 @@ const NuevoCaso = () => {
             value={selectTagValue}
           />
         </div>
-        <div className="genero">
-          <h3>Género</h3>
-
+        <div className="genero contain-select option-form__nuevocaso">
+          <label className="select-label">Género</label>
           <CustomSelect
             style={{
               width: "445px",
@@ -252,20 +258,31 @@ const NuevoCaso = () => {
             value={selectGenero}
           />
         </div>
-        <div className="edad">
-          <h3>Edad</h3>
+        <div className="edad contain-select option-form__nuevocaso">
+          <label className="select-label">Edad</label>
           <CustomSelect
             style={{
               width: "445px",
             }}
             name="edad"
-            arrayOptionsSelect={["Seleccione Edad", "5", "6", "7", "8", "9", "10", "11", "12"]}
+            arrayOptionsSelect={[
+              "Seleccione Edad",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+            ]}
             onChange={(e) => {
               handleCustomSelect(e, setSelectEdad);
             }}
             value={selectEdad}
           />
         </div>
+        <div className="option-form__nuevocaso">
 
         <CustomInput
           name="fechaDiagnostico"
@@ -281,6 +298,8 @@ const NuevoCaso = () => {
             .join("-")}
           readOnly
         />
+        </div>
+        <div className="input-file">
         <CustomInput
           label="Imagen para Diagnóstico"
           type="file"
@@ -288,6 +307,7 @@ const NuevoCaso = () => {
           onChange={handleChangeFile}
           required
         />
+        </div>
       </form>
       <CustomButton content="Realizar Diagnósticos" onClick={handleSubmit} />
       <Modal

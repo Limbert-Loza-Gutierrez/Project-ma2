@@ -1,116 +1,99 @@
-/* .ci-expedicion {
-    display: flex;
-    flex-direction: row;
-    margin-top: 5px;
-    margin-bottom: 20px;
-    align-items: flex-end; */
-
-
-/* } */
-
-.window-content-nc{
-    margin: 12rem;
-    padding: 5rem;
-    width: 100%;
-    height: 90rem;
-    background-color: rgb(7, 58, 211);
-    background: linear-gradient(0deg, rgb(184, 185, 204) 0%, rgb(177, 187, 222) 35%, rgb(77, 100, 202)100%);
-    border: rgb(244, 206, 206) 0.3rem solid;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 0.5rem #212428;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    
+.window-content-nc {
+  margin: 12rem;
+  padding: 5rem;
+  width: 100%;
+  height: 90rem;
+  background-color: rgb(7, 58, 211);
+  background: linear-gradient(
+    0deg,
+    rgb(184, 185, 204) 0%,
+    rgb(177, 187, 222) 35%,
+    rgb(77, 100, 202) 100%
+  );
+  border: rgb(244, 206, 206) 0.3rem solid;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem #212428;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
 }
 
-
-/* .window-content-nc {
-    width: calc(93.5vw - 40rem);
-    height: 123%;
-    align-items: center;
-    border: gray 0.3rem solid;
-    margin: 2rem;
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    box-shadow: 0 0 0.5rem #212428;
-    background-color: #fffbff;
-    position: relative;
-    top: 0;
-    left: 35rem;
-    display: flex;
-    flex-direction: column;
-    /* align-items: center;
-    justify-content: center; */
-  /* } */
-
-
-  .modalContainernc {
-    width: 500px;
-    height: 500px;
-    position: fixed;
-    top: 55%;
-    left: 49%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75); 
-    border-radius: 20px;
-    flex-direction: column; 
-    background-color: rgb(7, 58, 211);
-    background: linear-gradient(0deg, rgb(184, 185, 204) 0%, rgb(177, 187, 222) 35%, rgb(77, 100, 202)100%);
-    border: rgb(244, 206, 206) 0.3rem solid;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 0.5rem #212428;
-
+.modalContainernc {
+  width: 500px;
+  height: 500px;
+  position: fixed;
+  top: 55%;
+  left: 49%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 20px;
+  flex-direction: column;
+  background-color: rgb(7, 58, 211);
+  background: linear-gradient(
+    0deg,
+    rgb(184, 185, 204) 0%,
+    rgb(177, 187, 222) 35%,
+    rgb(77, 100, 202) 100%
+  );
+  border: rgb(244, 206, 206) 0.3rem solid;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem #212428;
 }
 
-.diagnosticoPsicologo {
-    display: flex;
-    flex-direction: row;
-    margin-top: 15px;
-    align-items: center;
-    justify-content: center;
-    margin: 13px;
-
+.for {
+  display: flex;
+  flex-direction: column;
+  /* background-color: green; */
+  padding: 20px;
 }
 
-.diagnosticoSelect {
-    margin: 8px;
-    width: 100px;
-    text-align: center;
-
+.for * {
+  padding: 0 !important;
+}
+.for .option-form__nuevocaso {
+  width: 100%;
+  margin-top: 10px;
+}
+.for .ci-expedicion1 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+.for .contain-select {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.for label {
+  font-weight: 700 !important;
+  font-size: 2rem !important;
 }
 
-.imprimird {
-    margin: 40px;
-    display: flex;
-    align-items: center;
+.for .contain-select label {
+  display: flex;
+  margin-left: 1rem;
 }
 
-.ci-expedicion {
-    display: flex;
-    flex-direction: row;
-    height: 100px;
-
+input[type="file"]::file-selector-button {
+  border-radius: 4px;
+  padding: 0 16px;
+  height: 40px;
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+  margin-right: 16px;
+  transition: background-color 200ms;
 }
 
-.genero {
-    width: 100px;
-    text-align: center; 
-    margin: 8px;
-
-}
-.edad {
-    width: 100px;
-    text-align: center; 
-    margin: 8px;
-
+/* file upload button hover state */
+input[type="file"]::file-selector-button:hover {
+  background-color: #f3f4f6;
 }
 
-.ci-expedicion1 {
-    display: flex;
-    flex-direction: row;
-    margin-top: 5px;
-    align-items: flex-end;
+/* file upload button active state */
+input[type="file"]::file-selector-button:active {
+  background-color: #e5e7eb;
 }
