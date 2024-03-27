@@ -94,6 +94,7 @@ const NuevoCaso = () => {
           [];
         let repuesta = generateResponse(detectionFeatures, indicadores);
         setDetectionResults(repuesta);
+        // console.log("respuesta dentro del nuevo caso: ",repuesta);
       })
       .catch(function (error) {
         console.log(error.message);

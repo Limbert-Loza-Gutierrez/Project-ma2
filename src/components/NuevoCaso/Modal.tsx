@@ -18,6 +18,7 @@ const Modal = ({
   if (!open) return null;
   const infoMedico = JSON.parse(localStorage.getItem("infoUser")) || {};
   const [diagnosticoPsicologo, setDiagnosticoPsicologo] = useState("");
+  console.log("caracteriticas detectadas",caracteristicas)
 
   const generatePDF = async () => {
     const diagnosticoPsicologo = document.getElementById(
@@ -51,7 +52,15 @@ const Modal = ({
       pdf.addImage(informacionPaciente.imagen, "PNG", 15, 200, 70, 70);
       pdf.addImage(informacionPaciente.imagen, "PNG", 100, 200, 70, 70);
       
-      pdf.text(caracteristicas.toString(), 100, 220)
+      //si el objeto no esta vacio que imprima 
+      // caracteristicas es un objeto que contiene las caracteristicas detectadas {coincidencias:[],isMaltrato:rtue}
+      if(caracteristicas.isMaltrato){
+        pdf.text("Se detecto indicios de Maltrato Psicologico", 10, 70);
+        pdf.text("Caracteristicas detectadas", 10, 90);
+        pdf.text(caracteristicas.coincidencias.join("\n"), 10, 100);
+      }else{
+        pdf.text("No se detecto indicios de Maltrato Psicologico - Ninguna coincidencia ", 10, 70);
+      }
 
       // *Información del paciente*
 
