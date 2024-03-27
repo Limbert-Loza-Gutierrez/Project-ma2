@@ -81,6 +81,7 @@ const Modal = ({
         da = "No especificado";
       }
       pdf.text(`¿Está de acuerdo con el diagnóstico?: ${da}`, 10, 120);
+      pdf.text(da, 10, 130);
 
       // *Pie de página*
 
