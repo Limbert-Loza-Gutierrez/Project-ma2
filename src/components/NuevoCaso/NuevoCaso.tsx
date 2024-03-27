@@ -322,6 +322,7 @@ const NuevoCaso = () => {
         }}
         informacionPaciente={infPaciente}
         updateReportBase64={updateReportBase64}
+        caracteristicas={detectionResults}
       />
     </main>
   );

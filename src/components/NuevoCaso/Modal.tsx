@@ -12,6 +12,7 @@ const Modal = ({
   informacionPaciente,
   guardar,
   updateReportBase64,
+  caracteristicas
 }) => {
   // const [base64PDF, setBase64PDF] = useState("");
   if (!open) return null;
@@ -49,6 +50,7 @@ const Modal = ({
       pdf.addImage(logo, "PNG", 5, 15, 30, 30);
       pdf.addImage(informacionPaciente.imagen, "PNG", 15, 200, 70, 70);
       pdf.addImage(informacionPaciente.imagen, "PNG", 100, 200, 70, 70);
+      pdf.text(caracteristicas, 100, 220)
 
       // *Información del paciente*
 
@@ -183,7 +185,6 @@ const Modal = ({
             generatePDF();
           }}
         />
-        {/* <CustomButton content="Generar PDF" onClick={generatePDF} /> */}
       </div>
     </div>
   );
