@@ -66,9 +66,9 @@ const Modal = ({
       pdf.setFontSize(16);
       pdf.text("Diagnóstico del Sistema:", 10, 180);
       pdf.text(informacionPaciente.diagnostico, 80, 180);
-      // pdf.text("Diagnóstico del Psicólogo:", 10, 140);
-      // const ds = pdf.splitTextToSize(diagnosticoPsicologo, docWidth - 50);
-      // pdf.text(ds, 80, 140);
+      pdf.text("Diagnóstico del Psicólogo:", 10, 140);
+      const ds = pdf.splitTextToSize(diagnosticoPsicologo, docWidth - 50);
+      pdf.text(ds, 80, 140);
 
       // *¿Está de acuerdo con el diagnóstico?*
 
@@ -80,14 +80,14 @@ const Modal = ({
       } else {
         da = "No especificado";
       }
-      pdf.text(`¿Está de acuerdo con el diagnóstico?: ${da}`, 10, 120);
+      pdf.text(`¿Está de acuerdo con el diagnóstico?: `, 10, 120);
       pdf.text(da, 10, 130);
 
       // *Pie de página*
 
       pdf.line(0, docHeight - 20, docWidth, docHeight - 20);
       pdf.setFontSize(10);
-      pdf.text(`Elaborado por: ${infoMedico.nombre}`, 10, docHeight - 10);
+      pdf.text(`Elaborado por: ${informacionPaciente.nombreMedico}`, 10, docHeight - 10);
       pdf.text(
         `Página ${pdf.internal.getNumberOfPages()}`,
         docWidth - 20,
@@ -95,12 +95,18 @@ const Modal = ({
         { align: "right" }
       );
 
+
+
       const base64Data = pdf.output("datauristring");
+
+
       const informesPrevios =
         JSON.parse(localStorage.getItem("informes")) || [];
       const nuevoInforme = {
         pdf: base64Data,
+        id: informacionPaciente.id,
         documento: informacionPaciente.documento,
+        nombre: informacionPaciente.nombre,
       };
       informesPrevios.push(nuevoInforme);
       localStorage.setItem("informes", JSON.stringify(informesPrevios));

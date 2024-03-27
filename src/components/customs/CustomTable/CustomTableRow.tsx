@@ -7,12 +7,17 @@ const CustomTableRow = ({ data }) => {
 
   const findInformeByDocumento = (documento) => {
     return informes.find((informe) => informe.documento === documento);
+    // return informes.find((informe) => informe.idPaciente === idPaciente);
   };
+  const findInformeById = (id) => {
+    return informes.find((informe) => informe.id === id);
+  }
 
   return (
     <>
       {objects.map((object) => {
-        const informe = findInformeByDocumento(object.documento);
+        // const informe = findInformeByDocumento(object.documento);
+        const informe = findInformeById(object.id);
         const href = informe ? informe.pdf : null;
 
         return (
@@ -40,10 +45,8 @@ const CustomTableRow = ({ data }) => {
                 // <td key={key}>{object[key]}</td>
                 <>
                   <td key={key}>{object[key]}</td>
-                  {console.log(object[key])}
-                  </>
-
-
+                  {/* {console.log(object[key])} */}
+                </>
               )
             )}
           </tr>

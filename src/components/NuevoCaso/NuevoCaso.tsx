@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { loadImageBase64, generateResponse } from "../../services/ia_detection";
 import Modal from "./Modal";
+import { number } from "prop-types";
 // import axios from 'axios';
 
 const NuevoCaso = () => {
@@ -40,9 +41,8 @@ const NuevoCaso = () => {
     sexo: "",
     edad: "",
     fechaDiagnostico: "",
-    // diagnostico: "",
     nombreMedico: "",
-    idPaciente : "",
+    id : number,
   });
   console.log(detectionResults);
   console.log(infPaciente);
@@ -162,7 +162,7 @@ const NuevoCaso = () => {
         .split("-")
         .reverse()
         .join("-"),
-      idPaciente  : Math.floor(Math.random() * 1000).toString() ,
+      id : pacientesLocalStorage.length + 1,
     });
   };
   const clearForm = () => {
@@ -175,7 +175,7 @@ const NuevoCaso = () => {
       fechaDiagnostico: "",
       diagnostico: "",
       nombreMedico: "",
-      idPaciente : "",
+      id : number,
     });
   };
 

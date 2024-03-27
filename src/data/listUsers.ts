@@ -1,7 +1,7 @@
 const usuarios = {
   personal: [
     {
-     
+
       imgPerfil: "https://cdn-icons-png.flaticon.com/512/6915/6915987.png",
       nombre: "admin",
       documento: "123456789",
