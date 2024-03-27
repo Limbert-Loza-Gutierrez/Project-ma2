@@ -176,7 +176,7 @@ function Reportes() {
     return (
         <div className="window-content">
             <div className="reportes">
-                <div className="genero-reporte">
+                <div className="genero-reporte container-grafico">
                     <h1
                         style={{
                             textAlign: "center",
@@ -187,21 +187,24 @@ function Reportes() {
                     >
                         Reporte por Género{" "}
                     </h1>
-                    <Bar
-                        options={{
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    ticks: {
-                                        stepSize: 1,
+                    <div className="grafico">
+                        <Bar
+                            options={{
+                                responsive: true,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        ticks: {
+                                            stepSize: 1,
+                                        },
                                     },
                                 },
-                            },
-                        }}
-                        data={data}
-                    />
+                            }}
+                            data={data}
+                        />
+                    </div>
                 </div>
-                <div className="edad-reporte">
+                <div className="edad-reporte container-grafico">
                     <h1
                         style={{
                             textAlign: "center",
@@ -212,23 +215,26 @@ function Reportes() {
                     >
                         Reporte por Edad
                     </h1>
-                    <PolarArea
-                        options={{
-                            scales: {
-                                y: {
-                                    // beginAtZero: true,
-                                    ticks: {
-                                        stepSize: 1,
+                    <div className="grafico">
+                        <PolarArea
+                            options={{
+                                scales: {
+                                    y: {
+                                        // beginAtZero: true,
+                                        ticks: {
+                                            stepSize: 1,
+                                        },
+
                                     },
 
                                 },
+                            }}
+                            data={dataEdad}
+                        />
+                    </div>
 
-                            },
-                        }}
-                        data={dataEdad}
-                    />
                 </div>
-                <div className="indicios-reporte">
+                <div className="indicios-reporte container-grafico">
                     <h1
                         style={{
                             textAlign: "center",
@@ -239,32 +245,35 @@ function Reportes() {
                     >
                         Reporte de indicios
                     </h1>
-                    <Line
-                        options={{
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    ticks: {
-                                        stepSize: 1,
+                    <div className="grafico">
+                        <Line
+                            options={{
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        ticks: {
+                                            stepSize: 1,
+                                        },
                                     },
                                 },
-                            },
-                        }}
-                        data={dataDeteccion}
-                    />
-                    <Line
-                        options={{
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    ticks: {
-                                        stepSize: 1, // Esto asegura que la numeración en el eje y sea solo en números enteros
+                            }}
+                            data={dataDeteccion}
+                        />
+                        <Line
+                            options={{
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        ticks: {
+                                            stepSize: 1, // Esto asegura que la numeración en el eje y sea solo en números enteros
+                                        },
                                     },
                                 },
-                            },
-                        }}
-                        data={dataDeteccionNegativo}
-                    />
+                            }}
+                            data={dataDeteccionNegativo}
+                        />
+                    </div>
+
                 </div>
             </div>
         </div>

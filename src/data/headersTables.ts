@@ -34,7 +34,7 @@ const headerCasosAdmin = {
   edad: "Edad",
   fechaDiagnostico: "Fecha de Diagnóstico",
   diagnostico: "Diagnóstico",
-  nombreMedico: "Médico Tratante",
+  nombreMedico: " Psicólogo Tratante",
   reporte: "Reporte",
 };
 

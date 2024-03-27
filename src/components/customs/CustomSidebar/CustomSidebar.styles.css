@@ -60,12 +60,11 @@
 }
 
 .sidebar .opciones-sidebar .opcion-sidebar:hover {
-    /* background-color: #3085d6; */
-    /* background-color: #0EB0C5; */
     background-color: #8b8be5;
     border-radius: 1rem;
     width: 20rem;
 }
+
 
 .sidebar a {
     text-decoration: none;

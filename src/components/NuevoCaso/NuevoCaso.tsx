@@ -42,6 +42,7 @@ const NuevoCaso = () => {
     fechaDiagnostico: "",
     // diagnostico: "",
     nombreMedico: "",
+    idPaciente : "",
   });
   console.log(detectionResults);
   console.log(infPaciente);
@@ -75,7 +76,6 @@ const NuevoCaso = () => {
   };
 
   const sendImageToAPI = (imageData) => {
-    // console.log("Enviando imagen a la API", imageData);
 
     axios({
       method: "POST",
@@ -92,8 +92,6 @@ const NuevoCaso = () => {
         let detectionFeatures =
           response.data?.predictions?.map((prediction) => prediction.class) ||
           [];
-        // console.log("caracteristicas detectadas", detectionFeatures);
-        // console.log("indicadores", indicadores);
         let repuesta = generateResponse(detectionFeatures, indicadores);
         setDetectionResults(repuesta);
       })
@@ -164,6 +162,7 @@ const NuevoCaso = () => {
         .split("-")
         .reverse()
         .join("-"),
+      idPaciente  : Math.floor(Math.random() * 1000).toString() ,
     });
   };
   const clearForm = () => {
@@ -176,6 +175,7 @@ const NuevoCaso = () => {
       fechaDiagnostico: "",
       diagnostico: "",
       nombreMedico: "",
+      idPaciente : "",
     });
   };
 
