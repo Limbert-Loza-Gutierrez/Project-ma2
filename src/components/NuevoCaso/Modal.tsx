@@ -49,17 +49,17 @@ const Modal = ({
       // *Logotipo e imagen del paciente*
 
       pdf.addImage(logo, "PNG", 5, 15, 30, 30);
-      pdf.addImage(informacionPaciente.imagen, "PNG", 15, 200, 70, 70);
-      pdf.addImage(informacionPaciente.imagen, "PNG", 100, 200, 70, 70);
+      pdf.addImage(informacionPaciente.imagen, "PNG", 15, 160, 70, 70);
+      pdf.addImage(informacionPaciente.imagen, "PNG", 100, 160, 70, 70);
       
       //si el objeto no esta vacio que imprima 
       // caracteristicas es un objeto que contiene las caracteristicas detectadas {coincidencias:[],isMaltrato:rtue}
       if(caracteristicas.isMaltrato){
-        pdf.text("Se detecto indicios de Maltrato Psicologico", 10, 70);
-        pdf.text("Caracteristicas detectadas", 10, 90);
-        pdf.text(caracteristicas.coincidencias.join("\n"), 10, 100);
+        // pdf.text("Se detecto indicios de Maltrato Psicologico", 10, 200);
+        pdf.text("Caracteristicas detectadas", 60, 240);
+        pdf.text(caracteristicas.coincidencias.join("\n"), 60, 250);
       }else{
-        pdf.text("No se detecto indicios de Maltrato Psicologico - Ninguna coincidencia ", 10, 70);
+        pdf.text("No se detecto indicios de Maltrato Psicologico - Ninguna coincidencia ", 10, 250);
       }
 
       // *Información del paciente*
@@ -73,14 +73,14 @@ const Modal = ({
       pdf.text("Fecha:", 10, 100);
       pdf.text(informacionPaciente.fechaDiagnostico, 50, 100);
 
-      pdf.line(0, 160, docWidth, 160);
+      pdf.line(0, 130, docWidth, 130);
 
       pdf.setFontSize(16);
-      pdf.text("Diagnóstico del Sistema:", 10, 180);
-      pdf.text(informacionPaciente.diagnostico, 80, 180);
-      pdf.text("Diagnóstico del Psicólogo:", 10, 140);
+      pdf.text("Diagnóstico del Sistema:", 10, 140);
+      // pdf.text(informacionPaciente.diagnostico, 80, 180);
+      pdf.text("Diagnóstico del Psicólogo:", 10, 110);
       const ds = pdf.splitTextToSize(diagnosticoPsicologo, docWidth - 50);
-      pdf.text(ds, 80, 140);
+      pdf.text(ds, 10, 120);
 
       // *¿Está de acuerdo con el diagnóstico?*
 
@@ -92,8 +92,8 @@ const Modal = ({
       } else {
         da = "No especificado";
       }
-      pdf.text(`¿Está de acuerdo con el diagnóstico?: `, 10, 120);
-      pdf.text(da, 10, 130);
+      // pdf.text(`¿Está de acuerdo con el diagnóstico?: `, 10, 120);
+      pdf.text(da, 10, 150);
 
       // *Pie de página*
 
