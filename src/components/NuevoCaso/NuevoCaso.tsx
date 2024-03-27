@@ -27,6 +27,9 @@ const NuevoCaso = () => {
   const [error, setError] = useState(null);
   const [response, setResponse] = useState(null);
   const [openModal, setOpenModal] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [processedImage,setProcessedImage] = useState(null);
+
   const handleSelectTagChange = (e) => {
     setSelectTagValue(e.target.value);
   };
@@ -42,10 +45,63 @@ const NuevoCaso = () => {
     edad: "",
     fechaDiagnostico: "",
     nombreMedico: "",
-    id : number,
+    id: number,
   });
   console.log(detectionResults);
   console.log(infPaciente);
+
+
+  
+
+  const handleSubmitProcessedImage = async () => {
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/upload/",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      // Una vez cargada la imagen, solicitamos el JSON con la imagen procesada
+      const processedImageResponse = await axios.get(
+        "http://localhost:8000/processed_image/"
+      );
+
+      // Actualizamos el estado con la imagen procesada
+      console.log(processedImageResponse);
+      setProcessedImage(processedImageResponse.data.image);
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
+  };
+
+  // Al cargar el componente, solicitar la imagen procesada
+  useEffect(() => {
+    const fetchProcessedImage = async () => {
+      try {
+        const processedImageResponse = await axios.get(
+          "http://localhost:8000/processed_image/"
+        );
+        setProcessedImage(processedImageResponse.data.image);
+      } catch (error) {
+        console.error("Error fetching processed image:", error);
+      }
+    };
+
+    fetchProcessedImage();
+  }, []);
+
+
+
+
+
+
   const handleCustomSelect = (e, functionSelect) => {
     handleChange(e);
     functionSelect(e.target.value);
@@ -115,9 +171,10 @@ const NuevoCaso = () => {
     reader.onerror = (error) => {
       console.error("Error:", error);
     };
-
+    setSelectedFile(file);
     handleImageUpload(file);
   };
+
   useEffect(() => {
     setError(null);
     setDetectionResults(null);
@@ -126,6 +183,7 @@ const NuevoCaso = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    handleSubmitProcessedImage();
     detectionResults?.isMaltrato
       ? (infPaciente.diagnostico = "Sí")
       : (infPaciente.diagnostico = "No");
@@ -163,7 +221,7 @@ const NuevoCaso = () => {
         .split("-")
         .reverse()
         .join("-"),
-      id : pacientesLocalStorage.length + 1,
+      id: pacientesLocalStorage.length + 1,
     });
   };
   const clearForm = () => {
@@ -176,7 +234,7 @@ const NuevoCaso = () => {
       fechaDiagnostico: "",
       diagnostico: "",
       nombreMedico: "",
-      id : number,
+      id: number,
     });
   };
 
@@ -196,15 +254,15 @@ const NuevoCaso = () => {
         onSubmit={handleSubmit}
       >
         <div className="contain-input option-form__nuevocaso">
-        <CustomInput
-          name="nombre"
-          label="Nombre del paciente"
-          type="text"
-          placeholder="Nombre del paciente"
-          required
-          onChange={handleChange}
-          value={infPaciente.nombre}
-        />
+          <CustomInput
+            name="nombre"
+            label="Nombre del paciente"
+            type="text"
+            placeholder="Nombre del paciente"
+            required
+            onChange={handleChange}
+            value={infPaciente.nombre}
+          />
         </div>
         <div className="ci-expedicion1 contain-input option-form__nuevocaso">
           <CustomInput
@@ -220,7 +278,7 @@ const NuevoCaso = () => {
           <CustomSelect
             style={{
               width: "70%",
-              
+
               textAlign: "center",
               borderRadius: "5px",
             }}
@@ -283,29 +341,29 @@ const NuevoCaso = () => {
         </div>
         <div className="option-form__nuevocaso">
 
-        <CustomInput
-          name="fechaDiagnostico"
-          label="Fecha de diagnóstico"
-          type="text"
-          placeholder="Fecha de diagnóstico"
-          required
-          value={new Date()
-            .toISOString()
-            .split("T")[0]
-            .split("-")
-            .reverse()
-            .join("-")}
-          readOnly
-        />
+          <CustomInput
+            name="fechaDiagnostico"
+            label="Fecha de diagnóstico"
+            type="text"
+            placeholder="Fecha de diagnóstico"
+            required
+            value={new Date()
+              .toISOString()
+              .split("T")[0]
+              .split("-")
+              .reverse()
+              .join("-")}
+            readOnly
+          />
         </div>
         <div className="input-file">
-        <CustomInput
-          label="Imagen para Diagnóstico"
-          type="file"
-          placeholder="Imagen para Diagnóstico"
-          onChange={handleChangeFile}
-          required
-        />
+          <CustomInput
+            label="Imagen para Diagnóstico"
+            type="file"
+            placeholder="Imagen para Diagnóstico"
+            onChange={handleChangeFile}
+            required
+          />
         </div>
       </form>
       <CustomButton content="Realizar Diagnósticos" onClick={handleSubmit} />
@@ -324,7 +382,18 @@ const NuevoCaso = () => {
         informacionPaciente={infPaciente}
         updateReportBase64={updateReportBase64}
         caracteristicas={detectionResults}
+        processedImageBase64={processedImage}
       />
+      {/* {processedImage && (
+        <div>
+          <h2>Processed Image:</h2>
+          <img
+            src={`data:image/jpeg;base64,${processedImage}`}
+            alt="Processed"
+            style={{ maxWidth: "100%" }}
+          />
+        </div>
+      )} */}
     </main>
   );
 };

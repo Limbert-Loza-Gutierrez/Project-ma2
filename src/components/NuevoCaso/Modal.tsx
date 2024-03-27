@@ -12,7 +12,9 @@ const Modal = ({
   informacionPaciente,
   guardar,
   updateReportBase64,
-  caracteristicas
+  caracteristicas,
+  processedImageBase64,
+
 }) => {
   // const [base64PDF, setBase64PDF] = useState("");
   if (!open) return null;
@@ -49,8 +51,9 @@ const Modal = ({
       // *Logotipo e imagen del paciente*
 
       pdf.addImage(logo, "PNG", 5, 15, 30, 30);
-      pdf.addImage(informacionPaciente.imagen, "PNG", 15, 160, 70, 70);
-      pdf.addImage(informacionPaciente.imagen, "PNG", 100, 160, 70, 70);
+
+      pdf.addImage(informacionPaciente.imagen, "PNG", 15, 200, 70, 70);
+      pdf.addImage(processedImageBase64,"PNG", 100, 200, 70, 70)
       
       //si el objeto no esta vacio que imprima 
       // caracteristicas es un objeto que contiene las caracteristicas detectadas {coincidencias:[],isMaltrato:rtue}
