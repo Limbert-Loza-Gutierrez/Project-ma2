@@ -168,7 +168,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
           </div>
         </form>
         <h2>Información Laboral</h2>
-        <form action=""  className = "inputs-box" onSubmit={handleSubmitLaboral}>
+        <form action=""  className = "form__group" onSubmit={handleSubmitLaboral}>
           <div className="especialidad">
             <CustomSelect
               name="especialidad"
@@ -189,7 +189,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
             />
           </div>
         </form>
-        <div className="buttons-box">
+        <div className="buttons-box ">
           <CustomButton content="Cancelar" onClick={onClose} />
           <CustomButton content="Guardar" onClick={handleSubmit} />
         </div>
