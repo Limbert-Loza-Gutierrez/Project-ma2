@@ -218,10 +218,8 @@ const NuevoCaso = () => {
 
           <CustomSelect
             style={{
-              width: "50%",
-              height: "40px",
-              marginBottom: "20px",
-              marginTop: "48px",
+              width: "70%",
+              
               textAlign: "center",
               borderRadius: "5px",
             }}
