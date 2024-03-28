@@ -173,7 +173,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
             <CustomSelect
               name="especialidad"
               style={stylesEspecilidad}
-              arrayOptionsSelect={["Seleccione una Especialidad", "Psicologo", "Admin"]}
+              arrayOptionsSelect={["Seleccione una Especialidad", "Psicólogo", "Admin"]}
               onChange={handleSelectEspecialidad}
               value={especialidadSelect}
             />
