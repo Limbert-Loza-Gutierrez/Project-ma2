@@ -2,37 +2,47 @@ Preparación:
 
 1. Clonar el repositorio:
 
-git clone https://github.com/tu_usuario/tu_repositorio.git
+git clone https://github.com/Limbert-Loza-Gutierrez/Project-ma2.git
 
-2. Instalar dependencias:
+## FRONTEND
+
+### 1. Instalar dependencias:
 
 En la raíz del proyecto:
 
+```
 npm i
-
-En el directorio src/backend:
-
-python -m venv sapp-env
-
-3. Activar el entorno virtual (Windows):
-
-sapp-env\Scripts\activate
-
-4. Instalar dependencias de Python:
-
-pip install fastapi roboflow supervision opencv-python-headless fastapi uvicorn
-
-Ejecutar la aplicación:
-
-1. Backend:
-
-uvicorn main:app --reload
-
-2. Frontend:
-
+```
+### 2. Ejecutar el sistema:
+```
 npm run dev
+```
+## BACKEND
+#### En el directorio src/backend:
+### 1. Crear entorno virtual:
+```
+python -m venv sapp-env
+```
 
-3. errores que pueden ocurrir
+### 2. Activar el entorno virtual (Windows):
+
+```
+sapp-env\Scripts\activate
+```
+### 3. Instalar dependencias de Python:
+```
+pip install fastapi roboflow supervision opencv-python-headless fastapi uvicorn
+python-multipart
+```
+### 4. Ejecutar la aplicación 
+```
+uvicorn main:app --reload
+```
+## Problemas secundarios
+```
+Errores que pueden ocurrir
+
 (al activar el entorno virtual en windows)
 
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
