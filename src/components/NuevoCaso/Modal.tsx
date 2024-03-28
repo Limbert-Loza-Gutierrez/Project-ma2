@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import CustomInput from "../customs/CustomInput/CustomInput";
 import CustomButton from "../customs/CustomButton/CustomButton";
 import CustomSelect from "../customs/CustomSelect/CustomSelect";
+import { Link } from "react-router-dom";
 import { jsPDF } from "jspdf";
 
 import logo from "../../../public/image/logo.jpg";
+import logo24 from "../../../public/image/logo24.webp";
 
 const Modal = ({
   open,
@@ -28,7 +30,7 @@ const Modal = ({
     ).value;
     const diagnosticoSelectElement =
       document.querySelector(".diagnosticoSelect");
-    const diagnosticoSeleccionado = diagnosticoSelectElement.value;
+    // const informacionPaciente.diagnostico = diagnosticoSelectElement.value;
 
     try {
       const pdf = new jsPDF();
@@ -44,30 +46,34 @@ const Modal = ({
       pdf.text("DIRECCIÓN DE IGUALDAD DE OPORTUNIDADES", docWidth / 2, 30, {
         align: "center",
       });
-      pdf.text("INFORME PSICOLÓGICO", docWidth / 2, 40, { align: "center" });
+      pdf.text("INFORME PSICOLÓGICO", docWidth / 2, 50, { align: "center" });
+      pdf.text(`PSICÓLOGO: ${informacionPaciente.nombreMedico}`, docWidth / 2, 40, { align: "center" });
       // pdf.text("SISTEMA DE APOYO PARA PSICÓLOGOS", docWidth / 2, 50, { align: "center" });
       pdf.line(0, 60, docWidth, 60);
 
       // *Logotipo e imagen del paciente*
 
       pdf.addImage(logo, "PNG", 5, 15, 30, 30);
+      pdf.addImage(logo24, "PNG", 172, 15, 30, 30);
 
-      pdf.addImage(informacionPaciente.imagen, "PNG", 15, 160, 70, 70);
-      pdf.addImage(processedImageBase64,"PNG", 100, 160, 70, 70)
+
+      pdf.addImage(informacionPaciente.imagen, "PNG", 15, 180, 70, 70);
+      pdf.addImage(processedImageBase64,"PNG", 100, 180, 70, 70)
       
       //si el objeto no esta vacio que imprima 
       // caracteristicas es un objeto que contiene las caracteristicas detectadas {coincidencias:[],isMaltrato:rtue}
       if(caracteristicas.isMaltrato){
         // pdf.text("Se detecto indicios de Maltrato Psicologico", 10, 200);
-        pdf.text("Caracteristicas detectadas", 60, 240);
-        pdf.text(caracteristicas.coincidencias.join("\n"), 60, 250);
+        pdf.text("Características detectadas", 60, 260);
+        // pdf.text(caracteristicas.coincidencias.join("\n"), 60, 270);
+        pdf.text(caracteristicas.coincidencias.join(), 60, 270);
       }else{
         pdf.text("No se detecto indicios de Maltrato Psicologico - Ninguna coincidencia ", 10, 250);
       }
 
       // *Información del paciente*
 
-      pdf.setFontSize(20);
+      pdf.setFontSize(16);
       pdf.text("Paciente:", 10, 80);
       pdf.text(informacionPaciente.nombre, 50, 80);
       pdf.text("Edad:", 10, 90);
@@ -76,10 +82,10 @@ const Modal = ({
       pdf.text("Fecha:", 10, 100);
       pdf.text(informacionPaciente.fechaDiagnostico, 50, 100);
 
-      pdf.line(0, 130, docWidth, 130);
+      pdf.line(0, 150, docWidth, 150);
 
       pdf.setFontSize(16);
-      pdf.text("Diagnóstico del Sistema:", 10, 140);
+      pdf.text("Diagnóstico del Sistema:", 10, 160);
       // pdf.text(informacionPaciente.diagnostico, 80, 180);
       pdf.text("Diagnóstico del Psicólogo:", 10, 110);
       const ds = pdf.splitTextToSize(diagnosticoPsicologo, docWidth - 50);
@@ -88,21 +94,21 @@ const Modal = ({
       // *¿Está de acuerdo con el diagnóstico?*
 
       let da = "";
-      if (diagnosticoSeleccionado === "si") {
-        da = "Sí se detectaron indicios de maltrato psicologico";
-      } else if (diagnosticoSeleccionado === "no") {
-        da = "No se detectaron indicios de maltrato psicologico";
+      if (informacionPaciente.diagnostico === "Sí") {
+        da = "Sí se detectaron indicios de maltrato psicológico";
+      } else if (informacionPaciente.diagnostico === "No") {
+        da = "No se detectaron indicios de maltrato psicológico";
       } else {
         da = "No especificado";
       }
       // pdf.text(`¿Está de acuerdo con el diagnóstico?: `, 10, 120);
-      pdf.text(da, 10, 150);
+      pdf.text(da, 10, 170);
 
       // *Pie de página*
 
       pdf.line(0, docHeight - 20, docWidth, docHeight - 20);
       pdf.setFontSize(10);
-      pdf.text(`Elaborado por: ${informacionPaciente.nombreMedico}`, 10, docHeight - 10);
+      
       pdf.text(
         `Página ${pdf.internal.getNumberOfPages()}`,
         docWidth - 20,
@@ -152,8 +158,8 @@ const Modal = ({
     <div className="modalContainernc" id="modalContainer">
       <h1>
         {informacionPaciente.diagnostico === "Sí"
-          ? "Se detecto indicios de Maltrato Psicologico"
-          : "No se detecto indicios de Maltrato Psicologico"}
+          ? "Se detecto indicios de Maltrato Psicológico"
+          : "No se detecto indicios de Maltrato Psicológico"}
       </h1>
       <label htmlFor="diagnosticoSelect">
         ¿Está de acuerdo con el diagnóstico?
@@ -166,7 +172,7 @@ const Modal = ({
         <option value="si">Si</option>
         <option value="no">No</option>
       </select>
-      <label htmlFor="diagnosticoPsicologo">Diagnostico del Psicologo</label>
+      <label htmlFor="diagnosticoPsicologo">Diagnostico del Psicólogo</label>
       <textarea
         className="diagnosticoPsicologo"
         name="diagnosticoPsicologo"
@@ -190,7 +196,7 @@ const Modal = ({
       ></textarea>
 
       <div className="imprimird">
-        <CustomButton content="Cancelar" onClick={onClose} />
+        <Link to="/casos">
         <CustomButton
           content="Guardar"
           onClick={() => {
@@ -198,6 +204,8 @@ const Modal = ({
             generatePDF();
           }}
         />
+        </Link>
+          <CustomButton content="Cancelar" onClick={onClose} />
       </div>
     </div>
   );

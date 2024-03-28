@@ -20,16 +20,17 @@
 }
 
 .modalContainernc {
-  width: 500px;
-  height: 500px;
+  width: 620px;
+  height: 550px;
   position: fixed;
   top: 55%;
   left: 49%;
   transform: translate(-50%, -50%);
   display: flex;
+  flex-direction: column;
+  align-items: center;
   box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
   border-radius: 20px;
-  flex-direction: column;
   background-color: rgb(7, 58, 211);
   background: linear-gradient(
     0deg,
@@ -38,8 +39,40 @@
     rgb(77, 100, 202) 100%
   );
   border: rgb(244, 206, 206) 0.3rem solid;
-  border-radius: 0.5rem;
   box-shadow: 0 0 0.5rem #212428;
+  padding: 3rem;
+}
+
+.modalContainernc label {
+  font-size: 2rem;
+  font-weight: 700;
+  color: black;
+  padding: 1rem;
+}
+.diagnosticoSelect {
+  width: 20%;
+  height: 3rem;
+  text-align: center;
+  margin-top: 1rem;
+  border-radius: 10rem;
+}
+
+.diagnosticoPsicologo {
+  font-size: 2rem;
+  font-family: "Montserrat", sans-serif!important;
+  width: 20%;
+  height: 3rem;
+  margin-top: 1rem;
+  border-radius: 10rem;
+  resize: none;
+}
+
+.imprimird {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 3rem;
 }
 
 .for {
@@ -97,3 +130,4 @@ input[type="file"]::file-selector-button:hover {
 input[type="file"]::file-selector-button:active {
   background-color: #e5e7eb;
 }
+

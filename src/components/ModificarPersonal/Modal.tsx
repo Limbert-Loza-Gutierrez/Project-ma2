@@ -120,7 +120,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
             personalSelect !== "" ? (
               <div className="modificar_pass">
                 <label htmlFor=""> Modificar Contraseña : </label>
-                <div className="password__container">
+                <div className="password-container__modificarpersonal">
                   <input
                     type={showPassword ? "text" : "password"}
                     className="new_password"
@@ -130,7 +130,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
                     value={newPassword}
                     onChange={handleChange}
                   />
-                  <p
+                  <p className="show-password"
                     onClick={() => {
                       setShowPassword(!showPassword);
                     }}

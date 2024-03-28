@@ -185,7 +185,7 @@ function Reportes() {
                             marginBottom: "1rem",
                         }}
                     >
-                        Reporte por Género{" "}
+                        Reporte por género{" "}
                     </h1>
                     <div className="grafico">
                         <Bar
@@ -213,7 +213,7 @@ function Reportes() {
                             marginBottom: "1rem",
                         }}
                     >
-                        Reporte por Edad
+                        Reporte por edad
                     </h1>
                     <div className="grafico">
                         <PolarArea

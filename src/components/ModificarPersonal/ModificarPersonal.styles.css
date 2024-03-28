@@ -18,7 +18,7 @@
 }
 
 .overlay_modal__modificar-personal .modalContainer1 input {
-    width: 40%;
+    
     height: 40px;
     margin-bottom: 30px;
     margin-top: 20px;
@@ -26,7 +26,7 @@
     border-radius: 5px;
     border: 1px solid #000;
     margin-right: 20px;
-    background-color: lightblue;
+    
 }
 
 .overlay_modal__modificar-personal .modalContainer1 button {
@@ -52,3 +52,21 @@
     margin-top: 1px;
     opacity: 0.7;
 }
+
+.password-container__modificarpersonal {
+    display: grid;
+    grid-template-columns: 80% 20%;
+
+}
+
+.overlay_modal__modificar-personal .modalContainer1 .show-password {
+    height: 40px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #000;
+    margin-right: 20px;
+    
+}
+
