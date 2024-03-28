@@ -358,7 +358,7 @@ const NuevoCaso = () => {
         </div>
         <div className="input-file">
           <CustomInput
-            label="Imagen para Diagnóstico"
+            label="Imagen para diagnóstico"
             type="file"
             placeholder="Imagen para diagnóstico"
             onChange={handleChangeFile}
