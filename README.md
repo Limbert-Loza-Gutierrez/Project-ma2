@@ -31,3 +31,8 @@ uvicorn main:app --reload
 2. Frontend:
 
 npm run dev
+
+3. errores que pueden ocurrir
+(al activar el entorno virtual en windows)
+
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
