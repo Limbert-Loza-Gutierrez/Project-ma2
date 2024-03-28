@@ -267,7 +267,7 @@ const NuevoCaso = () => {
         <div className="ci-expedicion1 contain-input option-form__nuevocaso">
           <CustomInput
             name="documento"
-            label="Carnet de Identidad"
+            label="Carnet de identidad"
             type="number"
             placeholder="Carnet de Identidad"
             required
@@ -366,7 +366,7 @@ const NuevoCaso = () => {
           />
         </div>
       </form>
-      <CustomButton content="Realizar Diagnósticos" onClick={handleSubmit} />
+      <CustomButton content="Realizar diagnósticos" onClick={handleSubmit} />
       <Modal
         open={openModal}
         onClose={() => {
