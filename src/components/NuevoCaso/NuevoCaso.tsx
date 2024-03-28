@@ -360,7 +360,7 @@ const NuevoCaso = () => {
           <CustomInput
             label="Imagen para Diagnóstico"
             type="file"
-            placeholder="Imagen para Diagnóstico"
+            placeholder="Imagen para diagnóstico"
             onChange={handleChangeFile}
             required
           />
