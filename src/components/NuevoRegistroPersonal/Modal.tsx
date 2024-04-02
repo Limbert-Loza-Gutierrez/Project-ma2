@@ -9,8 +9,6 @@ type FormSubmitEvent = FormEvent<HTMLFormElement>;
 type ChangeInputEvent = ChangeEvent<HTMLInputElement>;
 type ChangeSelectEvent = ChangeEvent<HTMLSelectElement>;
 
-
-
 const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
   const [showPassword, setShowPassword] = useState(false);
   const { updateListPersonal } = useContext(UsersContext);
@@ -59,7 +57,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
       ...inforPersonal,
       [e.target.name]: e.target.value,
       expedicion: selectTagValue,
-      especialidad: especialidadSelect
+      especialidad: especialidadSelect,
     });
   };
   const handleChangeLaboral = (e: ChangeSelectEvent) => {
@@ -74,7 +72,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
 
   const handleSelectEspecialidad = (e: ChangeSelectEvent) => {
     setEspecialidadSelect(e.target.value);
-  }
+  };
 
   const stylesCI = {
     width: "100%",
@@ -83,7 +81,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
     marginTop: "19px",
     textAlign: "center",
     borderRadius: "5px",
-  }
+  };
   const stylesEspecilidad = {
     width: "94%",
     height: "40px",
@@ -91,7 +89,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
     marginTop: "19px",
     textAlign: "center",
     borderRadius: "5px",
-  }
+  };
   const optiosExpedicion = [
     "Seleccione una Ciudad de Expedición",
     "La Paz",
@@ -103,9 +101,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
     "Chuquisaca",
     "Tarija",
     "Potosi",
-  ]
-
-
+  ];
 
   return (
     <div className="overlay ">
@@ -168,12 +164,16 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
           </div>
         </form>
         <h2>Información Laboral</h2>
-        <form action=""  className = "form__group" onSubmit={handleSubmitLaboral}>
+        <form action="" className="form__group" onSubmit={handleSubmitLaboral}>
           <div className="especialidad">
             <CustomSelect
               name="especialidad"
               style={stylesEspecilidad}
-              arrayOptionsSelect={["Seleccione una Especialidad", "Psicólogo", "Admin"]}
+              arrayOptionsSelect={[
+                "Seleccione una Especialidad",
+                "Psicólogo",
+                "Admin",
+              ]}
               onChange={handleSelectEspecialidad}
               value={especialidadSelect}
             />

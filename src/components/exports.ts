@@ -8,7 +8,6 @@ import { PrivateRoute, PublicRoute } from "./router/exports";
 import Reportes from "./Reportes/Reportes";
 
 
-
 export {
     AdministrarPersonal,
     AdministrarPacientes,
@@ -18,5 +17,5 @@ export {
     NuevoRegistroPacientes,
     PrivateRoute,
     PublicRoute,
-    Reportes
+    Reportes,
 }

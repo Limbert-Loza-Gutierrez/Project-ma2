@@ -39,4 +39,10 @@ const headerCasosAdmin = {
   reporte: "Reporte",
 };
 
+
+const headerPreguntasRespeustas = {
+  pregunta: "Pregunta",
+  respuesta: "Respuesta",
+};
+
 export { headerTablesAdminUs, headerTablePaciente, headerCasos, headerCasosAdmin };
