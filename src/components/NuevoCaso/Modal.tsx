@@ -40,14 +40,8 @@ const Modal = ({
       // *Encabezado*
 
       pdf.setFontSize(16);
-      pdf.text("SISTEMA DE APOYO PARA PSICÓLOGOS", docWidth / 2, 20, {
-        align: "center",
-      });
-      pdf.text("DIRECCIÓN DE IGUALDAD DE OPORTUNIDADES", docWidth / 2, 30, {
-        align: "center",
-      });
-      pdf.text("INFORME PSICOLÓGICO", docWidth / 2, 50, { align: "center" });
-      pdf.text(`PSICÓLOGO: ${informacionPaciente.nombreMedico}`, docWidth / 2, 40, { align: "center" });
+      pdf.setFont("Montserrat-Bold");
+     
       // pdf.text("SISTEMA DE APOYO PARA PSICÓLOGOS", docWidth / 2, 50, { align: "center" });
       pdf.line(0, 60, docWidth, 60);
 
@@ -64,7 +58,7 @@ const Modal = ({
       // caracteristicas es un objeto que contiene las caracteristicas detectadas {coincidencias:[],isMaltrato:rtue}
       if(caracteristicas.isMaltrato){
         // pdf.text("Se detecto indicios de Maltrato Psicologico", 10, 200);
-        pdf.text("Características detectadas", 10, 260);
+        
         // pdf.text(caracteristicas.coincidencias.join("\n"), 60, 270);
         pdf.text(caracteristicas.coincidencias.join(), 10, 270);
       }else{
@@ -72,22 +66,36 @@ const Modal = ({
       }
 
       // *Información del paciente*
+      // 
 
       pdf.setFontSize(16);
+      pdf.setFont("Montserrat-Bold", "normal","bold");
       pdf.text("Paciente:", 10, 80);
-      pdf.text(informacionPaciente.nombre, 50, 80);
       pdf.text("Edad:", 10, 90);
-      pdf.text(informacionPaciente.edad, 50, 90);
-
       pdf.text("Fecha:", 10, 100);
+      pdf.text("SISTEMA DE APOYO PARA PSICÓLOGOS", docWidth / 2, 20, {
+        align: "center",
+      });
+      pdf.text("DIRECCIÓN DE IGUALDAD DE OPORTUNIDADES", docWidth / 2, 30, {
+        align: "center",
+      });
+      pdf.text("INFORME PSICOLÓGICO", docWidth / 2, 50, { align: "center" });
+      pdf.text(`PSICÓLOGO: ${informacionPaciente.nombreMedico}`, docWidth / 2, 40, { align: "center" });
+      pdf.text("Diagnóstico del sistema:", 10, 160);
+      pdf.text("Diagnóstico del psicólogo:", 10, 110);
+      pdf.text("Características detectadas", 10, 260);
+      
+      pdf.setFont("Montserrat-Bold", "italic","normal");
+      pdf.text(informacionPaciente.nombre, 50, 80);
+      pdf.text(informacionPaciente.edad, 50, 90);
       pdf.text(informacionPaciente.fechaDiagnostico, 50, 100);
 
       pdf.line(0, 150, docWidth, 150);
 
       pdf.setFontSize(16);
-      pdf.text("Diagnóstico del sistema:", 10, 160);
+      
       // pdf.text(informacionPaciente.diagnostico, 80, 180);
-      pdf.text("Diagnóstico del psicólogo:", 10, 110);
+      
       const ds = pdf.splitTextToSize(diagnosticoPsicologo, docWidth - 50);
       pdf.text(ds, 10, 120);
 

@@ -18,11 +18,7 @@ const headerTablePaciente = {
 const headerCasos = {
   id: "ID",
   nombre: "Nombre",
-<<<<<<< HEAD
   documento: "Cédula de Identidad",
-=======
-  documento: "Cedula de Identidad",
->>>>>>> 7e552b5bfc8065809afdacbdd187f7ced76f9fce
   expedicion: "Expedición",
   sexo: "Sexo",
   edad: "Edad",

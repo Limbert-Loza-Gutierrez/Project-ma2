@@ -1,6 +1,7 @@
 import CustomInput from "../customs/CustomInput/CustomInput";
 import CustomButton from "../customs/CustomButton/CustomButton";
 import CustomSelect from "../customs/CustomSelect/CustomSelect";
+import { especialidad, expedicion } from "../../data/selectData";
 import { useState, useContext } from "react";
 import UsersContext from "../../context/UsersContext";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
@@ -91,19 +92,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
     textAlign: "center",
     borderRadius: "5px",
   };
-  const optiosExpedicion = [
-    "Seleccione una Ciudad de Expedición",
-    "La Paz",
-    "Cochabamba",
-    "Santa Cruz",
-    "Beni",
-    "Pando",
-    "Oruro",
-    "Chuquisaca",
-    "Tarija",
-    "Potosi",
-  ];
-
+  
   return (
     <div className="overlay ">
       <div className="modalContainer1">
@@ -133,7 +122,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
             <CustomSelect
               style={stylesCI}
               name="expedicion"
-              arrayOptionsSelect={optiosExpedicion}
+              arrayOptionsSelect={expedicion}
               onChange={handleSelectTagChange}
               value={selectTagValue}
             />
@@ -176,11 +165,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
               
               name="especialidad"
               style={stylesEspecilidad}
-              arrayOptionsSelect={[
-                "Seleccione una Especialidad",
-                "Psicólogo",
-                "Admin",
-              ]}
+              arrayOptionsSelect={especialidad}
               onChange={handleSelectEspecialidad}
               value={especialidadSelect}
             />

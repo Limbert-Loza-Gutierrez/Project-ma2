@@ -1,6 +1,7 @@
 import CustomInput from "../customs/CustomInput/CustomInput";
 import CustomButton from "../customs/CustomButton/CustomButton";
 import CustomSelect from "../customs/CustomSelect/CustomSelect";
+import { expedicion, genero,edad } from "../../data/selectData";
 import { useState, useContext } from "react";
 import UsersContext from "../../context/UsersContext";
 import "./NuevoCaso.styles.css";
@@ -283,18 +284,7 @@ const NuevoCaso = () => {
               borderRadius: "5px",
             }}
             name="expedicion"
-            arrayOptionsSelect={[
-              "Seleccione Expedición",
-              "La Paz",
-              "Cochabamba",
-              "Santa Cruz",
-              "Beni",
-              "Pando",
-              "Oruro",
-              "Potosí",
-              "Tarija",
-              "Chuquisaca",
-            ]}
+            arrayOptionsSelect={expedicion}
             onChange={(e) => {
               handleCustomSelect(e, setSelectTagValue);
             }}
@@ -308,7 +298,7 @@ const NuevoCaso = () => {
               width: "445px",
             }}
             name="sexo"
-            arrayOptionsSelect={["Seleccione Género", "Masculino", "Femenino"]}
+            arrayOptionsSelect={genero}
             onChange={(e) => {
               handleCustomSelect(e, setSelectGenero);
             }}
@@ -322,17 +312,7 @@ const NuevoCaso = () => {
               width: "445px",
             }}
             name="edad"
-            arrayOptionsSelect={[
-              "Seleccione Edad",
-              "5",
-              "6",
-              "7",
-              "8",
-              "9",
-              "10",
-              "11",
-              "12",
-            ]}
+            arrayOptionsSelect={edad}
             onChange={(e) => {
               handleCustomSelect(e, setSelectEdad);
             }}
