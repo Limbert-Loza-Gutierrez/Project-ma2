@@ -31,8 +31,7 @@ sapp-env\Scripts\activate
 ```
 ### 3. Instalar dependencias de Python:
 ```
-pip install fastapi roboflow supervision opencv-python-headless fastapi uvicorn
-python-multipart
+pip install fastapi roboflow supervision opencv-python-headless fastapi uvicorn python-multipart
 ```
 ### 4. Ejecutar la aplicación 
 ```

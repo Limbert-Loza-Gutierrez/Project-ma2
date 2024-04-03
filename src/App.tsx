@@ -7,7 +7,7 @@ import {
   Casos,
   PrivateRoute,
   PublicRoute,
-  Reportes
+  Reportes,
 } from "./components/exports"
 
 const router = createBrowserRouter([
@@ -43,7 +43,8 @@ const router = createBrowserRouter([
       {
         path: "/reportes",
         element: <Reportes/>,
-      }
+      },
+      
     ],
   },
   {

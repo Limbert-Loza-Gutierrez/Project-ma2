@@ -85,9 +85,9 @@ const Modal = ({
       pdf.line(0, 150, docWidth, 150);
 
       pdf.setFontSize(16);
-      pdf.text("Diagnóstico del Sistema:", 10, 160);
+      pdf.text("Diagnóstico del sistema:", 10, 160);
       // pdf.text(informacionPaciente.diagnostico, 80, 180);
-      pdf.text("Diagnóstico del Psicólogo:", 10, 110);
+      pdf.text("Diagnóstico del psicólogo:", 10, 110);
       const ds = pdf.splitTextToSize(diagnosticoPsicologo, docWidth - 50);
       pdf.text(ds, 10, 120);
 
