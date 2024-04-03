@@ -25,8 +25,8 @@ const Login = () => {
     (user) =>
       user.nombreUsuario === loginDate.username &&
       user.password === loginDate.password 
-      &&
-      user.informacionLaboral.estado === "Activo"
+      // &&
+      // user.informacionLaboral.estado === "Activo"
   );
 
   const handleSubmit = (e) => {

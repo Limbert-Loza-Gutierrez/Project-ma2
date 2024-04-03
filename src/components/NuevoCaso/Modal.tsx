@@ -64,9 +64,9 @@ const Modal = ({
       // caracteristicas es un objeto que contiene las caracteristicas detectadas {coincidencias:[],isMaltrato:rtue}
       if(caracteristicas.isMaltrato){
         // pdf.text("Se detecto indicios de Maltrato Psicologico", 10, 200);
-        pdf.text("Características detectadas", 60, 260);
+        pdf.text("Características detectadas", 10, 260);
         // pdf.text(caracteristicas.coincidencias.join("\n"), 60, 270);
-        pdf.text(caracteristicas.coincidencias.join(), 60, 270);
+        pdf.text(caracteristicas.coincidencias.join(), 10, 270);
       }else{
         pdf.text("No se detecto indicios de Maltrato Psicologico - Ninguna coincidencia ", 10, 250);
       }

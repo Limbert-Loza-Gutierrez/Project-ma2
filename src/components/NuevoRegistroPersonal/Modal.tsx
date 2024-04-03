@@ -5,6 +5,7 @@ import { useState, useContext } from "react";
 import UsersContext from "../../context/UsersContext";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 import { FormEvent, ChangeEvent } from "react";
+import Layout from './../../layout/Layout';
 type FormSubmitEvent = FormEvent<HTMLFormElement>;
 type ChangeInputEvent = ChangeEvent<HTMLInputElement>;
 type ChangeSelectEvent = ChangeEvent<HTMLSelectElement>;
@@ -80,7 +81,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
     width: "100%",
     height: "40px",
     marginBottom: "30px",
-    marginTop: "19px",
+    marginTop: "19px ",
     textAlign: "center",
     borderRadius: "5px",
   }
@@ -114,6 +115,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
         <form className="inputs-box" onSubmit={handleSubmitPersonal}>
           <div className="nombre input-box__option">
             <CustomInput
+              label="Nombre Completo"
               type="text"
               placeholder="Nombre"
               name="nombre"
@@ -124,8 +126,9 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
           </div>
           <div className="ci-expedicion input-box__option">
             <CustomInput
+              label="Cédula de Identidad"
               type="number"
-              placeholder="CI"
+              placeholder="Cédula de Identidad"
               name="documento"
               required
               value={inforPersonal.documento}
@@ -141,6 +144,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
           </div>
           <div className="nombre-usuario">
             <CustomInput
+              label="Nombre de Usuario"
               type="text"
               placeholder="Nombre de Usuario"
               name="nombreUsuario"
@@ -151,6 +155,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
           </div>
           <div className="password__container">
             <CustomInput
+              label="Contraseña"
               type={showPassword ? "text" : "password"}
               placeholder="Contraseña"
               name="password"
@@ -170,7 +175,9 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
         <h2>Información Laboral</h2>
         <form action=""  className = "form__group" onSubmit={handleSubmitLaboral}>
           <div className="especialidad">
+              <label htmlFor=""><h3>Especialidad</h3></label>
             <CustomSelect
+              
               name="especialidad"
               style={stylesEspecilidad}
               arrayOptionsSelect={["Seleccione una Especialidad", "Psicologo", "Admin"]}
@@ -180,6 +187,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
           </div>
           <div className="correo">
             <CustomInput
+              label="Correo Institucional"
               type="email"
               placeholder="Correo Institucional"
               name="correoInstitucional"
