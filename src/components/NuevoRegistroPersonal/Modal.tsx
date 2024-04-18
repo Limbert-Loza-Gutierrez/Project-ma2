@@ -6,17 +6,19 @@ import { useState, useContext } from "react";
 import UsersContext from "../../context/UsersContext";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 import { FormEvent, ChangeEvent } from "react";
-import Layout from './../../layout/Layout';
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../config/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 type FormSubmitEvent = FormEvent<HTMLFormElement>;
-type ChangeInputEvent = ChangeEvent<HTMLInputElement>;
 type ChangeSelectEvent = ChangeEvent<HTMLSelectElement>;
+import { getAuth } from "firebase/auth";
+import {appFirebase} from "../../config/firebase";
+const auth = getAuth(appFirebase);
 
 const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
   const [showPassword, setShowPassword] = useState(false);
   const { updateListPersonal } = useContext(UsersContext);
-  const personalLocalStorage = JSON.parse(
-    window.localStorage.getItem("listPersonal") as string
-  );
+
   const [selectTagValue, setSelectTagValue] = useState("LP");
   const [especialidadSelect, setEspecialidadSelect] = useState("");
   const [inforPersonal, setInforPersonal] = useState({
@@ -36,16 +38,24 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
   });
   if (!open) return null;
 
-  const handleSubmit = (e: FormSubmitEvent) => {
+  const handleSubmit = async (e: FormSubmitEvent) => {
     e.preventDefault();
     handleSubmitPersonal(e);
     handleSubmitLaboral(e);
-    const newPersonal = [
-      ...personalLocalStorage,
-      { ...inforPersonal, informacionLaboral: inforLaboral },
-    ];
+    const newPersonal = { ...inforPersonal,...inforLaboral };
+    await createUserWithEmailAndPassword(auth, newPersonal.correoInstitucional, newPersonal.password)
+    const docRef = collection(db, "personal");
+    addDoc(docRef, newPersonal).then(
+      (docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+      },
+      (error) => {
+        console.error("Error adding document: ", error);
+      }
+    );
+
     updateListPersonal(newPersonal);
-    console.log(newPersonal);
+
     onClose();
   };
   const handleSubmitPersonal = (e: FormSubmitEvent) => {
@@ -92,7 +102,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
     textAlign: "center",
     borderRadius: "5px",
   };
-  
+
   return (
     <div className="overlay ">
       <div className="modalContainer1">
@@ -160,9 +170,10 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
         <h2>Información Laboral</h2>
         <form action="" className="form__group" onSubmit={handleSubmitLaboral}>
           <div className="especialidad">
-              <label htmlFor=""><h3>Especialidad</h3></label>
+            <label htmlFor="">
+              <h3>Especialidad</h3>
+            </label>
             <CustomSelect
-              
               name="especialidad"
               style={stylesEspecilidad}
               arrayOptionsSelect={especialidad}

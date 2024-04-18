@@ -18,6 +18,7 @@ const CustomInput = ({ ...props }) => {
                 value={props.value}
                 onChange={props.onChange}
                 name={props.name}
+                id={props.id}
             />
         </div>
     );

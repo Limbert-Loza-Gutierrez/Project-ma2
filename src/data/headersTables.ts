@@ -3,7 +3,7 @@ const headerTablesAdminUs = {
   nombreUsuario: "Nombre de Usuario",
   documento: "Cédula de Identidad",
   expedicion: "Expedición Documento",
-  "informacionLaboral.estado": "Estado",
+  estado: "Estado",
 };
 
 const headerTablePaciente = {

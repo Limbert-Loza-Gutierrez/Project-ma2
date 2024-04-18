@@ -1,7 +1,7 @@
 import CustomInput from "../customs/CustomInput/CustomInput";
 import CustomButton from "../customs/CustomButton/CustomButton";
 import CustomSelect from "../customs/CustomSelect/CustomSelect";
-import { expedicion, genero,edad } from "../../data/selectData";
+import { expedicion, genero, edad } from "../../data/selectData";
 import { useState, useContext } from "react";
 import UsersContext from "../../context/UsersContext";
 import "./NuevoCaso.styles.css";
@@ -10,7 +10,6 @@ import axios from "axios";
 import { loadImageBase64, generateResponse } from "../../services/ia_detection";
 import Modal from "./Modal";
 import { number } from "prop-types";
-// import axios from 'axios';
 
 const NuevoCaso = () => {
   const { updateListPacientes } = useContext(UsersContext);
@@ -29,7 +28,7 @@ const NuevoCaso = () => {
   const [response, setResponse] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [processedImage,setProcessedImage] = useState(null);
+  const [processedImage, setProcessedImage] = useState(null);
 
   const handleSelectTagChange = (e) => {
     setSelectTagValue(e.target.value);
@@ -48,11 +47,6 @@ const NuevoCaso = () => {
     nombreMedico: "",
     id: number,
   });
-  console.log(detectionResults);
-  console.log(infPaciente);
-
-
-  
 
   const handleSubmitProcessedImage = async () => {
     const formData = new FormData();
@@ -69,20 +63,19 @@ const NuevoCaso = () => {
         }
       );
 
-      // Una vez cargada la imagen, solicitamos el JSON con la imagen procesada
+
       const processedImageResponse = await axios.get(
         "http://localhost:8000/processed_image/"
       );
 
-      // Actualizamos el estado con la imagen procesada
-      console.log(processedImageResponse);
+   
       setProcessedImage(processedImageResponse.data.image);
     } catch (error) {
       console.error("Error uploading file:", error);
     }
   };
 
-  // Al cargar el componente, solicitar la imagen procesada
+
   useEffect(() => {
     const fetchProcessedImage = async () => {
       try {
@@ -97,11 +90,6 @@ const NuevoCaso = () => {
 
     fetchProcessedImage();
   }, []);
-
-
-
-
-
 
   const handleCustomSelect = (e, functionSelect) => {
     handleChange(e);
@@ -133,7 +121,6 @@ const NuevoCaso = () => {
   };
 
   const sendImageToAPI = (imageData) => {
-
     axios({
       method: "POST",
       url: "https://detect.roboflow.com/persona-bajo-la-lluvia/1",
@@ -151,10 +138,9 @@ const NuevoCaso = () => {
           [];
         let repuesta = generateResponse(detectionFeatures, indicadores);
         setDetectionResults(repuesta);
-        // console.log("respuesta dentro del nuevo caso: ",repuesta);
       })
       .catch(function (error) {
-        console.log(error.message);
+        console.error(error.message);
       });
   };
 
@@ -320,7 +306,6 @@ const NuevoCaso = () => {
           />
         </div>
         <div className="option-form__nuevocaso">
-
           <CustomInput
             name="fechaDiagnostico"
             label="Fecha de diagnóstico"
@@ -364,16 +349,6 @@ const NuevoCaso = () => {
         caracteristicas={detectionResults}
         processedImageBase64={processedImage}
       />
-      {/* {processedImage && (
-        <div>
-          <h2>Processed Image:</h2>
-          <img
-            src={`data:image/jpeg;base64,${processedImage}`}
-            alt="Processed"
-            style={{ maxWidth: "100%" }}
-          />
-        </div>
-      )} */}
     </main>
   );
 };

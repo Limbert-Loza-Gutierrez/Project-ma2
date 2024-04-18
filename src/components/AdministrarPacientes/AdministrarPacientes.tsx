@@ -2,17 +2,17 @@
 import { headerCasosAdmin } from "../../data/headersTables";
 import CustomTNR from "../customs/CustomTablanNuevoRegistro/CustomTNR";
 import {  useEffect, useState } from "react";
+import {collection,getDocs} from "firebase/firestore";
+import { db } from "../../config/firebase";
 const Casos = () => {
   const [pacientes, setPacientes] = useState([]);
   
   useEffect(() => {
-    const data = JSON.parse(window.localStorage.getItem("listPacientes") as string);
-    console.log(data);
-    if (data) {
-      setPacientes(data);
-    }
+    const getPacientes = collection(db, "paciente");
+    getDocs(getPacientes).then((res) => {
+      setPacientes(res.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
   }, [
-    localStorage
   ])
   return (
     <main className="window-content">

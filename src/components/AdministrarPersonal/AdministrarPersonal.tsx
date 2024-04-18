@@ -4,15 +4,17 @@ import CustomTNR from "../customs/CustomTablanNuevoRegistro/CustomTNR";
 import NuevoRegistroPersonal from "../NuevoRegistroPersonal/NuevoRegistroPersonal.tsx";
 import ModificarPersonal from "../ModificarPersonal/ModificarPersonal.tsx";
 import UsersContext from "../../context/UsersContext";
+import {collection,getDocs} from "firebase/firestore";
+import { db } from "../../config/firebase";
 const AdministrarPersonal = () => {
   const { personal } = useContext(UsersContext);
   const [personalList, setPersonalList] = useState([]);
   
   useEffect(() => {
-    const data = JSON.parse(window.localStorage.getItem("listPersonal") as string);
-    if (data) {
-      setPersonalList(data);
-    }
+    const getPersonal = collection(db, "personal");
+    getDocs(getPersonal).then((res) => {
+      setPersonalList(res.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
   }, [
     localStorage, personal
   ])

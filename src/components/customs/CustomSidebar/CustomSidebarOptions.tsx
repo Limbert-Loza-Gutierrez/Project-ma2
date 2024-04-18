@@ -1,18 +1,19 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 const CustomSidebarOptions = ({ data_user, opciones }) => {
+  
   return (
     <aside className="sidebar">
       <div className="perfil-usuario">
         <img src={data_user.imgPerfil} alt="" className="foto-usuario" />
-        {data_user.informacionLaboral.nivelJerarquico ===
+        {data_user.nivelJerarquico ===
           "Super Administrador" ? (
           <h3>Administrador</h3>
         ) : (
           <div className="text-perfil nome-usuario">
             {data_user.nombre}
             <br />
-            {data_user.informacionLaboral.especialidad}
+            {data_user.especialidad}
           </div>
         )}
       </div>
