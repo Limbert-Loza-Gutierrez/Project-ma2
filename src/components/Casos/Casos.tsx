@@ -1,30 +1,65 @@
 import { headerCasos } from "../../data/headersTables";
 import CustomTNR from "../customs/CustomTablanNuevoRegistro/CustomTNR";
 import { useEffect, useState } from "react";
-import { jsPDF } from "jspdf";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { db, appFirebase } from "../../config/firebase";
+import { collection, getDocs } from "firebase/firestore";
+const auth = getAuth(appFirebase);
 const Casos = () => {
-
   const [pacientes, setPacientes] = useState([]);
-  const infMedico = JSON.parse(
-    window.localStorage.getItem("inforUser") as string
-  );
+  const [personal, setPersonal] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
   useEffect(() => {
-    const data = JSON.parse(
-      window.localStorage.getItem("listPacientes") as string
-    );
-    const dataFilter = data.filter(
-      (paciente) => paciente.nombreMedico === infMedico.nombre
-    );
+    const getData = collection(db, "paciente");
+    getDocs(getData).then((querySnapshot) => {
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push(doc.data());
+      });
+      setPacientes(data);
+    });
+  }, []);
+  useEffect(() => {
+    const getData = collection(db, "personal");
+    getDocs(getData).then((querySnapshot) => {
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push(doc.data());
+      });
+      setPersonal(data);
+    });
+  }, []);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      const currentPersonal = personal.find(
+        (p) => p.correoInstitucional === user.email
+      );
+      setCurrentUser(currentPersonal);
 
-    if (dataFilter) {
-      setPacientes(dataFilter);
-    }
-  }, [localStorage]);
+      if (currentPersonal) {
+        setPacientes(
+          pacientes.filter(
+            (paciente) => paciente.nombreMedico === currentPersonal.nombre
+          )
+        );
+      }
+    });
 
+    return () => {
+      unsubscribe();
+    };
+  }, [personal]);
 
+  // useEffect(() => {
+  //   const dataFilter = pacientes.filter(
+  //     (paciente) => paciente.nombreMedico === currentUser.nombre
+  //   );
 
+  //   if (dataFilter) {
+  //     setPacientes(dataFilter);
+  //   }
+  // }, []);
 
-  
   return (
     <main className="window-content">
       <div className="title-casos">
@@ -35,9 +70,7 @@ const Casos = () => {
       ) : (
         <p>Loading pacientes...</p>
       )}
-      <div>
-       
-      </div>
+      <div></div>
     </main>
   );
 };

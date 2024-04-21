@@ -1,36 +1,30 @@
-import React, { useState, useEffect } from "react";
-import CustomInput from "../customs/CustomInput/CustomInput";
+import { useState, useEffect } from "react";
 import CustomButton from "../customs/CustomButton/CustomButton";
-import CustomSelect from "../customs/CustomSelect/CustomSelect";
 import { Link } from "react-router-dom";
 import { jsPDF } from "jspdf";
-
 import logo from "../../../public/image/logo.jpg";
 import logo24 from "../../../public/image/logo24.webp";
+import { db } from "../../config/firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 const Modal = ({
   open,
   onClose,
   informacionPaciente,
   guardar,
-  updateReportBase64,
   caracteristicas,
   processedImageBase64,
-
 }) => {
-  // const [base64PDF, setBase64PDF] = useState("");
   if (!open) return null;
-  const infoMedico = JSON.parse(localStorage.getItem("infoUser")) || {};
+
   const [diagnosticoPsicologo, setDiagnosticoPsicologo] = useState("");
-  console.log("caracteriticas detectadas",caracteristicas)
 
   const generatePDF = async () => {
-    const diagnosticoPsicologo = document.getElementById(
+    const diagnosticoPsicologo = document?.getElementById(
       "diagnosticoPsicologo"
     ).value;
     const diagnosticoSelectElement =
       document.querySelector(".diagnosticoSelect");
-    // const informacionPaciente.diagnostico = diagnosticoSelectElement.value;
 
     try {
       const pdf = new jsPDF();
@@ -41,7 +35,7 @@ const Modal = ({
 
       pdf.setFontSize(16);
       pdf.setFont("Montserrat-Bold");
-     
+
       // pdf.text("SISTEMA DE APOYO PARA PSICÓLOGOS", docWidth / 2, 50, { align: "center" });
       pdf.line(0, 60, docWidth, 60);
 
@@ -50,26 +44,28 @@ const Modal = ({
       pdf.addImage(logo, "PNG", 5, 15, 30, 30);
       pdf.addImage(logo24, "PNG", 172, 15, 30, 30);
 
-
       pdf.addImage(informacionPaciente.imagen, "PNG", 15, 180, 70, 70);
-      pdf.addImage(processedImageBase64,"PNG", 100, 180, 70, 70)
-      
-      //si el objeto no esta vacio que imprima 
+      pdf.addImage(processedImageBase64, "PNG", 100, 180, 70, 70);
+
+      //si el objeto no esta vacio que imprima
       // caracteristicas es un objeto que contiene las caracteristicas detectadas {coincidencias:[],isMaltrato:rtue}
-      if(caracteristicas.isMaltrato){
+      if (caracteristicas.isMaltrato) {
         // pdf.text("Se detecto indicios de Maltrato Psicologico", 10, 200);
-        
+
         // pdf.text(caracteristicas.coincidencias.join("\n"), 60, 270);
         pdf.text(caracteristicas.coincidencias.join(), 10, 270);
-      }else{
-        pdf.text("No se detecto indicios de Maltrato Psicologico - Ninguna coincidencia ", 10, 250);
+      } else {
+        pdf.text(
+          "No se detecto indicios de Maltrato Psicologico - Ninguna coincidencia ",
+          10,
+          250
+        );
       }
 
       // *Información del paciente*
-      // 
 
       pdf.setFontSize(16);
-      pdf.setFont("Montserrat-Bold", "normal","bold");
+      pdf.setFont("Montserrat-Bold", "normal", "bold");
       pdf.text("Paciente:", 10, 80);
       pdf.text("Edad:", 10, 90);
       pdf.text("Fecha:", 10, 100);
@@ -80,12 +76,17 @@ const Modal = ({
         align: "center",
       });
       pdf.text("INFORME PSICOLÓGICO", docWidth / 2, 50, { align: "center" });
-      pdf.text(`PSICÓLOGO: ${informacionPaciente.nombreMedico}`, docWidth / 2, 40, { align: "center" });
+      pdf.text(
+        `PSICÓLOGO: ${informacionPaciente.nombreMedico}`,
+        docWidth / 2,
+        40,
+        { align: "center" }
+      );
       pdf.text("Diagnóstico del sistema:", 10, 160);
       pdf.text("Diagnóstico del psicólogo:", 10, 110);
       pdf.text("Características detectadas", 10, 260);
-      
-      pdf.setFont("Montserrat-Bold", "italic","normal");
+
+      pdf.setFont("Montserrat-Bold", "italic", "normal");
       pdf.text(informacionPaciente.nombre, 50, 80);
       pdf.text(informacionPaciente.edad, 50, 90);
       pdf.text(informacionPaciente.fechaDiagnostico, 50, 100);
@@ -93,9 +94,9 @@ const Modal = ({
       pdf.line(0, 150, docWidth, 150);
 
       pdf.setFontSize(16);
-      
+
       // pdf.text(informacionPaciente.diagnostico, 80, 180);
-      
+
       const ds = pdf.splitTextToSize(diagnosticoPsicologo, docWidth - 50);
       pdf.text(ds, 10, 120);
 
@@ -116,7 +117,7 @@ const Modal = ({
 
       pdf.line(0, docHeight - 20, docWidth, docHeight - 20);
       pdf.setFontSize(10);
-      
+
       pdf.text(
         `Página ${pdf.internal.getNumberOfPages()}`,
         docWidth - 20,
@@ -124,23 +125,78 @@ const Modal = ({
         { align: "right" }
       );
 
-
-
       const base64Data = pdf.output("datauristring");
+      
 
+      const totalLength = base64Data.length;
+      const partLength = Math.floor(totalLength / 4);
 
-      const informesPrevios =
-        JSON.parse(localStorage.getItem("informes")) || [];
-      const nuevoInforme = {
-        pdf: base64Data,
-        id: informacionPaciente.id,
+      const pdf1 = base64Data.substring(0, partLength);
+      const pdf2 = base64Data.substring(partLength, partLength * 2);
+      const pdf3 = base64Data.substring(partLength * 2, partLength * 3);
+      const pdf4 = base64Data.substring(partLength * 3);
+
+      const nuevoInforme1 = {
+        pdf: pdf1,
+        idDoc: informacionPaciente.idDoc,
         documento: informacionPaciente.documento,
         nombre: informacionPaciente.nombre,
       };
-      informesPrevios.push(nuevoInforme);
-      localStorage.setItem("informes", JSON.stringify(informesPrevios));
-      console.log("Base64:", base64Data);
-      updateReportBase64(base64Data);
+      const nuevoInforme2 = {
+        pdf: pdf2,
+        idDoc: informacionPaciente.idDoc,
+        documento: informacionPaciente.documento,
+        nombre: informacionPaciente.nombre,
+      };
+      const nuevoInforme3 = {
+        pdf: pdf3,
+        idDoc: informacionPaciente.idDoc,
+        documento: informacionPaciente.documento,
+        nombre: informacionPaciente.nombre,
+      };
+      const nuevoInforme4 = {
+        pdf: pdf4,
+        idDoc: informacionPaciente.idDoc,
+        documento: informacionPaciente.documento,
+        nombre: informacionPaciente.nombre,
+      };
+      const docRef = collection(db, "informes");
+      const docRef2 = collection(db, "informes2");
+      const docRef3 = collection(db, "informes3");
+      const docRef4 = collection(db, "informes4");
+      addDoc(docRef, nuevoInforme1).then(
+        (docRef) => {
+          console.log("Document written with ID: ", docRef.id);
+        },
+        (error) => {
+          console.error("Error adding document: ", error);
+        }
+      );
+      addDoc(docRef2, nuevoInforme2).then(
+        (docRef) => {
+          console.log("Document written with ID: ", docRef.id);
+        },
+        (error) => {
+          console.error("Error adding document: ", error);
+        }
+      );
+      addDoc(docRef3, nuevoInforme3).then(
+        (docRef) => {
+          console.log("Document written with ID: ", docRef.id);
+        },
+        (error) => {
+          console.error("Error adding document: ", error);
+        }
+      );
+      addDoc(docRef4, nuevoInforme4).then(
+        (docRef) => {
+          console.log("Document written with ID: ", docRef.id);
+        },
+        (error) => {
+          console.error("Error adding document: ", error);
+        }
+      );
+
       onClose();
     } catch (error) {
       console.error("Error generando PDF:", error);
@@ -155,7 +211,7 @@ const Modal = ({
         console.log(
           "Elemento Seleccionado de Diagnóstico Encontrado:",
           diagnosticoSelectElement.value
-        ); // Para depuración
+        );
       } else {
         console.error("Elemento Seleccionado de Diagnóstico No Encontrado");
       }
@@ -205,15 +261,15 @@ const Modal = ({
 
       <div className="imprimird">
         <Link to="/casos">
-        <CustomButton
-          content="Guardar"
-          onClick={() => {
-            guardar();
-            generatePDF();
-          }}
-        />
+          <CustomButton
+            content="Guardar"
+            onClick={() => {
+              guardar();
+              generatePDF();
+            }}
+          />
         </Link>
-          <CustomButton content="Cancelar" onClick={onClose} />
+        <CustomButton content="Cancelar" onClick={onClose} />
       </div>
     </div>
   );

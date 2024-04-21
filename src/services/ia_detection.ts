@@ -8,29 +8,36 @@ const loadImageBase64 = (file) => {
 };
 
 // Función para generar una respuesta aleatoria
-function generateResponse(array1, array2) {
-  let coincidencias = [];
-  let isMaltrato = false;
+// function generateResponse(array1, array2) {
+//   let coincidencias = [];
+//   let isMaltrato = false;
 
-  if (array1.length === 0 || array2.length === 0 || array1.length <= 2 || array2.length <= 2) {
-    isMaltrato = false;
-  }
+//   if (array1.length === 0 || array2.length === 0 || array1.length <= 2 || array2.length <= 2) {
+//     isMaltrato = false;
+//   }
 
-  for (const element of array1) {
-    if (array2.includes(element)) {
-      coincidencias.push(element);
-    }
-  }
+//   for (const element of array1) {
+//     if (array2.includes(element)) {
+//       coincidencias.push(element);
+//     }
+//   }
 
-  if (coincidencias.length >= 2) {
-    isMaltrato = true;
-    return { coincidencias, isMaltrato };
-  }
-  else {
-    return {};
-  }
+//   if (coincidencias.length >= 2) {
+//     isMaltrato = true;
+//     return { coincidencias, isMaltrato };
+//   }
+//   else {
+//     return {};
+//   }
 
+// }
+const generateResponse = (array1, array2) => {
+  const set = new Set(array1);
+  const coincidencias = array2.filter((element) => set.has(element));
+  const isMaltrato = coincidencias.length >= 2;
+  return { coincidencias, isMaltrato };
 }
+
 
 export {
   loadImageBase64,
