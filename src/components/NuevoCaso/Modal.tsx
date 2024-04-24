@@ -14,6 +14,7 @@ const Modal = ({
   guardar,
   caracteristicas,
   processedImageBase64,
+  detectionResults
 }) => {
   if (!open) return null;
 
@@ -189,6 +190,19 @@ const Modal = ({
         }
       );
       addDoc(docRef4, nuevoInforme4).then(
+        (docRef) => {
+          console.log("Document written with ID: ", docRef.id);
+        },
+        (error) => {
+          console.error("Error adding document: ", error);
+        }
+      );
+      const reporDoct = collection(db, "reportes");
+      const reporte = {
+        dD : diagnosticoPsicologo,
+        dS : detectionResults?.isMaltrato ? "Sí" : "No",
+      };
+      addDoc(reporDoct, reporte).then(
         (docRef) => {
           console.log("Document written with ID: ", docRef.id);
         },

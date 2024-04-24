@@ -11,8 +11,21 @@ import Modal from "./Modal";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import { db, appFirebase } from "../../config/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { number } from "prop-types";
 const auth = getAuth(appFirebase);
+
+interface PersonalData {
+  correoInstitucional: string;
+  documento: string;
+  especialidad: string;
+  estado: string;
+  expedicion: string;
+  imgPerfil: string;
+  nivelJerarquico: string;
+  nombre: string;
+  nombreUsuario: string;
+  password: string;
+  tipoLaboral: string;
+}
 
 const NuevoCaso = () => {
   const [imageUrl, setImageUrl] = useState("");
@@ -21,16 +34,30 @@ const NuevoCaso = () => {
   const [selectEdad, setSelectEdad] = useState("");
   const [fileData, setFileData] = useState(null);
   const [reportBase64, setReportBase64] = useState(null);
-  const [detectionResults, setDetectionResults] = useState(null);
+  const [detectionResults, setDetectionResults] = useState<{
+    coincidencias: any;
+    isMaltrato: boolean;
+  } | null>(null);
   const [error, setError] = useState(null);
   const [response, setResponse] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [processedImage, setProcessedImage] = useState(null);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [personal, setPersonal] = useState([]);
-  const [infPaciente, setInfPaciente] = useState({
-    idDoc : number,
+  const [currentUser, setCurrentUser] = useState<PersonalData | null>(null);
+  const [personal, setPersonal] = useState<PersonalData[]>([]);
+  const [infPaciente, setInfPaciente] = useState<{
+    idDoc: string;
+    nombre: string;
+    documento: string;
+    expedicion: string;
+    sexo: string;
+    edad: string;
+    fechaDiagnostico: string;
+    nombreMedico: string;
+    diagnostico: string;
+    imagen: string;
+  }>({
+    idDoc: "",
     nombre: "",
     documento: "",
     expedicion: "",
@@ -38,14 +65,16 @@ const NuevoCaso = () => {
     edad: "",
     fechaDiagnostico: "",
     nombreMedico: "",
+    diagnostico: "",
+    imagen: "",
   });
 
   useEffect(() => {
     const getData = collection(db, "personal");
     getDocs(getData).then((querySnapshot) => {
-      const data = [];
+      const data: PersonalData[] = [];
       querySnapshot.forEach((doc) => {
-        data.push(doc.data());
+        data.push(doc.data() as PersonalData);
       });
       setPersonal(data);
     });
@@ -53,12 +82,12 @@ const NuevoCaso = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      const currentPersonal = personal.find(
-        (p) => p.correoInstitucional === user.email
+      const currentPersonal: PersonalData | undefined = personal.find(
+        (p: PersonalData) => p.correoInstitucional === user?.email
       );
-      setCurrentUser(currentPersonal);
 
       if (currentPersonal) {
+        setCurrentUser(currentPersonal);
         setInfPaciente((prevInfPaciente) => ({
           ...prevInfPaciente,
           nombreMedico: currentPersonal.nombre,
@@ -72,6 +101,11 @@ const NuevoCaso = () => {
   }, [personal]);
 
   const handleSubmitProcessedImage = async () => {
+    if (!selectedFile) {
+      console.error("No file selected.");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("file", selectedFile);
 
@@ -154,9 +188,13 @@ const NuevoCaso = () => {
     })
       .then(function (response) {
         let detectionFeatures =
-          response.data?.predictions?.map((prediction) => prediction.class) ||
-          [];
-        let repuesta = generateResponse(detectionFeatures, indicadores);
+          response.data?.predictions?.map(
+            (prediction: { class: string }) => prediction.class
+          ) || [];
+        const repuesta = generateResponse(detectionFeatures, indicadores) || {
+          coincidencias: null,
+          isMaltrato: false,
+        };
         setDetectionResults(repuesta);
       })
       .catch(function (error) {
@@ -172,7 +210,9 @@ const NuevoCaso = () => {
     reader.readAsDataURL(file);
 
     reader.onload = () => {
-      setImageUrl(reader.result);
+      if (typeof reader.result === "string") {
+        setImageUrl(reader.result);
+      }
     };
 
     reader.onerror = (error) => {
@@ -191,7 +231,6 @@ const NuevoCaso = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleSubmitProcessedImage();
-    console.log("Detection results:", detectionResults);
     // detectionResults?.isMaltrato
     //   ? (infPaciente.diagnostico = "Sí")
     //   : (infPaciente.diagnostico = "No");
@@ -205,15 +244,17 @@ const NuevoCaso = () => {
 
     infPaciente.diagnostico = "Sí";
     infPaciente.imagen = imageUrl;
-    infPaciente.idDoc = Math.floor(Math.random() * 1000);
+    infPaciente.idDoc = Math.floor(Math.random() * 1000).toString();
     let hayCampoVacio = false;
 
     for (const propiedad in infPaciente) {
-      const valor = infPaciente[propiedad];
+      if (Object.prototype.hasOwnProperty.call(infPaciente, propiedad)) {
+        const valor = infPaciente[propiedad as keyof typeof infPaciente];
 
-      if (!valor) {
-        hayCampoVacio = true;
-        break;
+        if (!valor) {
+          hayCampoVacio = true;
+          break;
+        }
       }
     }
 
@@ -228,7 +269,6 @@ const NuevoCaso = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Actualizar el estado de infPaciente
     setInfPaciente((prevInfPaciente) => ({
       ...prevInfPaciente,
       [name]: value,
@@ -252,6 +292,7 @@ const NuevoCaso = () => {
 
   const clearForm = () => {
     setInfPaciente({
+      idDoc: "", 
       nombre: "",
       documento: "",
       expedicion: "",
@@ -260,9 +301,9 @@ const NuevoCaso = () => {
       fechaDiagnostico: "",
       diagnostico: "",
       nombreMedico: "",
+      imagen: "", 
     });
   };
-
   const updateReportBase64 = (newValue) => {
     setReportBase64(() => {
       return newValue;
@@ -377,7 +418,9 @@ const NuevoCaso = () => {
         guardar={() => {
           setOpenModal(false);
           const newPacientes = { ...infPaciente };
-          delete newPacientes[""];
+          if ("" in newPacientes) {
+            delete newPacientes[""];
+          }
           console.log(newPacientes);
           const docRef = collection(db, "paciente");
           addDoc(docRef, newPacientes).then(
@@ -393,6 +436,7 @@ const NuevoCaso = () => {
         informacionPaciente={infPaciente}
         caracteristicas={detectionResults}
         processedImageBase64={processedImage}
+        detectionResults={detectionResults}
       />
     </main>
   );
