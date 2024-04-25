@@ -43,7 +43,7 @@ const CustomTable = ({ headerData, bodyData }) => {
 
 CustomTable.propTypes = {
   headerData: PropTypes.object,
-  bodyData: PropTypes.object,
+  bodyData: PropTypes.arrayOf(PropTypes.object), 
 };
 
 export default CustomTable;

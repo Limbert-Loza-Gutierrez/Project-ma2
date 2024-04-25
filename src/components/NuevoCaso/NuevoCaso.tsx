@@ -34,10 +34,7 @@ const NuevoCaso = () => {
   const [selectEdad, setSelectEdad] = useState("");
   const [fileData, setFileData] = useState(null);
   const [reportBase64, setReportBase64] = useState(null);
-  const [detectionResults, setDetectionResults] = useState<{
-    coincidencias: any;
-    isMaltrato: boolean;
-  } | null>(null);
+  const [detectionResults, setDetectionResults] = useState<{ coincidencias: string[]; maltrato: string; } | null>(null);
   const [error, setError] = useState(null);
   const [response, setResponse] = useState(null);
   const [openModal, setOpenModal] = useState(false);
@@ -110,7 +107,7 @@ const NuevoCaso = () => {
     formData.append("file", selectedFile);
 
     try {
-      const response = await axios.post(
+      const res = await axios.post(
         "http://localhost:8000/upload/",
         formData,
         {
@@ -174,6 +171,38 @@ const NuevoCaso = () => {
       });
   };
 
+  // const sendImageToAPI = (imageData) => {
+  //   axios({
+  //     method: "POST",
+  //     url: "https://detect.roboflow.com/persona-bajo-la-lluvia/1",
+  //     params: {
+  //       api_key: "EAW01eDHAuDdqLm8W0W9",
+  //     },
+  //     data: imageData,
+  //     headers: {
+  //       "Content-Type": "application/x-www-form-urlencoded",
+  //     },
+  //   })
+  //     .then(function (response) {
+  //       let detectionFeatures =
+  //         response.data?.predictions?.map(
+  //           (prediction: { class: string }) => prediction.class
+  //         ) || [];
+  //         console.log(detectionFeatures)
+  //       if(detectionFeatures.length > 0){
+  //         const repuesta = generateResponse(detectionFeatures, indicadores);
+  //         setDetectionResults(repuesta);
+  //       }else{
+  //         setDetectionResults(null);
+  //       }
+        
+  //     })
+  //     .catch(function (error) {
+  //       console.error(error.message);
+  //     });
+  // };
+
+
   const sendImageToAPI = (imageData) => {
     axios({
       method: "POST",
@@ -191,17 +220,18 @@ const NuevoCaso = () => {
           response.data?.predictions?.map(
             (prediction: { class: string }) => prediction.class
           ) || [];
-        const repuesta = generateResponse(detectionFeatures, indicadores) || {
-          coincidencias: null,
-          isMaltrato: false,
-        };
-        setDetectionResults(repuesta);
+        if(detectionFeatures.length > 0){
+          let respuesta = generateResponse(detectionFeatures, indicadores);
+          setDetectionResults(respuesta);
+        } else {
+          setDetectionResults(null);
+        }
+        
       })
       .catch(function (error) {
         console.error(error.message);
       });
   };
-
   const handleChangeFile = (event) => {
     handleChange(event);
     const file = event.target.files[0];
@@ -325,8 +355,7 @@ const NuevoCaso = () => {
             label="Nombre"
             type="text"
             placeholder="Nombre"
-            required
-            onChange={handleChange}
+            onchange={handleChange}
             value={infPaciente.nombre}
           />
         </div>
@@ -336,8 +365,7 @@ const NuevoCaso = () => {
             label="Carnet de identidad"
             type="number"
             placeholder="Carnet de Identidad"
-            required
-            onChange={handleChange}
+            onchange={handleChange}
             value={infPaciente.documento}
           />
 
@@ -389,7 +417,6 @@ const NuevoCaso = () => {
             label="Fecha de diagnóstico"
             type="text"
             placeholder="Fecha de diagnóstico"
-            required
             value={new Date()
               .toISOString()
               .split("T")[0]
@@ -404,8 +431,7 @@ const NuevoCaso = () => {
             label="Imagen para diagnóstico"
             type="file"
             placeholder="Imagen para diagnóstico"
-            onChange={handleChangeFile}
-            required
+            onchange={handleChangeFile}
           />
         </div>
       </form>
@@ -434,7 +460,6 @@ const NuevoCaso = () => {
           clearForm();
         }}
         informacionPaciente={infPaciente}
-        caracteristicas={detectionResults}
         processedImageBase64={processedImage}
         detectionResults={detectionResults}
       />

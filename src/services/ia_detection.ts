@@ -1,46 +1,20 @@
-const loadImageBase64 = (file) => {
+const loadImageBase64 = (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
+    reader.onload = () => resolve(reader.result as string);
     reader.onerror = (error) => reject(error);
   });
 };
 
-// Función para generar una respuesta aleatoria
-// function generateResponse(array1, array2) {
-//   let coincidencias = [];
-//   let isMaltrato = false;
-
-//   if (array1.length === 0 || array2.length === 0 || array1.length <= 2 || array2.length <= 2) {
-//     isMaltrato = false;
-//   }
-
-//   for (const element of array1) {
-//     if (array2.includes(element)) {
-//       coincidencias.push(element);
-//     }
-//   }
-
-//   if (coincidencias.length >= 2) {
-//     isMaltrato = true;
-//     return { coincidencias, isMaltrato };
-//   }
-//   else {
-//     return {};
-//   }
-
-// }
-const generateResponse = (array1, array2) => {
-  const set = new Set(array1);
-  const coincidencias = array2.filter((element) => set.has(element));
+const generateResponse = (
+  detectionFeatures: string[],
+  indicadores: string[]
+): { coincidencias: string[]; maltrato: string } => {
+  const set = new Set(detectionFeatures);
+  const coincidencias = indicadores.filter((element) => set.has(element));
   const isMaltrato = coincidencias.length >= 2;
-  return { coincidencias, isMaltrato };
-}
+  return { coincidencias: coincidencias, maltrato: isMaltrato ? "Sí" : "No" };
+};
 
-
-export {
-  loadImageBase64,
-  generateResponse
-}
-
+export { loadImageBase64, generateResponse };

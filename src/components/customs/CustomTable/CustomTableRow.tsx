@@ -12,11 +12,6 @@ const CustomTableRow = ({ data }) => {
   const [informes3,setInformes3] = useState(null);
   const [informes4,setInformes4] = useState(null);
 
-
-
-  // tengo las colecciones informes , informes1 , informes2 , informes3 , informes4
-  // cada una de estas contiene una parte de el documento que se va a descargar
-  // se debe hacer un merge de estos documentos para poder descargar el pdf
   useEffect(() => {
     const getInformes = async () => {
       const informesCollection = collection(db, "informes");
@@ -44,10 +39,7 @@ const CustomTableRow = ({ data }) => {
     const informe2 = informes2?.find((informe) => informe.idDoc === idDoc);
     const informe3 = informes3?.find((informe) => informe.idDoc === idDoc);
     const informe4 = informes4?.find((informe) => informe.idDoc === idDoc);
-    // console.log("informe",informe)
-    // console.log("informe2",informe2)
-    // console.log("informe3",informe3)
-    // console.log("informe4",informe4)
+
     const pdfConcatenado = informe?.pdf + informe2?.pdf + informe3?.pdf + informe4?.pdf;
 
     const informeCompleto = {
@@ -56,15 +48,9 @@ const CustomTableRow = ({ data }) => {
       nombre : informe?.nombre,
       pdf : pdfConcatenado,
     }
-    console.log("informeCompleto",informeCompleto)
     return informeCompleto;
   }
   
-
-  
-  // const findInformeById = (id) => {
-  //   return informes.find((informe) => informe.id === id);
-  // }
   return (
     <>{objects.map((object) => {
       const informeT =  mergeInformesByIdDoc(object.idDoc);
@@ -92,10 +78,10 @@ const CustomTableRow = ({ data }) => {
                 )}
               </td>
             ) : (
-              // <td key={key}>{object[key]}</td>
+              
               <>
                 <td key={key}>{object[key]}</td>
-                {/* {console.log(object[key])} */}
+                
               </>
             )
           )}

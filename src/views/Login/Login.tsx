@@ -38,7 +38,7 @@ const Login = () => {
           type="email"
           placeholder="Correo"
           value={loginDate.email}
-          onChange={handleInputChange}
+          onchange={handleInputChange}
           name="email"
           id="email"
         />
@@ -47,7 +47,7 @@ const Login = () => {
           type="password"
           placeholder="Contraseña"
           value={loginDate.password}
-          onChange={handleInputChange}
+          onchange={handleInputChange}
           name="password"
           id="password"
         />

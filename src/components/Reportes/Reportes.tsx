@@ -178,17 +178,23 @@ function Reportes() {
     <div className="window-content">
       <div className="reportes">
         <div className="genero-reporte container-grafico">
-          <h1
-            style={{
-              textAlign: "center",
-              fontSize: "2rem",
-              color: "black",
-              marginBottom: "1rem",
-            }}
-          >
-            Reporte por género{" "}
-          </h1>
-          <div className="grafico">
+        <div  className="grafico-genero">
+            <Bar
+              options={{
+                responsive: true,
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    ticks: {
+                      stepSize: 1,
+                    },
+                  },
+                },
+              }}
+              data={data}
+            />
+          
+          
             <Bar
               options={{
                 responsive: true,

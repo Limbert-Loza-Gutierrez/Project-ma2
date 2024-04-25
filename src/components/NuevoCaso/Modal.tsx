@@ -2,30 +2,29 @@ import { useState, useEffect } from "react";
 import CustomButton from "../customs/CustomButton/CustomButton";
 import { Link } from "react-router-dom";
 import { jsPDF } from "jspdf";
-import logo from "../../../public/image/logo.jpg";
-import logo24 from "../../../public/image/logo24.png";
+import logo from "../../../public/image/logo.webp";
+import logo24 from "../../../public/image/logo24.webp";
 import { db } from "../../config/firebase";
 import { collection, addDoc } from "firebase/firestore";
+import CustomSelect from "../customs/CustomSelect/CustomSelect";
+import { BiBorderRadius } from "react-icons/bi";
 
 const Modal = ({
   open,
   onClose,
   informacionPaciente,
   guardar,
-  caracteristicas,
   processedImageBase64,
-  detectionResults
+  detectionResults,
 }) => {
   if (!open) return null;
-
+  const [selectDiagnostico, setSelectDiagnostico] = useState("");
   const [diagnosticoPsicologo, setDiagnosticoPsicologo] = useState("");
 
   const generatePDF = async () => {
     const diagnosticoPsicologo = document?.getElementById(
       "diagnosticoPsicologo"
-    ).value;
-    const diagnosticoSelectElement =
-      document.querySelector(".diagnosticoSelect");
+    )?.value;
 
     try {
       const pdf = new jsPDF();
@@ -49,18 +48,10 @@ const Modal = ({
       pdf.addImage(processedImageBase64, "PNG", 100, 180, 70, 70);
 
       //si el objeto no esta vacio que imprima
-      // caracteristicas es un objeto que contiene las caracteristicas detectadas {coincidencias:[],isMaltrato:rtue}
-      if (caracteristicas.isMaltrato) {
-        // pdf.text("Se detecto indicios de Maltrato Psicologico", 10, 200);
-
-        // pdf.text(caracteristicas.coincidencias.join("\n"), 60, 270);
-        pdf.text(caracteristicas.coincidencias.join(), 10, 270);
+      if (detectionResults?.maltrato === "Sí") {
+        pdf.text(detectionResults.coincidencias.join(), 10, 270);
       } else {
-        pdf.text(
-          "No se detecto indicios de Maltrato Psicologico - Ninguna coincidencia ",
-          10,
-          250
-        );
+        pdf.text("No se detecto indicios de Maltrato Psicologico", 10, 250);
       }
 
       // *Información del paciente*
@@ -85,7 +76,9 @@ const Modal = ({
       );
       pdf.text("Diagnóstico del sistema:", 10, 160);
       pdf.text("Diagnóstico del psicólogo:", 10, 110);
-      pdf.text("Características detectadas", 10, 260);
+      if (detectionResults?.maltrato === "Sí") {
+        pdf.text("Características detectadas", 10, 260);
+      }
 
       pdf.setFont("Montserrat-Bold", "italic", "normal");
       pdf.text(informacionPaciente.nombre, 50, 80);
@@ -101,20 +94,16 @@ const Modal = ({
       const ds = pdf.splitTextToSize(diagnosticoPsicologo, docWidth - 50);
       pdf.text(ds, 10, 120);
 
-      // *¿Está de acuerdo con el diagnóstico?*
-
       let da = "";
-      if (informacionPaciente.diagnostico === "Sí") {
+      if (detectionResults?.maltrato === "Sí") {
         da = "Sí se detectaron indicios de maltrato psicológico";
-      } else if (informacionPaciente.diagnostico === "No") {
+      } else if (detectionResults?.maltrato === "No") {
         da = "No se detectaron indicios de maltrato psicológico";
       } else {
         da = "No especificado";
       }
-      // pdf.text(`¿Está de acuerdo con el diagnóstico?: `, 10, 120);
-      pdf.text(da, 10, 170);
 
-      // *Pie de página*
+      pdf.text(da, 10, 170);
 
       pdf.line(0, docHeight - 20, docWidth, docHeight - 20);
       pdf.setFontSize(10);
@@ -127,7 +116,6 @@ const Modal = ({
       );
 
       const base64Data = pdf.output("datauristring");
-      
 
       const totalLength = base64Data.length;
       const partLength = Math.floor(totalLength / 4);
@@ -161,6 +149,7 @@ const Modal = ({
         documento: informacionPaciente.documento,
         nombre: informacionPaciente.nombre,
       };
+
       const docRef = collection(db, "informes");
       const docRef2 = collection(db, "informes2");
       const docRef3 = collection(db, "informes3");
@@ -199,8 +188,8 @@ const Modal = ({
       );
       const reporDoct = collection(db, "reportes");
       const reporte = {
-        dD : diagnosticoPsicologo,
-        dS : detectionResults?.isMaltrato ? "Sí" : "No",
+        dD: selectDiagnostico,
+        dS: detectionResults?.maltrato,
       };
       addDoc(reporDoct, reporte).then(
         (docRef) => {
@@ -217,39 +206,32 @@ const Modal = ({
     }
   };
 
-  useEffect(() => {
-    if (open) {
-      const diagnosticoSelectElement =
-        document.querySelector(".diagnosticoSelect");
-      if (diagnosticoSelectElement) {
-        console.log(
-          "Elemento Seleccionado de Diagnóstico Encontrado:",
-          diagnosticoSelectElement.value
-        );
-      } else {
-        console.error("Elemento Seleccionado de Diagnóstico No Encontrado");
-      }
-    }
-  }, [open]);
+  const handleCustomSelect = (e, functionSelect) => {
+    functionSelect(e.target.value);
+  };
 
   return (
     <div className="modalContainernc" id="modalContainer">
       <h1>
-        {informacionPaciente.diagnostico === "Sí"
+        {detectionResults?.maltrato === "Sí"
           ? "Se detecto indicios de Maltrato Psicológico"
           : "No se detecto indicios de Maltrato Psicológico"}
       </h1>
       <label htmlFor="diagnosticoSelect">
         ¿Está de acuerdo con el diagnóstico?
       </label>
-      <select
-        className="diagnosticoSelect"
+
+      <CustomSelect
+        arrayOptionsSelect={["Elija su respuesta", "Sí", "No"]}
         name="diagnosticoSelect"
-        id="diagnosticoSelect"
-      >
-        <option value="si">Si</option>
-        <option value="no">No</option>
-      </select>
+        onChange={(e) => {
+          handleCustomSelect(e, setSelectDiagnostico);
+        }}
+        value={selectDiagnostico}
+        style={{
+          BiBorderRadius: "20px",
+        }}
+      />
       <label htmlFor="diagnosticoPsicologo">Diagnostico del Psicólogo</label>
       <textarea
         className="diagnosticoPsicologo"
