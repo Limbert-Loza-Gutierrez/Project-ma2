@@ -34,32 +34,63 @@ function Reportes() {
   const [pacientes, setPacientes] = useState<any[]>([]);
   const [diagnosticos, setDiagnosticos] = useState<any[]>([]);
   const [count, setCount] = useState({});
-  console.log(count)
+  console.log(count);
   function contarCoincidencias(datos) {
     let coincidencias = 0;
     let diferencias = 0;
 
     for (let dato of datos) {
-        if (dato.dS === dato.dD) {
-            coincidencias++;
-        } else {
-            diferencias++;
-        }
+      if (dato.dS === dato.dD) {
+        coincidencias++;
+      } else {
+        diferencias++;
+      }
     }
 
     return { coincidencias, diferencias };
-}
-  console.log(contarCoincidencias(diagnosticos))
+  }
+  // useEffect(() => {
+  //   const getPacientes = collection(db, "paciente");
+  //   const getDiagnosticos = collection(db, "reportes");
+  //   getDocs(getPacientes).then((res) => {
+  //     setPacientes(res.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  //   });
+  //   getDocs(getDiagnosticos).then((res) => {
+  //     setDiagnosticos(res.docs.map((doc) => ({ ...doc.data()})));
+  //     setCount(contarCoincidencias(diagnosticos));
+  //   });
+  // }, []);
   useEffect(() => {
-    const getPacientes = collection(db, "paciente");
-    const getDiagnosticos = collection(db, "reportes");
-    getDocs(getPacientes).then((res) => {
-      setPacientes(res.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    });
-    getDocs(getDiagnosticos).then((res) => {
-      setDiagnosticos(res.docs.map((doc) => ({ ...doc.data()})));
-      setCount(contarCoincidencias(diagnosticos));
-    });
+    const fetchData = async () => {
+      try {
+        const getPacientes = collection(db, "paciente");
+        const getDiagnosticos = collection(db, "reportes");
+
+        const pacientesSnapshot = await getDocs(getPacientes);
+        const diagnosticosSnapshot = await getDocs(getDiagnosticos);
+
+        setPacientes(
+          pacientesSnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        );
+        setDiagnosticos(
+          diagnosticosSnapshot.docs.map((doc) => ({ ...doc.data() }))
+        );
+        setCount(
+          contarCoincidencias(
+            diagnosticosSnapshot.docs.map((doc) => ({ ...doc.data() }))
+          )
+        );
+      } catch (error) {
+        console.error("Error al obtener datos de Firebase:", error);
+      }
+    };
+
+    // Llama a fetchData inicialmente y luego cada minuto
+    fetchData();
+    const intervalId = setInterval(fetchData, 60000); // 60000 milisegundos = 1 minuto
+
+    // Limpia el intervalo cuando el componente se desmonta
+    return () => clearInterval(intervalId);
   }, []);
 
   let cantidadF = 0;
@@ -197,20 +228,20 @@ function Reportes() {
     ],
   };
   const dataCoincidendes = {
-    labels : ["Coincidencias y Diferencias"],
+    labels: ["Coincidencias y Diferencias"],
     datasets: [
       {
         label: "Coincidencias",
-        data: [count.coincidencias],
+        data: [count?.coincidencias],
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
       {
         label: "Diferencias",
-        data: [count.diferencias],
+        data: [count?.diferencias],
         backgroundColor: "rgba(53, 162, 235, 0.5)",
-      }
-    ]
-  }
+      },
+    ],
+  };
 
   return (
     <div className="window-content">
