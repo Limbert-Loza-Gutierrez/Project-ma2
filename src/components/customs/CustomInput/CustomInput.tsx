@@ -1,37 +1,37 @@
 import PropTypes from "prop-types";
 import "./CustomInput.styles.css";
-const CustomInput = ({ ...props }) => {
-    return (
-        <div className="custom-input">
-            {props.label && (
-                <label
-                style={{ fontWeight: "bold"}}
-                 className="custom-input__label">
-                    {props.icon && <div className="input_icon">{props.icon}</div>}
-                    {props.label}
-                </label>
-            )}
-            <input
-                className="custom-input__input"
-                type={props.type}
-                placeholder={props.placeholder}
-                value={props.value}
-                onChange={props.onChange}
-                name={props.name}
-                id={props.id}
-            />
-        </div>
-    );
+
+const CustomInput = ({ label, type, placeholder, value, onchange, name, id, icon }) => {
+  return (
+    <div className="custom-input">
+      {label && (
+        <label style={{ fontWeight: "bold"}} className="custom-input__label">
+          {icon && <div className="input_icon">{icon}</div>}
+          {label}
+        </label>
+      )}
+      <input
+        className="custom-input__input"
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={onchange}
+        name={name}
+        id={id}
+      />
+    </div>
+  );
 };
 
 CustomInput.propTypes = {
-    label: PropTypes.string,
-    type: PropTypes.string,
-    placeholder: PropTypes.string,
-    value: PropTypes.string,
-    onChange: PropTypes.func,
-    name: PropTypes.string,
-    icon: PropTypes.element,
+  label: PropTypes.string,
+  type: PropTypes.string,
+  placeholder: PropTypes.string,
+  value: PropTypes.string,
+  onchange: PropTypes.func,
+  name: PropTypes.string,
+  id: PropTypes.string,
+  icon: PropTypes.element,
 };
 
 export default CustomInput;

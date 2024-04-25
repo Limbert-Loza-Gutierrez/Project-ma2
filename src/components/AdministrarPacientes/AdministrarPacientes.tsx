@@ -10,7 +10,7 @@ const Casos = () => {
   useEffect(() => {
     const getPacientes = collection(db, "paciente");
     getDocs(getPacientes).then((res) => {
-      setPacientes(res.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setPacientes(res.docs.map((doc) => ({ ...doc.data(), id: doc.idDoc })));
     });
   }, [
   ])

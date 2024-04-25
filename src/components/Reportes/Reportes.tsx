@@ -32,10 +32,33 @@ import { useEffect, useState } from "react";
 
 function Reportes() {
   const [pacientes, setPacientes] = useState<any[]>([]);
+  const [diagnosticos, setDiagnosticos] = useState<any[]>([]);
+  const [count, setCount] = useState({});
+  console.log(count)
+  function contarCoincidencias(datos) {
+    let coincidencias = 0;
+    let diferencias = 0;
+
+    for (let dato of datos) {
+        if (dato.dS === dato.dD) {
+            coincidencias++;
+        } else {
+            diferencias++;
+        }
+    }
+
+    return { coincidencias, diferencias };
+}
+  console.log(contarCoincidencias(diagnosticos))
   useEffect(() => {
     const getPacientes = collection(db, "paciente");
+    const getDiagnosticos = collection(db, "reportes");
     getDocs(getPacientes).then((res) => {
       setPacientes(res.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
+    getDocs(getDiagnosticos).then((res) => {
+      setDiagnosticos(res.docs.map((doc) => ({ ...doc.data()})));
+      setCount(contarCoincidencias(diagnosticos));
     });
   }, []);
 
@@ -173,22 +196,27 @@ function Reportes() {
       },
     ],
   };
+  const dataCoincidendes = {
+    labels : ["Coincidencias y Diferencias"],
+    datasets: [
+      {
+        label: "Coincidencias",
+        data: [count.coincidencias],
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+      {
+        label: "Diferencias",
+        data: [count.diferencias],
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
+      }
+    ]
+  }
 
   return (
     <div className="window-content">
       <div className="reportes">
         <div className="genero-reporte container-grafico">
-          <h1
-            style={{
-              textAlign: "center",
-              fontSize: "2rem",
-              color: "black",
-              marginBottom: "1rem",
-            }}
-          >
-            Reporte por género{" "}
-          </h1>
-          <div className="grafico">
+          <div className="grafico-genero">
             <Bar
               options={{
                 responsive: true,
@@ -202,6 +230,21 @@ function Reportes() {
                 },
               }}
               data={data}
+            />
+
+            <Bar
+              options={{
+                responsive: true,
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    ticks: {
+                      stepSize: 1,
+                    },
+                  },
+                },
+              }}
+              data={dataCoincidendes}
             />
           </div>
         </div>

@@ -1,6 +1,7 @@
 const headerTablesAdminUs = {
   nombre: "Nombres",
   nombreUsuario: "Nombre de Usuario",
+  correoInstitucional:"Correo",
   documento: "Cédula de Identidad",
   expedicion: "Expedición Documento",
   estado: "Estado",
@@ -28,6 +29,7 @@ const headerCasos = {
 };
 
 const headerCasosAdmin = {
+  idDoc : "ID",
   nombre: "Nombre",
   documento: "Cédula de Identidad",
   expedicion: "Expedición",
