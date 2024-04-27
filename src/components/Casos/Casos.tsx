@@ -37,11 +37,16 @@ const Casos = () => {
       setCurrentUser(currentPersonal);
 
       if (currentPersonal) {
-        setPacientes(
-          pacientes.filter(
-            (paciente) => paciente.nombreMedico === currentPersonal.nombre
-          )
+        const dataFilter = pacientes.filter(
+          (paciente) => paciente.nombreMedico === currentUser.nombre
         );
+
+        if (dataFilter.length > 1) {
+          setPacientes(dataFilter);
+        }else{
+          setPacientes([])
+        }
+        
       }
     });
 
@@ -50,15 +55,16 @@ const Casos = () => {
     };
   }, [personal]);
 
-  useEffect(() => {
-    const dataFilter = pacientes.filter(
-      (paciente) => paciente.nombreMedico === currentUser.nombre
-    );
+  // useEffect(() => {
+  //   const dataFilter = pacientes.filter(
+  //     (paciente) => paciente.nombreMedico === currentUser.nombre
+  //   );
 
-    if (dataFilter) {
-      setPacientes(dataFilter);
-    }
-  }, []);
+  //   if (dataFilter.length > 1 ) {
+  //     setPacientes(dataFilter);
+  //   }
+
+  // }, []);
 
   return (
     <main className="window-content">
