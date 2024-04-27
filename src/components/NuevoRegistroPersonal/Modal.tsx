@@ -116,7 +116,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
               name="nombre"
               required
               value={inforPersonal.nombre}
-              onChange={handleChangePersonal}
+              onchange={handleChangePersonal}
             />
           </div>
           <div className="ci-expedicion input-box__option">
@@ -127,7 +127,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
               name="documento"
               required
               value={inforPersonal.documento}
-              onChange={handleChangePersonal}
+              onchange={handleChangePersonal}
             />
             <CustomSelect
               style={stylesCI}
@@ -145,7 +145,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
               name="nombreUsuario"
               required
               value={inforPersonal.nombreUsuario}
-              onChange={handleChangePersonal}
+              onchange={handleChangePersonal}
             />
           </div>
           <div className="password__container">
@@ -156,7 +156,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
               name="password"
               required
               value={inforPersonal.password}
-              onChange={handleChangePersonal}
+              onchange={handleChangePersonal}
             />
             <p
               onClick={() => {
@@ -189,7 +189,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
               name="correoInstitucional"
               required
               value={inforLaboral.correoInstitucional}
-              onChange={handleChangeLaboral}
+              onchange={handleChangeLaboral}
             />
           </div>
         </form>
