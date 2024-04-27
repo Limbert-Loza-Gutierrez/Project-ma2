@@ -272,7 +272,7 @@ const NuevoCaso = () => {
     //   }
     // }
 
-    infPaciente.diagnostico = "Sí";
+    infPaciente.diagnostico = detectionResults?.maltrato === "Sí" ? "Sí" : "No";
     infPaciente.imagen = imageUrl;
     infPaciente.idDoc = Math.floor(Math.random() * 1000).toString();
     let hayCampoVacio = false;

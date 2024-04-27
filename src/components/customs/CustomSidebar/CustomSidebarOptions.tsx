@@ -13,7 +13,7 @@ const CustomSidebarOptions = ({ data_user, opciones }) => {
           <div className="text-perfil nome-usuario">
             {data_user.nombre}
             <br />
-            {data_user.especialidad}
+            Psicólogo
           </div>
         )}
       </div>

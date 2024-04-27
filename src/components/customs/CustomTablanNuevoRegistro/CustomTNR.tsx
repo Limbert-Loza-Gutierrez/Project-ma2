@@ -38,7 +38,7 @@ const CustomTNR = (props) => {
           <CustomInput
             placeholder="Inserte Carnet de Identidad"
             type="number"
-            onChange={handleChange}
+            onchange={handleChange}
             value={carnet}
           />
         </div>

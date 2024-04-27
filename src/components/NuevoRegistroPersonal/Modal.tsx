@@ -19,7 +19,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
   const [showPassword, setShowPassword] = useState(false);
   const { updateListPersonal } = useContext(UsersContext);
 
-  const [selectTagValue, setSelectTagValue] = useState("LP");
+  const [selectTagValue, setSelectTagValue] = useState("");
   const [especialidadSelect, setEspecialidadSelect] = useState("");
   const [inforPersonal, setInforPersonal] = useState({
     imgPerfil: "https://cdn-icons-png.flaticon.com/512/6915/6915987.png",
@@ -177,7 +177,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
               name="especialidad"
               style={stylesEspecilidad}
               arrayOptionsSelect={especialidad}
-              onChange={handleSelectEspecialidad}
+              onChange={(e)=>setEspecialidadSelect(e.target.value)}
               value={especialidadSelect}
             />
           </div>
