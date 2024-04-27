@@ -29,6 +29,7 @@ const Casos = () => {
       setPersonal(data);
     });
   }, []);
+  console.log(currentUser)
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       const currentPersonal = personal.find(
@@ -36,18 +37,7 @@ const Casos = () => {
       );
       setCurrentUser(currentPersonal);
 
-      if (currentPersonal) {
-        const dataFilter = pacientes.filter(
-          (paciente) => paciente.nombreMedico === currentUser.nombre
-        );
-
-        if (dataFilter.length > 1) {
-          setPacientes(dataFilter);
-        }else{
-          setPacientes([])
-        }
-        
-      }
+      
     });
 
     return () => {
@@ -55,16 +45,25 @@ const Casos = () => {
     };
   }, [personal]);
 
-  // useEffect(() => {
-  //   const dataFilter = pacientes.filter(
-  //     (paciente) => paciente.nombreMedico === currentUser.nombre
-  //   );
+  useEffect(() => {
+    
+      console.log("este es el if")
+      const dataFilter = pacientes.filter(
+        (paciente) => paciente.nombreMedico === currentUser.nombre
+      );
+      console.log(dataFilter)
 
-  //   if (dataFilter.length > 1 ) {
-  //     setPacientes(dataFilter);
-  //   }
+      if (dataFilter.length > 1) {
+        setPacientes(dataFilter);
+      }else{
+        setPacientes([])
+      }
+      
+    
 
-  // }, []);
+  }, [currentUser]);
+
+  console.log("Pacientes",pacientes)
 
   return (
     <main className="window-content">
@@ -74,7 +73,7 @@ const Casos = () => {
       {pacientes.length > 0 ? (
         <CustomTNR headerTablesAdminUs={headerCasos} data={pacientes} />
       ) : (
-        <p>Loading pacientes...</p>
+        pacientes.length === 0 ? <h2>No hay casos registrados</h2> : <p>Loading pacientes...</p>
       )}
       <div></div>
     </main>
