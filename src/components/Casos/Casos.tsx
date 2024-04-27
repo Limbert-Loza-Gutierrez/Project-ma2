@@ -29,7 +29,6 @@ const Casos = () => {
       setPersonal(data);
     });
   }, []);
-  console.log(currentUser)
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       const currentPersonal = personal.find(
@@ -47,11 +46,9 @@ const Casos = () => {
 
   useEffect(() => {
     
-      console.log("este es el if")
       const dataFilter = pacientes.filter(
         (paciente) => paciente.nombreMedico === currentUser.nombre
       );
-      console.log(dataFilter)
 
       if (dataFilter.length > 1) {
         setPacientes(dataFilter);
@@ -63,7 +60,6 @@ const Casos = () => {
 
   }, [currentUser]);
 
-  console.log("Pacientes",pacientes)
 
   return (
     <main className="window-content">
