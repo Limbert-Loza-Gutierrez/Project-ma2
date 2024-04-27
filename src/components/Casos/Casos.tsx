@@ -104,7 +104,7 @@ const Casos = () => {
     if (!currentUser) return;
 
     const getData = collection(db, "paciente");
-    const q = query(getData, where("nombreMedico", "==", currentUser.displayName));
+    const q = query(getData, where("nombreMedico", "==", currentUser.nombre));
     
     getDocs(q)
       .then((querySnapshot) => {
