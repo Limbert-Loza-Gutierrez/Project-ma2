@@ -6,7 +6,7 @@ import { jsPDF } from "jspdf";
 
 import logo from "../../../public/image/logo.webp";
 
-import logo24 from "../../../public/image/logo24.webp";
+// import logo24 from "../../../public/image/logo24.webp";
 import { db } from "../../config/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import CustomSelect from "../customs/CustomSelect/CustomSelect";
@@ -45,7 +45,7 @@ const Modal = ({
       // *Logotipo e imagen del paciente*
 
       pdf.addImage(logo, "PNG", 5, 15, 30, 30);
-      pdf.addImage(logo24, "PNG", 172, 15, 30, 30);
+      pdf.addImage(logo, "PNG", 178, 15, 30, 30);
 
       pdf.addImage(informacionPaciente.imagen, "PNG", 15, 180, 70, 70);
       pdf.addImage(processedImageBase64, "PNG", 100, 180, 70, 70);

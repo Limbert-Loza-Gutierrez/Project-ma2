@@ -1,5 +1,5 @@
 const expedicion = [
-    "Ninguno",
+    "Seleccione la expedición",
     "La Paz",
     "Cochabamba",
     "Santa Cruz",
