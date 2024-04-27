@@ -6,7 +6,7 @@ import { jsPDF } from "jspdf";
 
 import logo from "../../../public/image/logo.webp";
 
-// import logo24 from "../../../public/image/logo24.webp";
+import logo24 from "../../../public/image/logo24.webp";
 import { db } from "../../config/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import CustomSelect from "../customs/CustomSelect/CustomSelect";
@@ -45,10 +45,10 @@ const Modal = ({
       // *Logotipo e imagen del paciente*
 
       pdf.addImage(logo, "PNG", 5, 15, 30, 30);
-      pdf.addImage(logo, "PNG", 178, 15, 30, 30);
+      pdf.addImage(logo24, "PNG", 176, 15, 30, 30);
 
       pdf.addImage(informacionPaciente.imagen, "PNG", 15, 180, 70, 70);
-      pdf.addImage(processedImageBase64, "PNG", 100, 180, 70, 70);
+      pdf.addImage(processedImageBase64, "PNG", 120, 180, 70, 70);
 
       //si el objeto no esta vacio que imprima
       if (detectionResults?.maltrato === "Sí") {
@@ -94,7 +94,7 @@ const Modal = ({
 
       // pdf.text(informacionPaciente.diagnostico, 80, 180);
 
-      const ds = pdf.splitTextToSize(diagnosticoPsicologo, docWidth - 50);
+      const ds = pdf.splitTextToSize(diagnosticoPsicologo, docWidth - 20);
       pdf.text(ds, 10, 120);
 
       let da = "";
