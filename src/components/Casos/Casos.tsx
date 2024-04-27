@@ -50,15 +50,15 @@ const Casos = () => {
     };
   }, [personal]);
 
-  // useEffect(() => {
-  //   const dataFilter = pacientes.filter(
-  //     (paciente) => paciente.nombreMedico === currentUser.nombre
-  //   );
+  useEffect(() => {
+    const dataFilter = pacientes.filter(
+      (paciente) => paciente.nombreMedico === currentUser.nombre
+    );
 
-  //   if (dataFilter) {
-  //     setPacientes(dataFilter);
-  //   }
-  // }, []);
+    if (dataFilter) {
+      setPacientes(dataFilter);
+    }
+  }, []);
 
   return (
     <main className="window-content">
