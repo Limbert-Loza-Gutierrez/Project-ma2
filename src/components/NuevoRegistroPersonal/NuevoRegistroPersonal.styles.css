@@ -47,7 +47,7 @@
     font-weight: 500;
     margin-bottom: 0.5rem;
     height: 4rem;
-    width: 100%;
+    width: 95%;
     align-items: center;
     justify-content: center;
     background-color: white;
@@ -69,6 +69,7 @@
 
 .modalContainer1 .ci-expedicion select {
     margin-top: 4rem !important;
+    width: 80px !important;
 }
 
 
@@ -101,7 +102,10 @@
     
 }
 
-
+.nombre {
+    width: 210%;
+    margin-bottom: 30px !important;
+}
 
 
 
