@@ -28,7 +28,6 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
     expedicion: "",
     especialidad: "",
     password: "",
-    nombreUsuario: "",
   });
   const [inforLaboral, setInforLaboral] = useState({
     tipoLaboral: "Medico",
@@ -137,17 +136,7 @@ const Modal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
               value={selectTagValue}
             />
           </div>
-          <div className="nombre-usuario">
-            <CustomInput
-              label="Nombre de Usuario"
-              type="text"
-              placeholder="Nombre de Usuario"
-              name="nombreUsuario"
-              required
-              value={inforPersonal.nombreUsuario}
-              onchange={handleChangePersonal}
-            />
-          </div>
+          
           <div className="password__container">
             <CustomInput
               label="Contraseña"

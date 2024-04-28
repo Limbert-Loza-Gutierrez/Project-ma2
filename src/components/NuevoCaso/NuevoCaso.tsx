@@ -42,6 +42,7 @@ const NuevoCaso = () => {
   const [processedImage, setProcessedImage] = useState(null);
   const [currentUser, setCurrentUser] = useState<PersonalData | null>(null);
   const [personal, setPersonal] = useState<PersonalData[]>([]);
+  const [pacientes,setPacientes] = useState([]);
   const [infPaciente, setInfPaciente] = useState<{
     idDoc: string;
     nombre: string;
@@ -53,6 +54,7 @@ const NuevoCaso = () => {
     nombreMedico: string;
     diagnostico: string;
     imagen: string;
+    order : number;
   }>({
     idDoc: "",
     nombre: "",
@@ -64,8 +66,21 @@ const NuevoCaso = () => {
     nombreMedico: "",
     diagnostico: "",
     imagen: "",
+    order: 0,
   });
 
+  useEffect(() => {
+    const getData = collection(db, "paciente");
+    getDocs(getData).then((querySnapshot) => {
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push(doc.data());
+      });
+      setPacientes(data);
+    });
+  }, []);
+
+  console.log(pacientes)
   useEffect(() => {
     const getData = collection(db, "personal");
     getDocs(getData).then((querySnapshot) => {
@@ -273,6 +288,7 @@ const NuevoCaso = () => {
     // }
 
     // infPaciente.diagnostico = detectionResults?.maltrato === "Sí" ? "Sí" : "No";
+    infPaciente.order = pacientes.length + 1;
     if (detectionResults?.maltrato === "Sí") {
       infPaciente.diagnostico = "Sí";
     } 

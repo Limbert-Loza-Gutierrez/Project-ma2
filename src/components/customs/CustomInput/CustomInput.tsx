@@ -18,6 +18,7 @@ const CustomInput = ({ label, type, placeholder, value, onchange, name, id, icon
         onChange={onchange}
         name={name}
         id={id}
+        autocomplete="off"
       />
     </div>
   );

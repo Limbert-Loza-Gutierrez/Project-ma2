@@ -116,9 +116,11 @@ const Casos = () => {
   useEffect(() => {
     // Filtrar la lista de pacientes basada en el nombre del médico actual
     if (currentUser) {
-      const filteredPacientes = pacientes.filter(
+      let filteredPacientes = pacientes.filter(
         (paciente) => paciente.nombreMedico === currentUser.nombre
       );
+      filteredPacientes = filteredPacientes.sort((a, b) => b.order - a.order);
+
       setPacientes(filteredPacientes);
     }
   }, [currentUser, pacientes]); // Asegúrate de ejecutar este efecto cuando currentUser o pacientes cambien
