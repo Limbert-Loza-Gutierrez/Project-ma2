@@ -10,7 +10,10 @@ const Casos = () => {
   useEffect(() => {
     const getPacientes = collection(db, "paciente");
     getDocs(getPacientes).then((res) => {
-      setPacientes(res.docs.map((doc) => ({ ...doc.data(), id: doc.idDoc })));
+      let dataPacientes = res.docs.map((doc) => ({ ...doc.data(), id: doc.idDoc }))
+      dataPacientes = dataPacientes.sort((a, b) => b.order - a.order);
+      setPacientes(dataPacientes);
+      
     });
   }, [
   ])

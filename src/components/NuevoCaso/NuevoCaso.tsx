@@ -43,6 +43,9 @@ const NuevoCaso = () => {
   const [currentUser, setCurrentUser] = useState<PersonalData | null>(null);
   const [personal, setPersonal] = useState<PersonalData[]>([]);
   const [pacientes,setPacientes] = useState([]);
+
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [buttonText, setButtonText] = useState("Realizar diagnósticos");
   const [infPaciente, setInfPaciente] = useState<{
     idDoc: string;
     nombre: string;
@@ -265,6 +268,7 @@ const NuevoCaso = () => {
     };
     setSelectedFile(file);
     handleImageUpload(file);
+    
   };
 
   useEffect(() => {
@@ -458,7 +462,14 @@ const NuevoCaso = () => {
           />
         </div>
       </form>
-      <CustomButton content="Realizar diagnósticos" onClick={handleSubmit} />
+      
+      {/* <CustomButton content="Realizar diagnósticos" onClick={handleSubmit} /> */}
+      <CustomButton
+        content="Realizar diagnósticos"
+        onClick={handleSubmit}
+      />
+
+
       <Modal
         open={openModal}
         onClose={() => {
