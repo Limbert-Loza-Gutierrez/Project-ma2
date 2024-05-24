@@ -20,8 +20,8 @@ const Modal = ({
   processedImageBase64,
   detectionResults,
 }) => {
-  // if (!open) return null;
-  if (open) return null;
+  if (!open) return null;
+  // if (open) return null;
   const [selectDiagnostico, setSelectDiagnostico] = useState("");
   const [diagnosticoPsicologo, setDiagnosticoPsicologo] = useState("");
 
