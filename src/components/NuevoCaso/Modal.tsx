@@ -20,7 +20,8 @@ const Modal = ({
   processedImageBase64,
   detectionResults,
 }) => {
-  if (!open) return null;
+  // if (!open) return null;
+  if (open) return null;
   const [selectDiagnostico, setSelectDiagnostico] = useState("");
   const [diagnosticoPsicologo, setDiagnosticoPsicologo] = useState("");
 
@@ -214,72 +215,101 @@ const Modal = ({
   };
 
   return (
-    <div className="modalContainernc" id="modalContainer">
-      <h1>
-        {detectionResults?.maltrato === "Sí"
-          ? "Se detecto indicios de Maltrato Psicológico"
-          : "No se detecto indicios de Maltrato Psicológico"}
-      </h1>
-      <label htmlFor="diagnosticoSelect">
-        ¿Está de acuerdo con el diagnóstico?
-      </label>
+    <div
+      className="modalContainernc"
+      id="modalContainer"
+      style={{
+        width: "120rem",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "row",
+      }}
+    >
+      <div
+        style={{
+          width: "50rem",
+        }}
+      >
+        <h1>
+          {detectionResults?.maltrato === "Sí"
+            ? "Se detecto indicios de Maltrato Psicológico"
+            : "No se detecto indicios de Maltrato Psicológico"}
+        </h1>
+        <label htmlFor="diagnosticoSelect">
+          ¿Está de acuerdo con el diagnóstico?
+        </label>
 
-      <CustomSelect
-        arrayOptionsSelect={["Elija su respuesta", "Sí", "No"]}
-        name="diagnosticoSelect"
-        onChange={(e) => {
-          handleCustomSelect(e, setSelectDiagnostico);
-        }}
-        value={selectDiagnostico}
+        <CustomSelect
+          arrayOptionsSelect={["Elija su respuesta", "Sí", "No"]}
+          name="diagnosticoSelect"
+          onChange={(e) => {
+            handleCustomSelect(e, setSelectDiagnostico);
+          }}
+          value={selectDiagnostico}
+          style={{
+            BiBorderRadius: "20px",
+          }}
+        />
+        <label htmlFor="diagnosticoPsicologo">Diagnostico del Psicólogo</label>
+        <textarea
+          className="diagnosticoPsicologo"
+          name="diagnosticoPsicologo"
+          id="diagnosticoPsicologo"
+          cols="30"
+          rows="10"
+          value={diagnosticoPsicologo}
+          style={{
+            outline: "none",
+            border: "none",
+            color: "#666",
+            display: "",
+            width: "95%",
+            background: "#e6e6e6",
+            fontFamily: "Montserrat-Bold",
+            borderRadius: "20px",
+            minHeight: "150px",
+            padding: "10px",
+          }}
+          onChange={(e) => setDiagnosticoPsicologo(e.target.value)}
+        ></textarea>
+        <div className="imprimird">
+          <Link to="/casos">
+            <CustomButton
+              content="Guardar"
+              onClick={() => {
+                guardar();
+                generatePDF();
+              }}
+            />
+          </Link>
+          <CustomButton content="Cancelar" onClick={onClose} />
+        </div>
+      </div>
+      <div
+        className="processed-image"
         style={{
-          BiBorderRadius: "20px",
+          width: "50rem",
         }}
-      />
-      <label htmlFor="diagnosticoPsicologo">Diagnostico del Psicólogo</label>
-      <textarea
-        className="diagnosticoPsicologo"
-        name="diagnosticoPsicologo"
-        id="diagnosticoPsicologo"
-        cols="30"
-        rows="10"
-        value={diagnosticoPsicologo}
-        style={{
-          outline: "none",
-          border: "none",
-          color: "#666",
-          display: "",
-          width: "95%",
-          background: "#e6e6e6",
-          fontFamily: "Montserrat-Bold",
-          borderRadius: "20px",
-          minHeight: "150px",
-          padding: "10px",
-        }}
-        onChange={(e) => setDiagnosticoPsicologo(e.target.value)}
-      ></textarea>
-      <div className="processed-image">
+      >
+        {/* <img
+          src={`data:image/png;base64,${processedImageBase64}`}
+          alt="processed"
+          style={{
+            width: "100%",
+            height: "100%",
+            borderRadius: "20px",
+          }}
+        /> */}
         <img
-src={`data:image/png;base64,${processedImageBase64}`} 
-alt="processed"
+          src="https://www.cdc.gov/coronavirus/2019-ncov/images/symptoms-testing/pcr-test.png?_=15023"
+          alt=""
           style={{
             width: "100%",
             height: "100%",
             borderRadius: "20px",
           }}
         />
-      </div>
-
-      <div className="imprimird">
-        <Link to="/casos">
-          <CustomButton
-            content="Guardar"
-            onClick={() => {
-              guardar();
-              generatePDF();
-            }}
-          />
-        </Link>
-        <CustomButton content="Cancelar" onClick={onClose} />
       </div>
     </div>
   );
