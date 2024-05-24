@@ -292,7 +292,7 @@ const Modal = ({
           width: "50rem",
         }}
       >
-        {/* <img
+        <img
           src={`data:image/png;base64,${processedImageBase64}`}
           alt="processed"
           style={{
@@ -300,8 +300,8 @@ const Modal = ({
             height: "100%",
             borderRadius: "20px",
           }}
-        /> */}
-        <img
+        />
+        {/* <img
           src="https://www.cdc.gov/coronavirus/2019-ncov/images/symptoms-testing/pcr-test.png?_=15023"
           alt=""
           style={{
@@ -309,7 +309,7 @@ const Modal = ({
             height: "100%",
             borderRadius: "20px",
           }}
-        />
+        /> */}
       </div>
     </div>
   );
