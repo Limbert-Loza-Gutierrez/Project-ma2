@@ -39,7 +39,21 @@ const CustomSidebarOptions = ({ data_user, opciones }) => {
             </Link>
           );
         })}
-        <button onClick={changePassword}>Cambiar Contraseña</button>
+
+        {data_user.nivelJerarquico !== "Super Administrador" ? (
+          <button
+            style={{
+              backgroundColor: "#f44336",
+              color: "white",
+              padding: "10px",
+              borderRadius: "10px",
+              border: "none",
+            }}
+            onClick={changePassword}
+          >
+            Cambiar Contraseña
+          </button>
+        ) : null}
       </div>
     </aside>
   );

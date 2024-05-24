@@ -1,7 +1,7 @@
 const headerTablesAdminUs = {
   nombre: "Nombres",
-  nombreUsuario: "Nombre de Usuario",
-  correoInstitucional:"Correo",
+  // nombreUsuario: "Nombre de Usuario",
+  correoInstitucional: "Correo",
   documento: "Cédula de Identidad",
   expedicion: "Expedición Documento",
   estado: "Estado",
@@ -13,7 +13,7 @@ const headerTablePaciente = {
   expedicionDocumento: "Expedición",
   primerApellido: "Primer Apellido",
   segundoApellido: "Segundo Apellido",
-  nombreUsuario: "Nombre de Usuario",
+  // nombreUsuario: "Nombre de Usuario",
 };
 
 const headerCasos = {
@@ -29,7 +29,7 @@ const headerCasos = {
 };
 
 const headerCasosAdmin = {
-  idDoc : "ID",
+  idDoc: "ID",
   nombre: "Nombre",
   documento: "Cédula de Identidad",
   expedicion: "Expedición",
@@ -41,10 +41,14 @@ const headerCasosAdmin = {
   reporte: "Reporte",
 };
 
-
 const headerPreguntasRespeustas = {
   pregunta: "Pregunta",
   respuesta: "Respuesta",
 };
 
-export { headerTablesAdminUs, headerTablePaciente, headerCasos, headerCasosAdmin };
+export {
+  headerTablesAdminUs,
+  headerTablePaciente,
+  headerCasos,
+  headerCasosAdmin,
+};
