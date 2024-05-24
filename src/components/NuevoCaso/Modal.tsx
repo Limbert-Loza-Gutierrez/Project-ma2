@@ -3,7 +3,6 @@ import CustomButton from "../customs/CustomButton/CustomButton";
 import { Link } from "react-router-dom";
 import { jsPDF } from "jspdf";
 
-
 import logo from "../../../public/image/logo.webp";
 
 import logo24 from "../../../public/image/logo24.webp";
@@ -26,7 +25,7 @@ const Modal = ({
 
   const generatePDF = async () => {
     const diagnosticoPsicologo = document?.getElementById(
-      "diagnosticoPsicologo"
+      "diagnosticoPsicologo",
     )?.value;
 
     try {
@@ -75,7 +74,7 @@ const Modal = ({
         `PSICÓLOGO: ${informacionPaciente.nombreMedico}`,
         docWidth / 2,
         40,
-        { align: "center" }
+        { align: "center" },
       );
       pdf.text("Diagnóstico del sistema:", 10, 160);
       pdf.text("Diagnóstico del psicólogo:", 10, 110);
@@ -115,7 +114,7 @@ const Modal = ({
         `Página ${pdf.internal.getNumberOfPages()}`,
         docWidth - 20,
         docHeight - 10,
-        { align: "right" }
+        { align: "right" },
       );
 
       const base64Data = pdf.output("datauristring");
@@ -163,7 +162,7 @@ const Modal = ({
         },
         (error) => {
           console.error("Error adding document: ", error);
-        }
+        },
       );
       addDoc(docRef2, nuevoInforme2).then(
         (docRef) => {
@@ -171,7 +170,7 @@ const Modal = ({
         },
         (error) => {
           console.error("Error adding document: ", error);
-        }
+        },
       );
       addDoc(docRef3, nuevoInforme3).then(
         (docRef) => {
@@ -179,7 +178,7 @@ const Modal = ({
         },
         (error) => {
           console.error("Error adding document: ", error);
-        }
+        },
       );
       addDoc(docRef4, nuevoInforme4).then(
         (docRef) => {
@@ -187,7 +186,7 @@ const Modal = ({
         },
         (error) => {
           console.error("Error adding document: ", error);
-        }
+        },
       );
       const reporDoct = collection(db, "reportes");
       const reporte = {
@@ -200,7 +199,7 @@ const Modal = ({
         },
         (error) => {
           console.error("Error adding document: ", error);
-        }
+        },
       );
 
       onClose();
@@ -257,6 +256,17 @@ const Modal = ({
         }}
         onChange={(e) => setDiagnosticoPsicologo(e.target.value)}
       ></textarea>
+      <div className="processed-image">
+        <img
+          src={processedImageBase64}
+          alt="processed"
+          style={{
+            width: "100%",
+            height: "100%",
+            borderRadius: "20px",
+          }}
+        />
+      </div>
 
       <div className="imprimird">
         <Link to="/casos">
