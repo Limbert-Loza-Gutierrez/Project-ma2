@@ -10,6 +10,7 @@ import { db } from "../../config/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import CustomSelect from "../customs/CustomSelect/CustomSelect";
 import { BiBorderRadius } from "react-icons/bi";
+import { prodErrorMap } from "firebase/auth";
 
 const Modal = ({
   open,
@@ -258,8 +259,8 @@ const Modal = ({
       ></textarea>
       <div className="processed-image">
         <img
-          src={processedImageBase64}
-          alt="processed"
+src={`data:image/png;base64,${processedImageBase64}`} 
+alt="processed"
           style={{
             width: "100%",
             height: "100%",
